@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "width": 99,
+  "height": 28,
+  "duration": 8.345518,
+  "command": "sudo rbspy record --pid 11587",
+  "title": "",
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/usr/bin/fish"
+  },
+  "stdout": [
+    [
+      0.000048,
+      "bork@kiwi$ sudo rbspy record --pid 11587\r\n"
+    ],
+    [
+      1.015606,
+      "Press Ctrl+C to stop"
+    ],
+    [
+      0.000048,
+      "\r\n"
+    ],
+    [
+      1.003437,
+      "\u001b[2J\r\n\u001b[0;0H\r\nTime since start: 1s. Press Ctrl+C to stop.\r\nSummary of profiling data so far:\r\n% self  % total  name\r\n 10.20    18.37  advance - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2\r\n  6.12    12.24  block in tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  5.10    20.41  each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  4.08     9.18  visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubo\r\n  4.08     4.08  source_range - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0\r\n  3.06    23.47  do_parse - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/racc/parser.rb\r\n  3.06     3.06  redefines_subject? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rub\r\n  2.04    35.71  block (2 levels) in on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0\r\n  2.04    20.41  block in each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/ge\r\n  2.04    14.29  tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/\r\n  2.04     4.08  dispatch_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-\r\n  2.04     3.06  style_detected - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop\r\n  2.04     3.06  line_for - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.\r\n  2.04     2.04  safe_mode? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.5\r\n  2.04     2.04  heredoc? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.\r\n  1.02    69.39  with_cop_error_handling - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gem\r\n  1.02    44.90  on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1\r\n  1.02    24.49  tokenize - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.\r\n  1.02    15.31  on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1\r\n  1.02     9.18  block in visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/\r\n"
+    ],
+    [
+      1.009456,
+      "\u001b[2J\r\n\u001b[0;0H\r\nTime since start: 2s. Press Ctrl+C to stop.\r\nSummary of profiling data so far:\r\n% self  % total  name\r\n 11.06    24.12  block in tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  8.04     8.04  source_range - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0\r\n  6.03    12.56  advance - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2\r\n  3.52    50.75  block (2 levels) in on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0\r\n  3.52    27.64  tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/\r\n  3.52     3.52  end_pos - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1\r\n  3.02    13.57  block in each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/ge\r\n  2.51    13.57  each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n 2.01     7.04  visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubo\r\n  1.51    15.58  do_parse - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/racc/parser.rb\r\n  1.51     7.04  block in visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/\r\n  1.51     2.01  tok - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/lib\r\n  1.51     2.01  line_for - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.\r\n  1.51     1.51  to_s - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/li\r\n  1.51     1.51  redefines_subject? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rub\r\n  1.51     1.51  nest_and_try_closing - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/p\r\n  1.51     1.51  eql? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ast-2.3.0/lib/ast\r\n  1.51     1.51  begin_pos - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52\r\n  1.01    77.89  with_cop_error_handling - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gem\r\n  1.01    14.57  block (2 levels) in on_block - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.\r\n"
+    ],
+    [
+      1.009702,
+      "\u001b[2J\r\n\u001b[0;0H\r\nTime since start: 3s. Press Ctrl+C to stop.\r\nSummary of profiling data so far:\r\n% self  % total  name\r\n  9.06    20.81  block in tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  7.38     7.72  source_range - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0\r\n  6.38    12.42  advance - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2\r\n  4.03    15.10  each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  3.69     3.69  end_pos - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1\r\n  3.36    45.30  block (2 levels) in on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0\r\n  3.36    14.77  block in each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/ge\r\n  2.35    22.82  tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/\r\n  2.35     8.39  visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubo\r\n  1.68    16.11  do_parse - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/racc/parser.rb\r\n  1.68     2.01  slice - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/l\r\n  1.68     1.68  to_s - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/li\r\n  1.34     1.68  tok - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/lib\r\n  1.34     1.34  redefines_subject? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rub\r\n  1.01    74.83  with_cop_error_handling - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gem\r\n  1.01    14.77  block (2 levels) in on_block - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.\r\n  1.01     8.39  block in visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/\r\n  1.01     2.68  block (2 levels) in \u003cclass:Node\u003e - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/\r\n  1.01     1.68  line_for - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.\r\n  1.01     1.68  dispatch_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-\r\n"
+    ],
+    [
+      1.009506,
+      "\u001b[2J\r\n\u001b[0;0H\r\nTime since start: 4s. Press Ctrl+C to stop.\r\nSummary of profiling data so far:\r\n% self  % total  name\r\n  7.77    17.54  block in tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  7.27    13.53  advance - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2\r\n  6.27     6.52  source_range - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0\r\n  4.51    14.54  each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  3.26    41.85  block (2 levels) in on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0\r\n  3.01    14.04  block in each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/ge\r\n  3.01     3.01  end_pos - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1\r\n  2.01    19.30  tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/\r\n  1.75     7.02  visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubo\r\n  1.50    72.93  with_cop_error_handling - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gem\r\n  1.50    17.54  do_parse - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/racc/parser.rb\r\n  1.50     1.75  tok - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/lib\r\n  1.50     1.75  slice - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/l\r\n  1.50     1.50  to_s - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/li\r\n  1.50     1.50  eql? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ast-2.3.0/lib/ast\r\n  1.25     2.51  cop_config - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.5\r\n  1.25     1.75  line_for - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.\r\n  1.25     1.75  def_modifier? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-\r\n  1.25     1.25  rspec_pattern - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-\r\n  1.25     1.25  redefines_subject? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rub\r\n"
+    ],
+    [
+      1.009380,
+      "\u001b[2J\r\n\u001b[0;0H\r\nTime since start: 5s. Press Ctrl+C to stop.\r\nSummary of profiling data so far:\r\n% self  % total  name\r\n  8.22    18.64  block in tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  6.81    12.42  advance - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2\r\n  6.81     7.01  source_range - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0\r\n  5.41    16.23  each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ruboco\r\n  3.21     3.21  end_pos - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1\r\n  3.01    15.83  block in each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/ge\r\n  2.61    43.09  block (2 levels) in on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0\r\n  2.00    20.44  tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/\r\n  2.00     7.41  visit_descendants - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubo\r\n  1.60     1.80  slice - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/l\r\n  1.40    74.55  with_cop_error_handling - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gem\r\n  1.40     2.40  cop_config - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.5\r\n  1.40     1.60  tok - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/lib\r\n  1.20    16.03  do_parse - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/racc/parser.rb\r\n  1.20     2.81  block (2 levels) in \u003cclass:Node\u003e - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/\r\n  1.20     1.20  to_s - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/li\r\n  1.20     1.20  eql? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ast-2.3.0/lib/ast\r\n  1.00     1.40  redefines_subject? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rub\r\n  1.00     1.40  line_for - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.\r\n  1.00     1.40  def_modifier? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-\r\n^C"
+    ],
+    [
+      0.000138,
+      "Interrupted.\r\n"
+    ],
+    [
+      0.008558,
+      "Wrote raw data to "
+    ],
+    [
+      0.000013,
+      "/home/bork/.cache/rbspy/records/rbspy-2018-03-20-24eQDZ8fgB.raw.gz\r\nWriting formatted output to /home/bork/.cache/rbspy/records/rbspy-2018-03-20-WjB07VaXFu.flamegraph.svg\r\n"
+    ],
+    [
+      2.008558,
+      " "
+    ]
+  ]
+}

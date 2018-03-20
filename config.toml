@@ -1,0 +1,28 @@
+baseurl = "http://rbspy.github.io/"
+title = "rbspy"
+languageCode = "en-us"
+theme = "crisp"
+publishDir = "docs"
+[params]
+  logo = "/rbspy.jpg"
+[[menu.main]]
+    name = "Home"
+    weight = -120
+    url = "/"
+[[menu.main]]
+    name = "Installing"
+    weight = -110
+    url = "/installing/"
+[[menu.main]]
+    name = "Profiling Examples"
+    weight = -100
+    url = "/examples/"
+[[menu.main]]
+    name = "rbspy vs stackprof"
+    weight = -90
+    url = "/rbspy-vs-stackprof/"
+[[menu.main]]
+    pre= "<i class='fa fa-github fa-1x'></i> "
+    name = "GitHub"
+    weight = -80
+    url = "https://github.com/rbspy/rbspy"
