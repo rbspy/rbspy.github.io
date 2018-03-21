@@ -307,9 +307,11 @@ h3.post-title {
 		padding-bottom:1em;
 		padding-top:1em;
 	}
-        .title {
-            margin-bottom:0.5em
-        }
+    .header .title {
+        margin-top: -35px;
+        margin-bottom: -25px;
+        padding-bottom: 0px;
+    }
 	#content {
 		margin-left: 0;
 		padding: 2em 2em 1em 2em;
@@ -319,7 +321,10 @@ h3.post-title {
 		padding: 0 2.5em 2em 2.5em;
 	}
     .logo {
-        display:none;
+        width: 50px;
+        position: absolute;
+        top: 5px;
+        right: 10px;
     }
 
 }
