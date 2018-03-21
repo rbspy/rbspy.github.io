@@ -3,28 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://rbspy.github.io/</loc>
+    <loc>https://rbspy.github.io/</loc>
   </url>
   
   <url>
-    <loc>http://rbspy.github.io/categories/</loc>
+    <loc>https://rbspy.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://rbspy.github.io/installing/</loc>
+    <loc>https://rbspy.github.io/installing/</loc>
   </url>
   
   <url>
-    <loc>http://rbspy.github.io/examples/</loc>
+    <loc>https://rbspy.github.io/examples/</loc>
   </url>
   
   <url>
-    <loc>http://rbspy.github.io/rbspy-vs-stackprof/</loc>
+    <loc>https://rbspy.github.io/rbspy-vs-stackprof/</loc>
   </url>
   
   <url>
-    <loc>http://rbspy.github.io/tags/</loc>
+    <loc>https://rbspy.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
