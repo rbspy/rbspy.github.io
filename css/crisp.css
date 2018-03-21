@@ -344,6 +344,14 @@ h3.post-title {
  * Hamburger menu stuff
  */
 
+h3.menu-title {
+    font-weight: bold;
+	font-size:1em;
+	line-height: 1em;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+}
+
 #menuToggle input {
     display: none;
 }
@@ -453,7 +461,6 @@ h3.post-title {
         padding-top: 125px;
     
         background: #ededed;
-        list-style-type: none;
         -webkit-font-smoothing: antialiased;
         /* to stop flickering of text in safari */
     
@@ -462,7 +469,16 @@ h3.post-title {
     
         transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
     }
-    
+    #menu ul {
+        list-style-type: none;
+    }
+
+    h3.menu-title
+    {
+        padding: 10px 0;
+        font-size: 22px;
+    }
+
     .sidebar-menu li
     {
         padding: 10px 0;
@@ -472,7 +488,7 @@ h3.post-title {
     /*
      * And let's slide it in from the left
      */
-    #menuToggle input:checked ~ ul
+    #menuToggle input:checked ~ #menu 
     {
         transform: none;
     }
