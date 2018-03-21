@@ -42,5 +42,16 @@ $ rbspy record ruby slow_test.rb Summary of profiling data so far: % self % tota
 The two tools are actually used in pretty different ways! rbspy is a command line tool (rbspy record --pid YOUR_PID), and stackprof is a library that you can include in your Ruby program and use to profile a given section of code.</description>
     </item>
     
+    <item>
+      <title>Using flamegraphs</title>
+      <link>https://rbspy.github.io/using-flamegraphs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://rbspy.github.io/using-flamegraphs/</guid>
+      <description>What&amp;rsquo;s a flamegraph? rbspy uses Brendan Gregg&amp;rsquo;s flamegraph script to generate flamegraphs! The flamegraph format is documented at http://www.brendangregg.com/flamegraphs.html, but here&amp;rsquo;s a very basic introduction.
+Flamegraphs are a way to visualize how your program is spending its time. A few important things about flamegraphs:
+ The colours are randomly generated (they don&amp;rsquo;t mean anything) The x axis on the flamegraph doesn&amp;rsquo;t represent time. The SVGs have Javascript in them and they&amp;rsquo;re interactive!</description>
+    </item>
+    
   </channel>
 </rss>

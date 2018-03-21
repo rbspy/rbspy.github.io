@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta property="og:title" content=" Using flamegraphs &middot;  rbspy" />
+<meta property="og:site_name" content="rbspy" />
+<meta property="og:url" content="https://rbspy.github.io/using-flamegraphs/" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta name="twitter:title" content="Using flamegraphs" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:url" content="https://rbspy.github.io/using-flamegraphs/" />
+
+
+<title> Using flamegraphs &middot;  rbspy</title>
+
+
+    <meta name="description" content="" />
+
+
+<meta name="p:domain_verify" content="fc173d84e3a4de948ed4bda2908afd3e"/>
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://rbspy.github.io/css/pure-min.css">
+
+
+    <link rel="stylesheet" href="https://rbspy.github.io/css/grids-responsive-min.css">
+
+<link rel="stylesheet" href="https://rbspy.github.io/css/crisp.css">
+<link rel="stylesheet" href="https://rbspy.github.io/css/rrssb.css">
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://rbspy.github.io/using-flamegraphs/" />
+
+
+    
+
+
+    </head>
+    <body>
+        <div id="layout" class="pure-g">
+            <div class="sidebar pure-u-1 pure-u-md-1-6">
+                <div class="header">
+    
+    <div class="logo">
+        
+        
+            
+                <a id="logo" href="https://rbspy.github.io/"><img src="/rbspy.jpg" alt="rbspy" /></a>
+            
+        
+    </div>
+
+    <div id="menuToggle">
+    
+    <input type="checkbox" />
+    
+    
+    <span></span>
+    <span></span>
+    <span></span>
+    
+    <div id="menu">
+        <ul class="sidebar-menu">
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/examples/">Profiling Examples</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
+            
+                <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
+            
+        </ul>
+        <h3 class="menu-title">Profiling basics </h3>
+        <ul class="sidebar-menu">
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-flamegraphs/">Using flamegraphs</a></li>
+            
+        </ul>
+    </div>
+    </div>
+
+    <div id="follow-icons">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+            </div>
+            <div class="content pure-u-1 pure-u-md-5-6">
+                <div class="singlepage">
+                    <div class="article" id="" class="page">
+                        <div class="post-stamp">
+                            <h1 class="post-title">Using flamegraphs</h1>
+                        </div>
+                        <aside>
+                            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#what-s-a-flamegraph">What&rsquo;s a flamegraph?</a></li>
+<li><a href="#reading-a-flamegraph">Reading a flamegraph</a></li>
+<li><a href="#a-simple-real-example">A simple real example</a></li>
+<li><a href="#a-more-complicated-flamegraph-jekyll">A more complicated flamegraph: Jekyll</a></li>
+<li><a href="#when-don-t-flamegraphs-work-well-recursion">When don&rsquo;t flamegraphs work well? (recursion!)</a></li>
+</ul></li>
+</ul>
+</nav>
+                        </aside>
+                        
+
+<h2 id="what-s-a-flamegraph">What&rsquo;s a flamegraph?</h2>
+
+<p>rbspy uses <a href="https://github.com/brendangregg/flamegraph">Brendan Gregg&rsquo;s flamegraph script</a> to
+generate flamegraphs! The flamegraph format is documented at
+<a href="http://www.brendangregg.com/flamegraphs.html">http://www.brendangregg.com/flamegraphs.html</a>, but here&rsquo;s a very basic introduction.</p>
+
+<p>Flamegraphs are a way to visualize how your program is spending its time. A few important things
+about flamegraphs:</p>
+
+<ul>
+<li>The colours are randomly generated (they don&rsquo;t mean anything)</li>
+<li>The x axis on the flamegraph doesn&rsquo;t represent time.</li>
+<li>The SVGs have Javascript in them and they&rsquo;re interactive! You can search with ctrl+f!</li>
+</ul>
+
+<h2 id="reading-a-flamegraph">Reading a flamegraph</h2>
+
+<p>Flamegraphs are generated from a series of stack traces. To get an idea for how this works, let&rsquo;s
+pretend that our profiler has collected 4 stack traces, as follows.</p>
+
+<pre><code>a;d 1
+b;d 1
+a;b;c 1
+a;b;c;d 1
+</code></pre>
+
+<p>Here&rsquo;s the flamegraph. It&rsquo;s generated by sorting the above stack traces (so that all the <code>a</code>s are
+together) and arranging them vertically into a chart. In this one, the main method is at the top.</p>
+
+<p><a href="/images/simplest-flamegraph.svg">
+<img src="/images/simplest-flamegraph.svg">
+</a></p>
+
+<p>What this tells us is:</p>
+
+<ul>
+<li>75% (<sup>3</sup>&frasl;<sub>4</sub>) of the stack traces we collected started in the <code>a</code> function</li>
+<li>50% (<sup>2</sup>&frasl;<sub>4</sub>) of the stack traces started with <code>a</code> calling <code>b</code> and then calling <code>c</code>.</li>
+</ul>
+
+<h2 id="a-simple-real-example">A simple real example</h2>
+
+<p>To get a tiny bit more complicated &ndash; here&rsquo;s a very simple Ruby program that spends 20% of its time
+running the <code>panda</code> function, and 80% of its time running the <code>cucumber</code> function.</p>
+
+<pre><code>def panda
+    sleep(0.20)
+end
+
+def potato
+    cucumber
+end
+
+def cucumber
+    sleep(0.80)
+end
+
+loop do
+    panda
+    potato
+end
+</code></pre>
+
+<p>Here&rsquo;s the flamegraph! There&rsquo;s a <code>panda</code> bar in the flame graph that takes up 20% of the x axis, and
+<code>potato</code> and <code>cucumber</code> bars that take up 80% of the x axis. This means that 80% of the time was
+spent in <code>potato</code>/<code>cucumber</code> and 20% in <code>panda</code>.</p>
+
+<p><a href="/images/basic-flamegraph.svg">
+<img src="/images/basic-flamegraph.svg">
+</a></p>
+
+<p>If you click on the above flamegraph, you&rsquo;ll get an interactive SVG &ndash; you can hover over any part
+of the flamegraph to get the % of samples that were in that function. In this example, 79.37% of the
+samples were in the <code>potato</code> function.</p>
+
+<p><img src="/images/hover.png"></p>
+
+<h2 id="a-more-complicated-flamegraph-jekyll">A more complicated flamegraph: Jekyll</h2>
+
+<p>Here&rsquo;s a much more complicated flamegraph generated by <code>rbspy</code>. The way I usually read flamegraphs
+is to look for big wide sections (because they represent a large part of the program&rsquo;s execution)</p>
+
+<p>There are 2 things that jump out to me about this flamegraph:</p>
+
+<ul>
+<li>there&rsquo;s an <code>initialize</code> function where 5.9% of the time is spent. Not that much time is being
+spent in initialization!</li>
+<li>86.6% of the time is spent in <code>process_site</code>, and if you look a little further down, you can see
+that <code>render_document</code> splits into 3 separate functions: <code>convert</code>, <code>place_in_layouts</code>, and
+<code>render_liquid</code>. That means that <code>render_document</code> called those 3 methods, and that, while
+<code>render_document</code> did call other methods, it didn&rsquo;t spend a substantial amount of time in any
+other method.</li>
+</ul>
+
+<p>This is neat! I&rsquo;m not familiar with the Jekyll codebase at all, but just by looking through this
+flamegraph I can understand a few important things about how the code is structured.</p>
+
+<p>Here&rsquo;s the slice that jumps out at me (where <code>render_document</code> splits into the 3 methods it calls)
+<img src="/examples/jekyll-flamegraph.png"></p>
+
+<p>and the whole flamegraph:</p>
+
+<p><a href="/examples/jekyll-flamegraph.svg">
+<img src="/examples/jekyll-flamegraph.svg">
+</a></p>
+
+<h2 id="when-don-t-flamegraphs-work-well-recursion">When don&rsquo;t flamegraphs work well? (recursion!)</h2>
+
+<p>Flamegraphs don&rsquo;t work well with highly recursive programs. When you have a program with a lot of
+recursion, what will happen is that the function you&rsquo;re calling recursively will appear over and
+over again multiple times in each stack trace. If you have a very recursive program that you want to
+analyze in depth, using a <code>callgrind</code> visualization instead might work better.</p>
+
+<p>For example, Rubocop uses a lot of recursion. In this flamegraph from a Rubocop execution, we see
+that the <code>on_block</code>, <code>on_begin</code>, <code>on_while</code>, etc functions get called over and over and over again
+in a lot of different places, and it&rsquo;s very hard to learn anything from the flamegraph except that
+there&rsquo;s a lot of recursion.</p>
+
+<p><a href="/images/rubocop-flamegraph.svg">
+<img src="/images/rubocop-flamegraph.svg">
+</a></p>
+
+<p>A simple text summary gives us more insight into what&rsquo;s going on (7.6% of the time is spent in
+<code>advance</code>!) than the flamegraph does.</p>
+
+<pre><code>Summary of profiling data so far:
+% self  % total  name
+  7.65     8.99  advance - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/lib/parser/lexer.rb
+  4.83    11.31  each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/node.rb
+  3.66     8.65  block in tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/mixin/surrounding_s
+  3.33     3.33  source_range - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/node.rb
+  2.50    29.28  block (2 levels) in on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/commiss
+  2.50     2.50  block in offensive? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/style/commented
+  2.50     2.50  block (2 levels) in find_common_characters - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubo
+  2.16     9.65  block in each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/node.rb
+  1.83    15.31  do_parse - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/racc/parser.rb
+  1.83     1.83  to_s - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/badge.rb
+  1.83     1.83  rspec_pattern - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-rspec-1.22.0/lib/rubocop/cop/rspec/cop.rb
+  1.66     2.66  cop_config - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/cop.rb
+  1.50     1.50  end_pos - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/token.rb
+  1.33     1.50  style_detected - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/mixin/configurable_e
+  1.16     2.00  to_a - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ast-2.3.0/lib/ast/node.rb
+  1.16     1.16  initialize - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/cop.rb
+  1.16     1.16  block (2 levels) in of - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/unicode-display_width-1.3.0/lib/unicode/dis
+  1.00     9.48  tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/mixin/surrounding_space.rb
+  1.00     2.50  block (2 levels) in &lt;class:Node&gt; - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/no
+  1.00     2.16  block in on_module - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/commissioner.rb
+</code></pre>
+
+                        
+                        
+    <div id="comments">
+        
+        
+    </div>
+
+
+                    </div>
+                </div>
+                
+
+
+            </div>
+        </div>
+    </body>
+</html>

@@ -339,6 +339,16 @@ h3.post-title {
 	}
 }
 
+/**
+ * table of contents
+ */
+
+
+#TableOfContents ul {
+    list-style-type: none;
+    padding-left: 1em;
+}
+
 
 /** 
  * Hamburger menu stuff
@@ -351,6 +361,7 @@ h3.menu-title {
 	margin-top: 0.2em;
 	margin-bottom: 0.2em;
 }
+
 
 #menuToggle input {
     display: none;

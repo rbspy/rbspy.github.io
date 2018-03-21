@@ -90,7 +90,7 @@
         <h3 class="menu-title">Profiling basics </h3>
         <ul class="sidebar-menu">
             
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">test</a></li>
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-flamegraphs/">Using flamegraphs</a></li>
             
         </ul>
     </div>
@@ -236,21 +236,6 @@ $ cat summary.txt
   0.00   100.00  aaa - ci/ruby-programs/short_program.rb
   0.00   100.00  &lt;main&gt; - ci/ruby-programs/short_program.rb
 </code></pre>
-
-<h2 id="what-s-a-flamegraph">What&rsquo;s a flamegraph?</h2>
-
-<p>rbspy uses <a href="https://github.com/brendangregg/flamegraph">Brendan Gregg&rsquo;s flamegraph script</a> to
-generate flamegraphs!</p>
-
-<p>A flamegraph is a way to visualize profiling data from a process. Here&rsquo;s a flamegraph of
-Jekyll building a blog recorded with <code>rbspy record jekyll build</code>.</p>
-
-<p>You can see it spends about 50% of its time building the site (on the left, above <code>execute</code>) and
-about 50% of its time loading requires (on the right, above <code>require</code>).</p>
-
-<p><a href="https://user-images.githubusercontent.com/817739/35201793-3a16071a-feec-11e7-8583-e1fa3c5e14b2.png">
-<img src="https://user-images.githubusercontent.com/817739/35201793-3a16071a-feec-11e7-8583-e1fa3c5e14b2.png">
-</a></p>
 
 <h2 id="on-the-dropped-x-y-stack-traces-because-of-errors-message">On the &ldquo;Dropped X/Y stack traces because of errors&rdquo; message</h2>
 
