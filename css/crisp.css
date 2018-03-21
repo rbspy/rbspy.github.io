@@ -353,7 +353,7 @@ h3.post-title {
     {
         display: block;
         position: absolute;
-        top: 50px;
+        top: 15px;
         left: 20px;
 
         z-index: 1;
@@ -463,7 +463,7 @@ h3.post-title {
         transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
     }
     
-    #menu li
+    .sidebar-menu li
     {
         padding: 10px 0;
         font-size: 22px;
