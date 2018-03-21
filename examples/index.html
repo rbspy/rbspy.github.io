@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta property="og:title" content=" Profiling examples &middot;  rbspy" />
+<meta property="og:site_name" content="rbspy" />
+<meta property="og:url" content="http://rbspy.github.io/examples/" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta name="twitter:title" content="Profiling examples" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:url" content="http://rbspy.github.io/examples/" />
+
+
+<title> Profiling examples &middot;  rbspy</title>
+
+
+    <meta name="description" content="" />
+
+
+<meta name="p:domain_verify" content="fc173d84e3a4de948ed4bda2908afd3e"/>
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://rbspy.github.io/css/pure-min.css">
+
+
+    <link rel="stylesheet" href="http://rbspy.github.io/css/grids-responsive-min.css">
+
+<link rel="stylesheet" href="http://rbspy.github.io/css/crisp.css">
+<link rel="stylesheet" href="http://rbspy.github.io/css/rrssb.css">
+
+
+
+
+
+
+
+
+<link rel="canonical" href="http://rbspy.github.io/examples/" />
+
+
+    
+
+
+    </head>
+    <body>
+        <div id="layout" class="pure-g">
+            <div class="sidebar pure-u-1 pure-u-md-1-6">
+                <div class="header">
+    <div class="title">
+        <h1><a href="http://rbspy.github.io/">rbspy</a></h1>
+        
+        
+    </div>
+    <div class="logo">
+        
+        
+            
+                <a id="logo" href="http://rbspy.github.io/"><img src="/rbspy.jpg" alt="rbspy" /></a>
+            
+        
+    </div>
+
+    <ul class="sidebar-menu">
+        
+            <li class="sidebar-menu-item"><a href="http://rbspy.github.io/">Home</a></li>
+        
+            <li class="sidebar-menu-item"><a href="http://rbspy.github.io/installing/">Installing</a></li>
+        
+            <li class="sidebar-menu-item"><a href="http://rbspy.github.io/examples/">Profiling Examples</a></li>
+        
+            <li class="sidebar-menu-item"><a href="http://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
+        
+            <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
+        
+    </ul>
+
+    <div id="follow-icons">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+            </div>
+            <div class="content pure-u-1 pure-u-md-5-6">
+                <div class="singlepage">
+                    <div class="article" id="" class="page">
+                        <div class="post-stamp">
+                            <h1 class="post-title">Profiling examples</h1>
+                        </div>
+                        
+
+<h2 id="the-case-of-the-slow-unit-test">The case of the slow unit test</h2>
+
+<p>To get an idea of how rbspy can help you do profiling, let&rsquo;s do a couple of quick examples!</p>
+
+<pre><code>$ wget http://rbspy.github.io/examples/slow_test.rb
+$ ruby slow_test.rb
+Loaded suite static/examples/test
+Started
+.
+
+Finished in 4.001482979 seconds.
+</code></pre>
+
+<p>Why is this test taking 4 seconds to run? Let&rsquo;s run rbspy!</p>
+
+<pre><code>$ rbspy record ruby slow_test.rb
+Summary of profiling data so far:
+% self  % total  name
+ 96.98    96.98  slow_function - static/examples/slow_test.rb
+  1.26     1.76  require - /usr/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb
+  0.50     1.01  &lt;top (required)&gt; - /usr/lib/ruby/2.3.0/rubygems.rb
+  0.25     0.50  &lt;module:Gem&gt; - /usr/lib/ruby/2.3.0/rubygems.rb
+  0.25     0.25  block in make_switch - /usr/lib/ruby/2.3.0/optparse.rb
+  0.25     0.25  block in &lt;module:NoWrite&gt; - /usr/lib/ruby/2.3.0/fileutils.rb
+  0.25     0.25  block in &lt;class:SexpBuilder&gt; - /usr/lib/ruby/2.3.0/ripper/sexp.rb
+  0.25     0.25  &lt;top (required)&gt; - /usr/lib/ruby/2.3.0/rubygems/specification.rb
+</code></pre>
+
+<p>It&rsquo;s spending 96% of its time in <code>slow_function</code>! What&rsquo;s that?</p>
+
+<pre><code>
+def slow_function
+    sleep(4)
+    return 4
+end
+</code></pre>
+
+<p><code>slow_function</code> sleeps for 4 seconds! That&rsquo;s why our tests are slow.</p>
+
+<p>This is obviously a manufactured example, but this technique (run <code>rbspy record</code>, see which function
+all the time is being spent in, figure out why) is helpful when you code is taking WAY longer than
+you think it should (for instance something that should take 2 seconds is taking 5 minutes).</p>
+
+<h2 id="the-case-of-the-selenium-test">The case of the Selenium test</h2>
+
+<pre><code>$ wget http://rbspy.github.io/examples/selenium.rb
+$ time ruby selenium.rb # requires a bunch of dependencies to be installed
+</code></pre>
+
+<pre><code>require 'rubygems'
+require 'headless'
+require 'selenium-webdriver'
+
+Headless.ly do
+  driver = Selenium::WebDriver.for :firefox
+  driver.navigate.to 'http://google.com'
+  puts driver.title 
+end
+</code></pre>
+
+<pre><code>  0.00    88.13  request - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/net/http.rb
+</code></pre>
+
+<h2 id="the-case-of-the-slow-download">The case of the slow download</h2>
+
+<pre><code>$ wget http://rbspy.github.io/examples/mystery_download.rb
+$ time ruby mystery_download.rb
+0.09user 0.00system 0:02.13elapsed 4%CPU (0avgtext+0avgdata 11576maxresident)k
+</code></pre>
+
+<p>2 seconds! Why is this program taking 2 seconds? Again, let&rsquo;s start by running <code>rbspy record</code>!</p>
+
+<pre><code>$ rbspy record ruby mystery_download.rb
+Time since start: 2s. Press Ctrl+C to stop.
+Summary of profiling data so far:
+% self  % total  name
+ 95.94    95.94  block in connect - /usr/lib/ruby/2.3.0/net/http.rb
+  2.03     2.03  require - /usr/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb
+  0.51    99.49  &lt;c function&gt; - unknown
+  0.51     0.51  expand - /usr/lib/x86_64-linux-gnu/ruby/2.3.0/rbconfig.rb
+  0.51     0.51  base_dir - /usr/lib/ruby/2.3.0/rubygems/specification.rb
+
+Wrote raw data to /home/bork/.cache/rbspy/records/rbspy-2018-03-20-udS4Y8WHgj.raw.gz
+Writing formatted output to /home/bork/.cache/rbspy/records/rbspy-2018-03-20-KZlFL4Jx8Q.flamegraph.svg
+</code></pre>
+
+<p>This tells us 95% of the time is being spent in <code>connect</code></p>
+
+<p><a href="/examples/slow-network.svg">
+<img src="/examples/slow-network.svg">
+</a></p>
+
+<h2 id="profiling-jekyll">Profiling Jekyll</h2>
+
+<p><a href="/examples/jekyll-flamegraph.svg">
+<img src="/examples/jekyll-flamegraph.png">
+</a></p>
+
+                        
+                        
+    <div id="comments">
+        
+        
+    </div>
+
+
+                    </div>
+                </div>
+                
+
+
+            </div>
+        </div>
+    </body>
+</html>
