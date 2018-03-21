@@ -11,13 +11,18 @@ html, button, input, select, textarea,
 .header {
 	border-right: 1px #eee solid;
 	height: 100%;
-    padding: 10% 0.5em 0;
     text-align: center;
 }
+
+.header ul,h3 {
+    text-align: left;
+    padding-left: 1em;
+}
+
 .header h1 {
 	font-size:1.9em;
-	margin-top:0.8em;
-	margin-bottom:0.6em;
+	margin-top:0.5em;
+	margin-bottom: 0em;
 }
 .header h1 a {
 	color:#444;
@@ -27,7 +32,7 @@ html, button, input, select, textarea,
 }
 .header #logo img {
 	border: none;
-        width:80%;
+        width:60%;
         display: block;
         margin: auto;
 }
@@ -36,7 +41,6 @@ html, button, input, select, textarea,
 }
 .header .roundlogo img {
 	width:9em;
-	height:9em;
 	border-radius:4.5em;
 	-moz-border-radius: 4.5em;
 	-webkit-border-radius: 4.5em;
