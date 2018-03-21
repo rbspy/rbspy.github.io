@@ -11,8 +11,8 @@ html, button, input, select, textarea,
 .header {
 	border-right: 1px #eee solid;
 	height: 100%;
-        padding: 20% 2em 0;
-        text-align: center;
+    padding: 10% 0.5em 0;
+    text-align: center;
 }
 .header h1 {
 	font-size:1.9em;
@@ -171,7 +171,7 @@ input {
 }
 
 .logo {
-    margin-bottom:2em;
+    margin-bottom:1em;
 }
 
 #follow-icons .fa:hover {

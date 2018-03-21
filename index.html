@@ -112,12 +112,195 @@
         <div class="content pure-u-1 pure-u-md-5-6">
             <div class="index-list">
                 
-                
-                <nav class="pagination">
-	
-	<span class="page-number">Page 1 of 0</span>
-	
-</nav>
+
+<h1 id="rbspy">rbspy</h1>
+
+<p>Have you ever wanted to know what functions your Ruby program is calling? <code>rbspy</code> can tell you!</p>
+
+<p><code>rbspy</code> lets you profile Ruby processes that are already running. You give it a PID, and it starts
+profiling! It&rsquo;s a sampling profiler, which means it&rsquo;s <strong>low overhead</strong> and <strong>safe to run in
+production</strong>.</p>
+
+<h2 id="quickstart">Quickstart</h2>
+
+<ol>
+<li>Download the latest release from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a></li>
+<li>Unzip + move the rbspy binary to <code>/usr/local/bin/rbspy</code></li>
+<li>Profile a running Ruby process!</li>
+</ol>
+
+<pre><code>$ rbspy record --pid $PID
+</code></pre>
+
+<p>Here&rsquo;s what running <code>rbspy record</code> on a Rubocop process looks like. You&rsquo;ll see a live summary of
+what the top functions being run are, and it also saves the raw data + a flamegraph for more in
+depth analysis.</p>
+
+<p><img src="/rbspy-record.gif"></p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>rbspy runs on Linux* and Mac.</p>
+
+<p><small>
+* kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.
+</small></p>
+
+<h2 id="using-rbspy">Using rbspy</h2>
+
+<p>rbspy currently has 2 features: snapshot and record.</p>
+
+<h3 id="snapshot">Snapshot</h3>
+
+<p>Snapshot takes a single stack trace from the specified process, prints it, and exits. This is
+useful if you have a stuck Ruby program and just want to know what it&rsquo;s doing right now.  Must be
+run as root.</p>
+
+<pre><code>sudo rbspy snapshot --pid $PID
+</code></pre>
+
+<h3 id="record">Record</h3>
+
+<p>Record records stack traces from your process and saves them to disk.</p>
+
+<p><code>rbspy record</code> will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you
+can configure the visualization format with <code>--format</code>). The raw data file contains every stack
+trace that <code>rbspy</code> recorded, so that you can generate other visualizations later if you want. By
+default, rbspy saves both files to <code>~/.cache/rbspy/records</code>, but you can customize where those are
+stored with <code>--file</code> and <code>--raw-file</code>.</p>
+
+<p>This is useful when you want to know what functions your program is spending most of its time in.</p>
+
+<p>You can record stack traces in two different ways, by PID or by executing a new ruby process.</p>
+
+<h4 id="record-by-pid">Record by PID</h4>
+
+<pre><code># Must be run as root
+sudo rbspy record --pid $PID
+</code></pre>
+
+<h4 id="record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</h4>
+
+<pre><code># Must be run as root on Mac (but not Linux)
+rbspy record ruby myprogram.rb
+</code></pre>
+
+<p>The reason this has to be run as root on Mac but not on Linux is that Mac and Linux systems APIs are
+different. rbspy can use the <code>process_vm_readv</code> system call to read memory from a child process on
+Linux without being root, but can&rsquo;t do the same with <code>vm_read</code> on Mac.</p>
+
+<p>If run with sudo, <code>rbspy record</code> by default drops root privileges when executing a subprocess. So if
+you&rsquo;re user <code>bork</code> and run <code>sudo rbspy record ruby script.rb</code>. You can disable this with
+<code>--no-drop-root</code>.</p>
+
+<h4 id="optional-arguments">Optional Arguments</h4>
+
+<p>These work regardless of how you started the recording.</p>
+
+<ul>
+<li><code>--rate</code>: Specifies the frequency of that stack traces are recorded. The interval is determined by <code>1000/rate</code>. The default rate is 100hz.</li>
+<li><code>--duration</code>: Specifies how long to run before stopping rbspy. This conficts with running a subcommand (<code>rbspy record ruby myprogram.rb</code>).</li>
+<li><code>--format</code>: Specifies what format to use to report profiling data. The options are:
+
+<ul>
+<li><code>flamegraph</code>: generates a flamegraph SVG that you can view in a browser</li>
+<li><code>callgrind</code>: generates a callgrind-formatted file that you can view with a tool like
+<code>kcachegrind</code>.</li>
+<li><code>summary</code>: aggregates % self and % total times by function. Useful to get a basic overview</li>
+<li><code>summary_by_line</code>: aggregates % self and % total times by line number. Especially useful when
+there&rsquo;s 1 line in your program which is taking up all the time.</li>
+</ul></li>
+<li><code>--file</code>: Specifies where rbspy will save formatted output.</li>
+<li><code>--raw-file</code>: Specifies where rbspy will save formatted data. Use a gz extension because it will be gzipped.</li>
+</ul>
+
+<h2 id="reporting">Reporting</h2>
+
+<p>If you have a raw rbspy data file that you&rsquo;ve previously recorded, you can use <code>rbspy report</code> to
+generate different kinds of visualizations from it (the flamegraph/callgrind/summary formats, as
+documented above). This is useful because you can record raw data from a program and then decide how
+you want to visualize it afterwards.</p>
+
+<p>For example, here&rsquo;s what recording a simple program and then generating a summary report looks like:</p>
+
+<pre><code>$ sudo rbspy record --raw-file raw.gz ruby ci/ruby-programs/short_program.rb
+$ rbspy report -f summary -i raw.gz -o summary.txt
+$ cat summary.txt
+% self  % total  name
+100.00   100.00  &lt;c function&gt; - unknown
+  0.00   100.00  ccc - ci/ruby-programs/short_program.rb
+  0.00   100.00  bbb - ci/ruby-programs/short_program.rb
+  0.00   100.00  aaa - ci/ruby-programs/short_program.rb
+  0.00   100.00  &lt;main&gt; - ci/ruby-programs/short_program.rb
+</code></pre>
+
+<h2 id="what-s-a-flamegraph">What&rsquo;s a flamegraph?</h2>
+
+<p>rbspy uses <a href="https://github.com/brendangregg/flamegraph">Brendan Gregg&rsquo;s flamegraph script</a> to
+generate flamegraphs!</p>
+
+<p>A flamegraph is a way to visualize profiling data from a process. Here&rsquo;s a flamegraph of
+Jekyll building a blog recorded with <code>rbspy record jekyll build</code>.</p>
+
+<p>You can see it spends about 50% of its time building the site (on the left, above <code>execute</code>) and
+about 50% of its time loading requires (on the right, above <code>require</code>).</p>
+
+<p><a href="https://user-images.githubusercontent.com/817739/35201793-3a16071a-feec-11e7-8583-e1fa3c5e14b2.png">
+<img src="https://user-images.githubusercontent.com/817739/35201793-3a16071a-feec-11e7-8583-e1fa3c5e14b2.png">
+</a></p>
+
+<h2 id="on-the-dropped-x-y-stack-traces-because-of-errors-message">On the &ldquo;Dropped X/Y stack traces because of errors&rdquo; message</h2>
+
+<p>rbspy does not stop your Ruby processes to collect information about what it&rsquo;s doing. This is for
+both performance reasons and general production-safety reasons &ndash; only <strong>reading</strong> from your Ruby
+processes and not altering them in any way means that rbspy is safer to run on production Ruby
+applications. rbspy does not use ptrace or signals.</p>
+
+<p>This means that sometimes rbspy will try to read a stack trace out of a Ruby process, there will be
+a race, and the memory of that process will temporarily be in an invalid state which means rbspy
+can&rsquo;t collect its stack. <code>rbspy record</code> handles this by just dropping that stack trace and trying
+again later, and reports the total number of dropped stack traces when it&rsquo;s done.</p>
+
+<p>A typical error message here is something like &ldquo;Dropped <sup>13</sup>&frasl;<sub>3700</sub> stack traces because of errors&rdquo;. If
+you&rsquo;re seeing high error rates (more than <sup>1</sup>&frasl;<sub>100</sub> or so), please create an issue.</p>
+
+<h2 id="missing-features">Missing features</h2>
+
+<p>Contributions in any of these areas would be very welcome.</p>
+
+<ul>
+<li>BSD/Windows support</li>
+<li>Profile multiple threads</li>
+<li>Profile C extensions (rbspy will simply ignore any calls into C extensions)</li>
+</ul>
+
+<h2 id="contributing">Contributing</h2>
+
+<p>A major goal for this project is to get more maintainers and contributors. Pull requests that
+improve usability, fix bugs, or help rbspy support more operating systems are very welcome. If you
+have questions about contributing come chat <a href="https://gitter.im/rbspy/rbspy">on gitter</a>.</p>
+
+<p>If you&rsquo;re not a very experienced Rust programmer, you&rsquo;re very welcome to contribute. A major reason
+rbspy is written in Rust is that Rust is more approachable than C/C++.
+<a href="https://www.rust-lang.org/en-US/">https://www.rust-lang.org/en-US/</a> has great resources for learning Rust.</p>
+
+<h2 id="building-rbspy">Building rbspy</h2>
+
+<ol>
+<li>Install cargo from <a href="https://crates.io/">crates.io</a></li>
+<li><code>cargo build</code> to build</li>
+<li><code>cargo test</code> to test</li>
+</ol>
+
+<p>The build artifacts will end up in <code>target/debug</code></p>
+
+<h2 id="authors">Authors</h2>
+
+<ul>
+<li>Julia Evans</li>
+<li>Kamal Marhubi</li>
+</ul>
+
             </div>
             
 
