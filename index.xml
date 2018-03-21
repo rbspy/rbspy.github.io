@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rbspy</title>
+    <link>http://rbspy.github.io/</link>
+    <description>Recent content on rbspy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="http://rbspy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installing rbspy</title>
+      <link>http://rbspy.github.io/installing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rbspy.github.io/installing/</guid>
+      <description>asdf</description>
+    </item>
+    
+    <item>
+      <title>Profiling examples</title>
+      <link>http://rbspy.github.io/examples/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rbspy.github.io/examples/</guid>
+      <description>The case of the slow unit test To get an idea of how rbspy can help you do profiling, let&amp;rsquo;s do a couple of quick examples!
+$ wget http://rbspy.github.io/examples/slow_test.rb $ ruby slow_test.rb Loaded suite static/examples/test Started . Finished in 4.001482979 seconds.  Why is this test taking 4 seconds to run? Let&amp;rsquo;s run rbspy!
+$ rbspy record ruby slow_test.rb Summary of profiling data so far: % self % total name 96.</description>
+    </item>
+    
+    <item>
+      <title>Should I use rbspy or stackprof?</title>
+      <link>http://rbspy.github.io/rbspy-vs-stackprof/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rbspy.github.io/rbspy-vs-stackprof/</guid>
+      <description>rbspy and stackprof are both sampling profilers for Ruby. They both let you generate flamegraphs. So when should you use rbspy, and when should you use stackprof?
+The two tools are actually used in pretty different ways! rbspy is a command line tool (rbspy record --pid YOUR_PID), and stackprof is a library that you can include in your Ruby program and use to profile a given section of code.</description>
+    </item>
+    
+  </channel>
+</rss>
