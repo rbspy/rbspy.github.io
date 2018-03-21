@@ -125,7 +125,33 @@
                         <div class="post-stamp">
                             <h1 class="post-title">Installing rbspy</h1>
                         </div>
-                        <p>asdf</p>
+                        
+
+<h3 id="download-a-binary">Download a binary</h3>
+
+<p>Installing rbspy is easy: it&rsquo;s a single static binary. There are binaries for Linux and Mac, which
+are the two supported platforms.</p>
+
+<ol>
+<li>Download the latest release from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a></li>
+<li>Unzip + move the rbspy binary to <code>/usr/local/bin/rbspy</code></li>
+</ol>
+
+<h3 id="compile-from-source">Compile from source</h3>
+
+<p><strong>Step 1</strong>: Install Cargo (if you haven&rsquo;t already). There&rsquo;s a guide in the <a href="https://doc.rust-lang.org/cargo/getting-started/installation.html">cargo docs</a>, or just run this command.</p>
+
+<pre><code>curl -sSf https://static.rust-lang.org/rustup.sh | sh
+</code></pre>
+
+<p><strong>Step 2</strong>: Add <code>~/.cargo/bin</code> to your PATH.</p>
+
+<p><strong>Step 3</strong>: Build rbspy!</p>
+
+<pre><code>git clone https://github.com/rbspy/rbspy
+cd rbspy
+cargo install
+</code></pre>
 
                         
                         

@@ -147,14 +147,14 @@ hr{
 	margin-left: 3em;
 }*/
 code {
-	font-size:1em;
+	font-size:0.9em;
 	background: #eee;
 }
 pre {
 	font-size: 0.8em;
-	line-height: 2em;
+	line-height: 1.5em;
 	background: #eee;
-	padding: 1em;
+	padding: 0.5em;
 	word-break: break-all;
 	word-wrap: break-word;
 	white-space: pre;
