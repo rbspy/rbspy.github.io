@@ -53,5 +53,17 @@ Flamegraphs are a way to visualize how your program is spending its time. A few 
  The colours are randomly generated (they don&amp;rsquo;t mean anything) The x axis on the flamegraph doesn&amp;rsquo;t represent time.</description>
     </item>
     
+    <item>
+      <title>Using rbspy</title>
+      <link>https://rbspy.github.io/using-rbspy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://rbspy.github.io/using-rbspy/</guid>
+      <description>Subcommands rbspy has 3 subcommands: snapshot, record, and report.
+Snapshot Snapshot takes a single stack trace from the specified process, prints it, and exits. This is useful if you have a stuck Ruby program and just want to know what it&amp;rsquo;s doing right now. Must be run as root.
+sudo rbspy snapshot --pid $PID  Record Record records stack traces from your process and saves them to disk.
+rbspy record will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you can configure the visualization format with --format).</description>
+    </item>
+    
   </channel>
 </rss>
