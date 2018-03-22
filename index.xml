@@ -12,10 +12,10 @@
     
     <item>
       <title>Benchmarking your code</title>
-      <link>https://rbspy.github.io/benchmarking/</link>
+      <link>https://rbspy.github.io/benchmarking-your-code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rbspy.github.io/benchmarking/</guid>
+      <guid>https://rbspy.github.io/benchmarking-your-code/</guid>
       <description>People who are just getting started making their code faster sometimes confuse benchmarking and profiling. Let&amp;rsquo;s explain the difference and how to use both techniques to make your code faster!
 In short: a benchmark tells you how slow your code is (&amp;ldquo;it took 20 seconds to do X Y Z&amp;rdquo;) and a profiler tells you why it&amp;rsquo;s slow (&amp;ldquo;35% of that time was spent doing compression&amp;rdquo;).
 What&amp;rsquo;s benchmarking? Why is it important?</description>
