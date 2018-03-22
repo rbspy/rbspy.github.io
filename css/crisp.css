@@ -184,13 +184,14 @@ input {
 
 .sidebar-menu {
     list-style: none;
-    margin-bottom: 2em;
+    margin-bottom: 0.5em;
     padding-left: 0em;
 }
 
 .sidebar-menu-item {
     display: block;
-    line-height: 1.75;
+    line-height: 1em;
+    font-size: 15px;
 }
 
 #follow-icons {
@@ -377,6 +378,13 @@ h3.menu-title {
     display: none;
 }
 
+.sidebar-menu li
+{
+    padding: 5px 0;
+    line-height: 1.2em;
+    font-size: 15px;
+}
+
 @media only screen and (max-width: 48em) {
     #menuToggle
     {
@@ -500,11 +508,6 @@ h3.menu-title {
         font-size: 22px;
     }
 
-    .sidebar-menu li
-    {
-        padding: 10px 0;
-        font-size: 22px;
-    }
     
     /*
      * And let's slide it in from the left
