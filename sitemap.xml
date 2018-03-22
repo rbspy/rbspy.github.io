@@ -7,6 +7,10 @@
   </url>
   
   <url>
+    <loc>https://rbspy.github.io/benchmarking/</loc>
+  </url>
+  
+  <url>
     <loc>https://rbspy.github.io/categories/</loc>
     <priority>0</priority>
   </url>
