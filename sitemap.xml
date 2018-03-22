@@ -7,6 +7,10 @@
   </url>
   
   <url>
+    <loc>https://rbspy.github.io/about-profiling-guide/</loc>
+  </url>
+  
+  <url>
     <loc>https://rbspy.github.io/benchmarking-your-code/</loc>
   </url>
   
@@ -21,6 +25,10 @@
   
   <url>
     <loc>https://rbspy.github.io/examples/</loc>
+  </url>
+  
+  <url>
+    <loc>https://rbspy.github.io/optimization-questions/</loc>
   </url>
   
   <url>

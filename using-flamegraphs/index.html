@@ -102,8 +102,12 @@
                 <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
             
         </ul>
-        <h3 class="menu-title">Profiling basics </h3>
+        <h3 class="menu-title">Profiling guide</h3>
         <ul class="sidebar-menu">
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/about-profiling-guide/">About the guide</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/optimization-questions/">Questions to ask when optimizing</a></li>
             
                 <li class="sidebar-menu-item"><a href="https://rbspy.github.io/benchmarking-your-code/">Benchmarking your code</a></li>
             
@@ -251,8 +255,11 @@ other method.</li>
 <p>This is neat! I&rsquo;m not familiar with the Jekyll codebase at all, but just by looking through this
 flamegraph I can understand a few important things about how the code is structured.</p>
 
-<p>Here&rsquo;s the slice that jumps out at me (where <code>render_document</code> splits into the 3 methods it calls)
-<img src="/examples/jekyll-flamegraph.png"></p>
+<p>Here&rsquo;s the slice that jumps out at me (where <code>render_document</code> splits into the 3 methods it calls).
+Basically the thing to look for here is where the big slice (which takes up ~80% of the program)
+breaks into smaller slices, because that tells you what the program&rsquo;s main phases are.</p>
+
+<p><img src="/examples/jekyll-flamegraph.png"></p>
 
 <p>and the whole flamegraph:</p>
 

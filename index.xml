@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>About this profiling guide</title>
+      <link>https://rbspy.github.io/about-profiling-guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://rbspy.github.io/about-profiling-guide/</guid>
+      <description>rbspy&amp;rsquo;s goal is not just to be a Ruby profiler, but to make profiling a little bit more accessible to the Ruby community in general and something that more programmers do.
+I&amp;rsquo;ve heard from a lot of people over the years that they find profiling confusing and that they don&amp;rsquo;t know where to start. So this profiling guide (the index is on the sidebar) aims to explain some of the basics of profiling (what&amp;rsquo;s benchmarking?</description>
+    </item>
+    
+    <item>
       <title>Benchmarking your code</title>
       <link>https://rbspy.github.io/benchmarking-your-code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -41,6 +51,17 @@ curl -sSf https://static.rust-lang.org/rustup.sh | sh  Step 2: Add ~/.</descript
       <description>The case of the slow unit test To get an idea of how rbspy can help you do profiling, let&amp;rsquo;s do a couple of quick examples!
 $ wget http://rbspy.github.io/examples/slow_test.rb $ ruby slow_test.rb Loaded suite static/examples/test Started . Finished in 4.001482979 seconds.  Why is this test taking 4 seconds to run? Let&amp;rsquo;s run rbspy!
 $ rbspy record ruby slow_test.rb Summary of profiling data so far: % self % total name 96.</description>
+    </item>
+    
+    <item>
+      <title>Questions to ask when optimizing</title>
+      <link>https://rbspy.github.io/optimization-questions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://rbspy.github.io/optimization-questions/</guid>
+      <description>When people start looking at profiling data, they&amp;rsquo;re often unsure of where to start.
+If you have a slow program that you want to start optimizing, here are a few questions to consider using your profiling tools to answer.
+Is my program mostly using the CPU or mostly waiting? If your program is slow, the first most important thing to find out is whether it&amp;rsquo;s slow because it&amp;rsquo;s using the CPU or if it&amp;rsquo;s slow because it&amp;rsquo;s waiting for the disk or network or something.</description>
     </item>
     
     <item>

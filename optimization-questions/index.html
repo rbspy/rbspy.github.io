@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta property="og:title" content=" Questions to ask when optimizing &middot;  rbspy" />
+<meta property="og:site_name" content="rbspy" />
+<meta property="og:url" content="https://rbspy.github.io/optimization-questions/" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta name="twitter:title" content="Questions to ask when optimizing" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:url" content="https://rbspy.github.io/optimization-questions/" />
+    <meta name="twitter:image" content="https://rbspy.github.io/rbspy.jpg" />
+
+
+<title> Questions to ask when optimizing &middot;  rbspy</title>
+
+
+    <meta name="description" content="" />
+
+
+<meta name="p:domain_verify" content="fc173d84e3a4de948ed4bda2908afd3e"/>
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+
+
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,300,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://rbspy.github.io/css/pure-min.css">
+
+
+    <link rel="stylesheet" href="https://rbspy.github.io/css/grids-responsive-min.css">
+
+<link rel="stylesheet" href="https://rbspy.github.io/css/crisp.css">
+<link rel="stylesheet" href="https://rbspy.github.io/css/rrssb.css">
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://rbspy.github.io/optimization-questions/" />
+
+
+    
+
+
+    </head>
+    <body>
+        <div id="layout" class="pure-g">
+            <div class="sidebar pure-u-1 pure-u-md-1-6">
+                <div class="header">
+    <div class="title">
+        <h1><a href="https://rbspy.github.io/">rbspy</a></h1>
+        
+        
+    </div>
+    <div class="logo">
+        
+        
+            
+                <a id="logo" href="https://rbspy.github.io/"><img src="https://rbspy.github.io/rbspy.jpg" alt="rbspy" /></a>
+            
+        
+    </div>
+
+    <div id="menuToggle">
+    
+    <input type="checkbox" />
+    
+    
+    <span></span>
+    <span></span>
+    <span></span>
+    
+    <div id="menu">
+        <ul class="sidebar-menu">
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-rbspy/">Using rbspy</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
+            
+                <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
+            
+        </ul>
+        <h3 class="menu-title">Profiling guide</h3>
+        <ul class="sidebar-menu">
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/about-profiling-guide/">About the guide</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/optimization-questions/">Questions to ask when optimizing</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/benchmarking-your-code/">Benchmarking your code</a></li>
+            
+                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-flamegraphs/">Using flamegraphs</a></li>
+            
+        </ul>
+    </div>
+    </div>
+
+    <div id="follow-icons">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+            </div>
+            <div class="content pure-u-1 pure-u-md-5-6">
+                <div class="singlepage">
+                    <div class="article" id="" class="page">
+                        <div class="post-stamp">
+                            <h1 class="post-title">Questions to ask when optimizing</h1>
+                        </div>
+                        <aside>
+                            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#is-my-program-mostly-using-the-cpu-or-mostly-waiting">Is my program mostly using the CPU or mostly waiting?</a></li>
+<li><a href="#is-my-program-swapping-memory-to-disk">Is my program swapping memory to disk?</a></li>
+<li><a href="#is-there-a-single-function-where-all-the-time-is-being-spent">Is there a single function where all the time is being spent?</a></li>
+<li><a href="#how-many-times-is-function-x-being-called">How many times is function X being called?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                        </aside>
+                        
+
+<p>When people start looking at profiling data, they&rsquo;re often unsure of where to start.</p>
+
+<p>If you have a slow program that you want to start optimizing, here are a few questions to consider
+using your profiling tools to answer.</p>
+
+<h3 id="is-my-program-mostly-using-the-cpu-or-mostly-waiting">Is my program mostly using the CPU or mostly waiting?</h3>
+
+<p>If your program is slow, the first most important thing to find out is whether it&rsquo;s slow because
+it&rsquo;s using the CPU or if it&rsquo;s slow because it&rsquo;s waiting for the disk or network or something.</p>
+
+<p>If your program is spending 98% of its time waiting for the result of a database query, it&rsquo;s very
+possible that you don&rsquo;t need to change your program&rsquo;s code at all, and what you need to do is work
+on your database&rsquo;s indexes!</p>
+
+<h3 id="is-my-program-swapping-memory-to-disk">Is my program swapping memory to disk?</h3>
+
+<p>This isn&rsquo;t a question that profilers can answer, but if your program is using a lot of memory (more
+than is available on your machine), it&rsquo;s worth checking whether the program is swapping memory to
+disk. Swapping will make your program run a lot slower, especially if your swap partition is
+encrypted.</p>
+
+<h3 id="is-there-a-single-function-where-all-the-time-is-being-spent">Is there a single function where all the time is being spent?</h3>
+
+<p>Sometimes when a program is really unexpectedly slow, there&rsquo;s one function which is overwhelmingly
+the culprit. Profilers can tell you what % of your program&rsquo;s execution time was spent in each
+function.</p>
+
+<p>When thinking about this question it&rsquo;s useful to understand the difference between &ldquo;self time&rdquo; and
+&ldquo;total time&rdquo; spent in a function &ndash; a lot of profilers (including rbspy) will give you a report like
+this:</p>
+
+<pre><code>% self  % total  name
+  3.05    10.09  each_child_node
+  2.52    31.14  block (2 levels) in on_send
+  2.17    14.31  do_parse
+  1.76     3.28  cop_config
+  1.70     2.29  block (2 levels) in &lt;class:Node&gt;
+  1.41     1.41  end_pos
+</code></pre>
+
+<p>The <strong>self time</strong> is the percentage of time that function was at the top of the call stack.
+Basically &ndash; if the function is doing computations itself (vs calling other functions), it&rsquo;s what %
+of time was spent in those functions.</p>
+
+<p><strong>Looking for functions with high self time can be a good way to find low-hanging fruit for
+optimizations</strong> &ndash; if 20% of the time is being spent in a single function&rsquo;s calculations and you
+can make that function 90% faster, then you&rsquo;ve improved your program&rsquo;s overall speed a lot!</p>
+
+<p>The <strong>total time</strong> is the percentage of time that function appeared in a call stack. Basically it&rsquo;s
+the % of time spent in the function itself + every other function it called.</p>
+
+<p>Both self time and total time are important to consider &ndash; for example, if I have a function that
+does this:</p>
+
+<pre><code>def parent_fun
+    for x in list1
+        for y in list2
+            child_fun(x,y)
+        end
+    end
+end
+</code></pre>
+
+<p>your profiler might report that <code>parent_fun</code> has 0% &ldquo;self time&rdquo; (because all it does is call
+<code>child_fun</code> over and over again), but maybe it&rsquo;s still possible to optimize the algorithm it uses.</p>
+
+<h3 id="how-many-times-is-function-x-being-called">How many times is function X being called?</h3>
+
+<p>If your profiler says that 98% of the time is being spent inside a single function
+like <code>calculate_thing</code>, you&rsquo;re not done! There are 2 possible cases here:</p>
+
+<ul>
+<li><code>calculate_thing</code> is taking a long time</li>
+<li><code>calculate_thing</code> is fast, but another function is <strong>calling</strong> that function way too many times.
+No use having a fast function if it&rsquo;s being called 100 million times!</li>
+</ul>
+
+<p>Because rbspy is a sampling profiler (not a tracing profiler), it actually can&rsquo;t tell you how times
+a function was called &ndash; it just reports &ldquo;hey, I observed your program 100,000 times, and 98,000 of
+those times it was in the <code>calculate_thing</code> function&rdquo;.</p>
+
+<p><a href="https://github.com/ruby-prof/ruby-prof">ruby-prof</a> is a tracing profiler for Ruby, which can tell
+you exactly how many times each function was called at the cost of being higher overhead.</p>
+
+                        
+                        
+    <div id="comments">
+        
+        
+    </div>
+
+
+                    </div>
+                </div>
+                
+
+
+            </div>
+        </div>
+    </body>
+</html>
