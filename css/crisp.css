@@ -297,7 +297,7 @@ h3.post-title {
 }
 
 /* Small Screens */
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 48em) {
 	body {
 		padding:0;
 	}
@@ -376,7 +376,7 @@ h3.menu-title {
     display: none;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 48em) {
     #menuToggle
     {
         display: block;
