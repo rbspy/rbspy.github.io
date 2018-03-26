@@ -32,6 +32,16 @@ What&amp;rsquo;s benchmarking? Why is it important?</description>
     </item>
     
     <item>
+      <title>Getting help with rbspy</title>
+      <link>https://rbspy.github.io/getting-help/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://rbspy.github.io/getting-help/</guid>
+      <description>Places you can get help with rbspy:
+ The mailing list! Email rbspy-users@googlegroups.com. Gitter chat room: http://gitter.im/rbspy/rbspy. If you think you&amp;rsquo;ve found a bug, create an issue on github  </description>
+    </item>
+    
+    <item>
       <title>Installing rbspy</title>
       <link>https://rbspy.github.io/installing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
