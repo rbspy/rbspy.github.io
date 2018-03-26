@@ -203,7 +203,8 @@ of time was spent in those functions.</p>
 
 <p><strong>Looking for functions with high self time can be a good way to find low-hanging fruit for
 optimizations</strong> &ndash; if 20% of the time is being spent in a single function&rsquo;s calculations and you
-can make that function 90% faster, then you&rsquo;ve improved your program&rsquo;s overall speed a lot!</p>
+can make that function 90% faster, then you&rsquo;ve improved your program&rsquo;s overall speed a lot! For
+example, if you have a slow calculation, maybe you can cache it!</p>
 
 <p>The <strong>total time</strong> is the percentage of time that function appeared in a call stack. Basically it&rsquo;s
 the % of time spent in the function itself + every other function it called.</p>
