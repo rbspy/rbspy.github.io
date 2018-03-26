@@ -131,10 +131,12 @@
 
 <h1 id="rbspy">rbspy</h1>
 
-<p>Have you ever wanted to know what functions your Ruby program is calling? <code>rbspy</code> can tell you!</p>
+<p>Have a running Ruby program that you want to profile? Don&rsquo;t want to do extra work to install
+profiling gems? You want <code>rbspy</code>! rbspy can profile any Ruby program just by running 1 simple
+command.</p>
 
 <p><code>rbspy</code> lets you profile Ruby processes that are already running. You give it a PID, and it starts
-profiling! It&rsquo;s a sampling profiler, which means it&rsquo;s <strong>low overhead</strong> and <strong>safe to run in
+profiling. It&rsquo;s a sampling profiler, which means it&rsquo;s <strong>low overhead</strong> and <strong>safe to run in
 production</strong>.</p>
 
 <p><code>rbspy</code> lets you record profiling data, save the raw profiling data to disk, and then analyze it in
@@ -142,13 +144,22 @@ a variety of different ways later on.</p>
 
 <h2 id="quickstart">Quickstart</h2>
 
+<p>Getting started using <code>rbspy</code> is easy. Here&rsquo;s how:</p>
+
 <ol>
 <li>Download the latest release from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a></li>
 <li>Unzip + move the rbspy binary to <code>/usr/local/bin/rbspy</code></li>
 <li>Profile a running Ruby process!</li>
 </ol>
 
+<p>To start profiling, just give <code>rbspy</code> the PID of the process you want to profile, like this:</p>
+
 <pre><code>$ rbspy record --pid $PID
+</code></pre>
+
+<p>You can also use <code>rbspy</code> to profile a Ruby script, like this. It works both with and without <code>bundle exec</code>.</p>
+
+<pre><code>$ rbspy record bundle exec ruby my-script.rb
 </code></pre>
 
 <p>Here&rsquo;s what running <code>rbspy record</code> on a Rubocop process looks like. You&rsquo;ll see a live summary of
