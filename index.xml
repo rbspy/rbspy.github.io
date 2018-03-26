@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>rbspy documentation</title>
+    <title>rbspy docs</title>
     <link>https://rbspy.github.io/</link>
-    <description>Recent content on rbspy documentation</description>
+    <description>Recent content on rbspy docs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
