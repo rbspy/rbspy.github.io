@@ -210,6 +210,8 @@ sudo rbspy record --pid $PID
 
 <pre><code># Must be run as root on Mac (but not Linux)
 rbspy record ruby myprogram.rb
+# Put `--` after record if your program has command line arguments
+rbspy record -- ruby myprogram.rb --log-level 0
 </code></pre>
 
 <p>The reason this has to be run as root on Mac but not on Linux is that Mac and Linux systems APIs are
