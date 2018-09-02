@@ -48,8 +48,8 @@ What&amp;rsquo;s benchmarking? Why is it important?</description>
       
       <guid>https://rbspy.github.io/installing/</guid>
       <description>Download a binary Installing rbspy is easy: it&amp;rsquo;s a single static binary. There are binaries for Linux and Mac, which are the two supported platforms.
- Download the latest release from the releases page Unzip + move the rbspy binary to /usr/local/bin/rbspy  Compile from source Step 1: Install Cargo (if you haven&amp;rsquo;t already). There&amp;rsquo;s a guide in the cargo docs, or just run this command.
-curl -sSf https://static.rust-lang.org/rustup.sh | sh  Step 2: Add ~/.</description>
+ Download the latest release from the releases page Unzip + move the rbspy binary to /usr/local/bin/rbspy  With Homebrew On Mac, you can install rbspy with Homebrew:
+brew install rbspy  Compile from source Step 1: Install Cargo (if you haven&amp;rsquo;t already). There&amp;rsquo;s a guide in the cargo docs, or just run this command.</description>
     </item>
     
     <item>
