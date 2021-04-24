@@ -165,6 +165,8 @@ there&rsquo;s 1 line in your program which is taking up all the time.</li>
 <li><code>--raw-file</code>: Specifies where rbspy will save formatted data. Use a gz extension because it will be gzipped.</li>
 <li><code>--flame-min-width</code>: Specifies the minimum flame width in flamegraphs as a percentage. Useful for excluding functions that appear in a small number of samples.</li>
 <li><code>--nonblocking</code>: Don&rsquo;t pause the ruby process when collecting stack samples. Setting this option will reduce the performance impact of sampling but may produce inaccurate results.</li>
+<li><code>--subprocesses</code>: Record all subprocesses of the given PID or command.</li>
+<li><code>--silent</code>: Don&rsquo;t print the summary profiling data every second.</li>
 </ul>
 <h2 id="report">Report</h2>
 <p>If you have a raw rbspy data file that you&rsquo;ve previously recorded, you can use <code>rbspy report</code> to
