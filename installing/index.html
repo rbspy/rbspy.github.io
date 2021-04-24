@@ -18,7 +18,6 @@
     <meta name="twitter:title" content="Installing rbspy" />
     <meta name="twitter:description" content="" />
     <meta name="twitter:url" content="https://rbspy.github.io/installing/" />
-    <meta name="twitter:image" content="https://rbspy.github.io/rbspy.jpg" />
 
 
 <title> Installing rbspy &middot;  rbspy docs</title>
@@ -79,45 +78,21 @@
         
     </div>
 
-    <div id="menuToggle">
-    
-    <input type="checkbox" />
-    
-    
-    <span></span>
-    <span></span>
-    <span></span>
-    
-    <div id="menu">
-        <ul class="sidebar-menu">
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-rbspy/">Using rbspy</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/getting-help/">Getting help</a></li>
-            
-                <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
-            
-        </ul>
-        <h3 class="menu-title">Profiling guide</h3>
-        <ul class="sidebar-menu">
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/about-profiling-guide/">About the guide</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/optimization-questions/">Questions to ask when optimizing</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/benchmarking-your-code/">Benchmarking your code</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-flamegraphs/">Using flamegraphs</a></li>
-            
-        </ul>
-    </div>
-    </div>
+    <ul class="sidebar-menu">
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-rbspy/">Using rbspy</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/getting-help/">Getting help</a></li>
+        
+            <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
+        
+    </ul>
 
     <div id="follow-icons">
         
@@ -141,56 +116,23 @@
                         <div class="post-stamp">
                             <h1 class="post-title">Installing rbspy</h1>
                         </div>
-                        <aside>
-                            <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#download-a-binary">Download a binary</a></li>
-<li><a href="#with-homebrew">With Homebrew</a></li>
-<li><a href="#compile-from-source">Compile from source</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-                        </aside>
-                        
-
-<h3 id="download-a-binary">Download a binary</h3>
-
-<p>Installing rbspy is easy: it&rsquo;s a single static binary. There are binaries for Linux and Mac, which
-are the two supported platforms.</p>
-
+                        <h3 id="download-a-binary">Download a binary</h3>
+<p>Installing rbspy is easy: it&rsquo;s a single static binary. There are binaries for Linux, Mac, and Windows, which
+are the three supported platforms. It&rsquo;s also possible to build rbspy on FreeBSD.</p>
 <ol>
 <li>Download the latest release from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a></li>
 <li>Unzip + move the rbspy binary to <code>/usr/local/bin/rbspy</code></li>
 </ol>
-
-<h3 id="with-homebrew">With Homebrew</h3>
-
-<p>On Mac, you can install rbspy with Homebrew:</p>
-
-<pre><code>brew install rbspy
-</code></pre>
-
 <h3 id="compile-from-source">Compile from source</h3>
-
 <p><strong>Step 1</strong>: Install Cargo (if you haven&rsquo;t already). There&rsquo;s a guide in the <a href="https://doc.rust-lang.org/cargo/getting-started/installation.html">cargo docs</a>, or just run this command.</p>
-
 <pre><code>curl -sSf https://static.rust-lang.org/rustup.sh | sh
-</code></pre>
-
-<p><strong>Step 2</strong>: Add <code>~/.cargo/bin</code> to your PATH.</p>
-
+</code></pre><p><strong>Step 2</strong>: Add <code>~/.cargo/bin</code> to your PATH.</p>
 <p><strong>Step 3</strong>: Build rbspy!</p>
-
 <pre><code>git clone https://github.com/rbspy/rbspy
 cd rbspy
-cargo install
+cargo build --release
+./target/release/rbspy --help
 </code></pre>
-
                         
                         
     <div id="comments">

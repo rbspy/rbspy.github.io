@@ -11,19 +11,13 @@ html, button, input, select, textarea,
 .header {
 	border-right: 1px #eee solid;
 	height: 100%;
-    text-align: center;
-    padding-right: 0.5em;
+        padding: 20% 2em 0;
+        text-align: center;
 }
-
-.header ul,h3 {
-    text-align: left;
-    padding-left: 1em;
-}
-
 .header h1 {
 	font-size:1.9em;
-	margin-top:0.5em;
-	margin-bottom: 0em;
+	margin-top:0.8em;
+	margin-bottom:0.6em;
 }
 .header h1 a {
 	color:#444;
@@ -33,7 +27,7 @@ html, button, input, select, textarea,
 }
 .header #logo img {
 	border: none;
-        width:60%;
+        width:80%;
         display: block;
         margin: auto;
 }
@@ -42,6 +36,7 @@ html, button, input, select, textarea,
 }
 .header .roundlogo img {
 	width:9em;
+	height:9em;
 	border-radius:4.5em;
 	-moz-border-radius: 4.5em;
 	-webkit-border-radius: 4.5em;
@@ -152,14 +147,14 @@ hr{
 	margin-left: 3em;
 }*/
 code {
-	font-size:0.9em;
+	font-size:1.4em;
 	background: #eee;
 }
 pre {
 	font-size: 0.8em;
-	line-height: 1.5em;
+	line-height: 2em;
 	background: #eee;
-	padding: 0.5em;
+	padding: 1em;
 	word-break: break-all;
 	word-wrap: break-word;
 	white-space: pre;
@@ -176,7 +171,7 @@ input {
 }
 
 .logo {
-    margin-bottom:1em;
+    margin-bottom:2em;
 }
 
 #follow-icons .fa:hover {
@@ -185,14 +180,13 @@ input {
 
 .sidebar-menu {
     list-style: none;
-    margin-bottom: 0.5em;
+    margin-bottom: 2em;
     padding-left: 0em;
 }
 
 .sidebar-menu-item {
     display: block;
-    line-height: 1em;
-    font-size: 15px;
+    line-height: 1.75;
 }
 
 #follow-icons {
@@ -287,7 +281,6 @@ h3.post-title {
 }
 
 
-
 /* Large Screens */
 @media only screen and (min-width: 1281px) {
 	html, body {
@@ -297,9 +290,8 @@ h3.post-title {
         padding: 2em 3em 0;
     }
 }
-
 /* Small Screens */
-@media only screen and (max-width: 48em) {
+@media only screen and (max-width: 800px) {
 	body {
 		padding:0;
 	}
@@ -313,12 +305,9 @@ h3.post-title {
 		padding-bottom:1em;
 		padding-top:1em;
 	}
-    .header .title {
-        margin-top: -35px;
-        margin-bottom: -25px;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
-    }
+        .title {
+            margin-bottom:0.5em
+        }
 	#content {
 		margin-left: 0;
 		padding: 2em 2em 1em 2em;
@@ -327,13 +316,9 @@ h3.post-title {
 	footer {
 		padding: 0 2.5em 2em 2.5em;
 	}
-    .logo {
-        width: 50px;
-        position: absolute;
-        top: 5px;
-        right: 10px;
-    }
-
+        .logo {
+            display:none;
+        }
 }
 /* Tiny Screens */
 @media only screen and (max-width: 320px) {
@@ -349,172 +334,4 @@ h3.post-title {
 	ul, ol {
 		margin-left: 2em;
 	}
-}
-
-/**
- * table of contents
- */
-
-
-#TableOfContents ul {
-    list-style-type: none;
-    padding-left: 1em;
-}
-
-
-/** 
- * Hamburger menu stuff
- */
-
-h3.menu-title {
-    font-weight: bold;
-	font-size:1em;
-	line-height: 1em;
-	margin-top: 0.2em;
-	margin-bottom: 0.2em;
-}
-
-
-#menuToggle input {
-    display: none;
-}
-
-.sidebar-menu li
-{
-    padding: 5px 0;
-    line-height: 1.2em;
-    font-size: 15px;
-}
-
-@media only screen and (max-width: 48em) {
-    #menuToggle
-    {
-        display: block;
-        position: absolute;
-        top: 15px;
-        left: 20px;
-
-        z-index: 1;
-
-        -webkit-user-select: none;
-        user-select: none;
-    }
-
-    #menuToggle input
-    {
-        display: block;
-        width: 40px;
-        height: 32px;
-        position: absolute;
-        top: -7px;
-        left: -5px;
-
-        cursor: pointer;
-
-        opacity: 0; /* hide this */
-        z-index: 2; /* and place it over the hamburger */
-
-        -webkit-touch-callout: none;
-    }
-
-    /*
-     * Just a quick hamburger
-     */
-    #menuToggle span
-    {
-        display: block;
-        width: 33px;
-        height: 4px;
-        margin-bottom: 5px;
-        position: relative;
-    
-        background: #cdcdcd;
-        border-radius: 3px;
-    
-        z-index: 1;
-    
-        transform-origin: 4px 0px;
-    
-        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-        background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-        opacity 0.55s ease;
-    }
-    
-    #menuToggle span:first-child
-    {
-        transform-origin: 0% 0%;
-    }
-    
-    #menuToggle span:nth-last-child(2)
-    {
-        transform-origin: 0% 100%;
-    }
-    
-    /* 
-     * Transform all the slices of hamburger
-     * into a crossmark.
-     */
-    #menuToggle input:checked ~ span
-    {
-        opacity: 1;
-        transform: rotate(45deg) translate(-2px, -1px);
-        background: #232323;
-    }
-    
-    /*
-     * But let's hide the middle one.
-     */
-    #menuToggle input:checked ~ span:nth-last-child(3)
-    {
-        opacity: 0;
-        transform: rotate(0deg) scale(0.2, 0.2);
-    }
-    
-    /*
-     * Ohyeah and the last one should go the other direction
-     */
-    #menuToggle input:checked ~ span:nth-last-child(2)
-    {
-        transform: rotate(-45deg) translate(0, -1px);
-    }
-    
-    /*
-     * Make this absolute positioned
-     * at the top left of the screen
-     */
-    #menu
-    {
-        position: absolute;
-        width: 300px;
-        margin: -100px 0 0 -50px;
-        padding: 50px;
-        padding-top: 125px;
-    
-        background: #ededed;
-        -webkit-font-smoothing: antialiased;
-        /* to stop flickering of text in safari */
-    
-        transform-origin: 0% 0%;
-        transform: translate(0%, -100%);
-    
-        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-    }
-    #menu ul {
-        list-style-type: none;
-    }
-
-    h3.menu-title
-    {
-        padding: 10px 0;
-        font-size: 22px;
-    }
-
-    
-    /*
-     * And let's slide it in from the left
-     */
-    #menuToggle input:checked ~ #menu 
-    {
-        transform: none;
-    }
 }

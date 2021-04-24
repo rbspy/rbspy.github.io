@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>rbspy docs</title>
     <link>https://rbspy.github.io/</link>
     <description>Recent content on rbspy docs</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://rbspy.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://rbspy.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About this profiling guide</title>
       <link>https://rbspy.github.io/about-profiling-guide/</link>
@@ -47,9 +43,8 @@ What&amp;rsquo;s benchmarking? Why is it important?</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://rbspy.github.io/installing/</guid>
-      <description>Download a binary Installing rbspy is easy: it&amp;rsquo;s a single static binary. There are binaries for Linux and Mac, which are the two supported platforms.
- Download the latest release from the releases page Unzip + move the rbspy binary to /usr/local/bin/rbspy  With Homebrew On Mac, you can install rbspy with Homebrew:
-brew install rbspy  Compile from source Step 1: Install Cargo (if you haven&amp;rsquo;t already). There&amp;rsquo;s a guide in the cargo docs, or just run this command.</description>
+      <description>Download a binary Installing rbspy is easy: it&amp;rsquo;s a single static binary. There are binaries for Linux, Mac, and Windows, which are the three supported platforms. It&amp;rsquo;s also possible to build rbspy on FreeBSD.
+ Download the latest release from the releases page Unzip + move the rbspy binary to /usr/local/bin/rbspy  Compile from source Step 1: Install Cargo (if you haven&amp;rsquo;t already). There&amp;rsquo;s a guide in the cargo docs, or just run this command.</description>
     </item>
     
     <item>
@@ -59,8 +54,8 @@ brew install rbspy  Compile from source Step 1: Install Cargo (if you haven&amp;
       
       <guid>https://rbspy.github.io/examples/</guid>
       <description>The case of the slow unit test To get an idea of how rbspy can help you do profiling, let&amp;rsquo;s do a couple of quick examples!
-$ wget http://rbspy.github.io/examples/slow_test.rb $ ruby slow_test.rb Loaded suite static/examples/test Started . Finished in 4.001482979 seconds.  Why is this test taking 4 seconds to run? Let&amp;rsquo;s run rbspy!
-$ rbspy record ruby slow_test.rb Summary of profiling data so far: % self % total name 96.</description>
+$ wget http://rbspy.github.io/examples/slow_test.rb $ ruby slow_test.rb Loaded suite static/examples/test Started . Finished in 4.001482979 seconds. Why is this test taking 4 seconds to run? Let&amp;rsquo;s run rbspy!
+$ rbspy record ruby slow_test.rb Summary of profiling data so far: % self % total name 96.98 96.</description>
     </item>
     
     <item>
@@ -81,7 +76,8 @@ Is my program mostly using the CPU or mostly waiting? If your program is slow, t
       
       <guid>https://rbspy.github.io/rbspy-vs-stackprof/</guid>
       <description>rbspy and stackprof are both sampling profilers for Ruby. They both let you generate flamegraphs. So when should you use rbspy, and when should you use stackprof?
-The two tools are actually used in pretty different ways! rbspy is a command line tool (rbspy record --pid YOUR_PID), and stackprof is a library that you can include in your Ruby program and use to profile a given section of code.</description>
+The two tools are actually used in pretty different ways! rbspy is a command line tool (rbspy record --pid YOUR_PID), and stackprof is a library that you can include in your Ruby program and use to profile a given section of code.
+When to use rbspy rbspy profiles everything a given Ruby process is doing &amp;ndash; you give it a PID of a Ruby process, and it profiles it.</description>
     </item>
     
     <item>
@@ -103,7 +99,7 @@ Flamegraphs are a way to visualize how your program is spending its time. A few 
       <guid>https://rbspy.github.io/using-rbspy/</guid>
       <description>Subcommands rbspy has 3 subcommands: snapshot, record, and report.
 Snapshot Snapshot takes a single stack trace from the specified process, prints it, and exits. This is useful if you have a stuck Ruby program and just want to know what it&amp;rsquo;s doing right now. Must be run as root.
-sudo rbspy snapshot --pid $PID  Record Record records stack traces from your process and saves them to disk.
+sudo rbspy snapshot --pid $PID Record Record records stack traces from your process and saves them to disk.
 rbspy record will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you can configure the visualization format with --format).</description>
     </item>
     

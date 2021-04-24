@@ -18,7 +18,6 @@
     <meta name="twitter:title" content="Should I use rbspy or stackprof?" />
     <meta name="twitter:description" content="" />
     <meta name="twitter:url" content="https://rbspy.github.io/rbspy-vs-stackprof/" />
-    <meta name="twitter:image" content="https://rbspy.github.io/rbspy.jpg" />
 
 
 <title> Should I use rbspy or stackprof? &middot;  rbspy docs</title>
@@ -79,45 +78,21 @@
         
     </div>
 
-    <div id="menuToggle">
-    
-    <input type="checkbox" />
-    
-    
-    <span></span>
-    <span></span>
-    <span></span>
-    
-    <div id="menu">
-        <ul class="sidebar-menu">
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-rbspy/">Using rbspy</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/getting-help/">Getting help</a></li>
-            
-                <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
-            
-        </ul>
-        <h3 class="menu-title">Profiling guide</h3>
-        <ul class="sidebar-menu">
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/about-profiling-guide/">About the guide</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/optimization-questions/">Questions to ask when optimizing</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/benchmarking-your-code/">Benchmarking your code</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-flamegraphs/">Using flamegraphs</a></li>
-            
-        </ul>
-    </div>
-    </div>
+    <ul class="sidebar-menu">
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-rbspy/">Using rbspy</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/getting-help/">Getting help</a></li>
+        
+            <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
+        
+    </ul>
 
     <div id="follow-icons">
         
@@ -141,66 +116,37 @@
                         <div class="post-stamp">
                             <h1 class="post-title">Should I use rbspy or stackprof?</h1>
                         </div>
-                        <aside>
-                            <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#when-to-use-rbspy">When to use rbspy</a></li>
-<li><a href="#when-to-use-stackprof">When to use stackprof</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-                        </aside>
-                        
-
-<p><a href="https://github.com/rbspy/rbspy">rbspy</a> and <a href="https://github.com/tmm1/stackprof">stackprof</a> are both
+                        <p><a href="https://github.com/rbspy/rbspy">rbspy</a> and <a href="https://github.com/tmm1/stackprof">stackprof</a> are both
 sampling profilers for Ruby. They both let you generate flamegraphs. So when should you use rbspy,
 and when should you use stackprof?</p>
-
 <p>The two tools are actually used in pretty different ways! rbspy is a command line tool (<code>rbspy record --pid YOUR_PID</code>),
 and stackprof is a library that you can include in your Ruby program and use to profile a given
 section of code.</p>
-
 <h3 id="when-to-use-rbspy">When to use rbspy</h3>
-
 <p>rbspy profiles everything a given Ruby process is doing &ndash; you give it a PID of a Ruby process, and
 it profiles it. It&rsquo;s useful when:</p>
-
 <ul>
 <li>You don&rsquo;t want to edit your code to start profiling</li>
 <li>You have a Ruby program that you didn&rsquo;t write that you want to quickly get profiling information about (eg Chef / Puppet)</li>
 <li>You want to quickly profile a Ruby script (how to do it: <code>rbspy record ruby my-script.rb</code>)</li>
 </ul>
-
 <p>One common use case for rbspy is profiling slow unit test runs &ndash; instead of spending a bunch of
 time adding instrumentation, you can run <code>rbspy record ruby my-test.rb</code> and instantly get profiling
 information about what&rsquo;s going on.</p>
-
 <h3 id="when-to-use-stackprof">When to use stackprof</h3>
-
 <p><a href="https://github.com/tmm1/stackprof">Stackprof</a> requires more work to set up, and gives you more
 control over which code gets profiled.  It&rsquo;s best when you want to profile a specific section of
 your code, or only want to profile certain HTTP requests.</p>
-
 <p>Here&rsquo;s what editing your code to use Stackprof looks like</p>
-
 <pre><code>StackProf.run(mode: :cpu, out: 'tmp/stackprof-cpu-myapp.dump', raw: true) do
     # code you want to profile here
 end
-</code></pre>
-
-<p>Here are the steps to using Stackprof:</p>
-
+</code></pre><p>Here are the steps to using Stackprof:</p>
 <ol>
 <li>Add the <code>stackprof</code> gem to your Gemfile</li>
 <li>Edit your code to call Stackprof and save data to the right file</li>
 <li>Use <code>stackprof</code> to summarize the reported data from the</li>
 </ol>
-
 <p>A more batteries-included way of doing profiling if you have a Rails/Rack program is to use
 <a href="https://github.com/MiniProfiler/rack-mini-profiler">rack-mini-profiler</a>. It uses stackprof under
 the hood to do CPU profiling as well as supporting memory profiling. <a href="https://www.speedshop.co/2015/08/05/rack-mini-profiler-the-secret-weapon.html">Here&rsquo;s a blog post about

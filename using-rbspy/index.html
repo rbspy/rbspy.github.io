@@ -18,7 +18,6 @@
     <meta name="twitter:title" content="Using rbspy" />
     <meta name="twitter:description" content="" />
     <meta name="twitter:url" content="https://rbspy.github.io/using-rbspy/" />
-    <meta name="twitter:image" content="https://rbspy.github.io/rbspy.jpg" />
 
 
 <title> Using rbspy &middot;  rbspy docs</title>
@@ -79,45 +78,21 @@
         
     </div>
 
-    <div id="menuToggle">
-    
-    <input type="checkbox" />
-    
-    
-    <span></span>
-    <span></span>
-    <span></span>
-    
-    <div id="menu">
-        <ul class="sidebar-menu">
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-rbspy/">Using rbspy</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/getting-help/">Getting help</a></li>
-            
-                <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
-            
-        </ul>
-        <h3 class="menu-title">Profiling guide</h3>
-        <ul class="sidebar-menu">
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/about-profiling-guide/">About the guide</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/optimization-questions/">Questions to ask when optimizing</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/benchmarking-your-code/">Benchmarking your code</a></li>
-            
-                <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-flamegraphs/">Using flamegraphs</a></li>
-            
-        </ul>
-    </div>
-    </div>
+    <ul class="sidebar-menu">
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/">Home</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/installing/">Installing</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/using-rbspy/">Using rbspy</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/rbspy-vs-stackprof/">rbspy vs stackprof</a></li>
+        
+            <li class="sidebar-menu-item"><a href="https://rbspy.github.io/getting-help/">Getting help</a></li>
+        
+            <li class="sidebar-menu-item"><i class='fa fa-github fa-1x'></i> <a href="https://github.com/rbspy/rbspy">GitHub</a></li>
+        
+    </ul>
 
     <div id="follow-icons">
         
@@ -141,96 +116,42 @@
                         <div class="post-stamp">
                             <h1 class="post-title">Using rbspy</h1>
                         </div>
-                        <aside>
-                            <nav id="TableOfContents">
-<ul>
-<li><a href="#subcommands">Subcommands</a>
-<ul>
-<li><a href="#snapshot">Snapshot</a></li>
-<li><a href="#record">Record</a>
-<ul>
-<li><a href="#record-by-pid">Record by PID</a></li>
-<li><a href="#record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</a></li>
-<li><a href="#optional-arguments">Optional Arguments</a></li>
-</ul></li>
-<li><a href="#report">Report</a></li>
-</ul></li>
-<li><a href="#faq">FAQ</a>
-<ul>
-<li><a href="#who-makes-rbspy">Who makes rbspy?</a></li>
-<li><a href="#who-funds-rbspy">Who funds rbspy?</a></li>
-<li><a href="#can-i-use-rbspy-in-production">Can I use rbspy in production?</a></li>
-<li><a href="#how-does-rbspy-read-data-from-my-ruby-processes">How does rbspy read data from my Ruby processes?</a></li>
-<li><a href="#doesn-t-not-pausing-the-ruby-process-cause-errors">Doesn&rsquo;t not pausing the Ruby process cause errors?</a></li>
-<li><a href="#how-does-rbspy-handle-threads">How does rbspy handle threads?</a></li>
-<li><a href="#can-rbspy-profile-c-extensions">Can rbspy profile C extensions?</a></li>
-<li><a href="#i-love-rbspy-how-can-i-thank-you">I love rbspy! How can I thank you?</a></li>
-<li><a href="#is-there-a-similar-project-for-python">Is there a similar project for Python?</a></li>
-<li><a href="#who-made-the-logo">Who made the logo?</a></li>
-</ul></li>
-</ul>
-</nav>
-                        </aside>
-                        
-
-<h1 id="subcommands">Subcommands</h1>
-
+                        <h1 id="subcommands">Subcommands</h1>
 <p><code>rbspy</code> has 3 subcommands: <code>snapshot</code>, <code>record</code>, and <code>report</code>.</p>
-
 <h2 id="snapshot">Snapshot</h2>
-
 <p>Snapshot takes a single stack trace from the specified process, prints it, and exits. This is
 useful if you have a stuck Ruby program and just want to know what it&rsquo;s doing right now.  Must be
 run as root.</p>
-
 <pre><code>sudo rbspy snapshot --pid $PID
-</code></pre>
-
-<h2 id="record">Record</h2>
-
+</code></pre><h2 id="record">Record</h2>
 <p>Record records stack traces from your process and saves them to disk.</p>
-
 <p><code>rbspy record</code> will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you
 can configure the visualization format with <code>--format</code>). The raw data file contains every stack
 trace that <code>rbspy</code> recorded, so that you can generate other visualizations later if you want. By
 default, rbspy saves both files to <code>~/.cache/rbspy/records</code>, but you can customize where those are
 stored with <code>--file</code> and <code>--raw-file</code>.</p>
-
 <p>This is useful when you want to know what functions your program is spending most of its time in.</p>
-
 <p>You can record stack traces in two different ways, by PID or by executing a new ruby process.</p>
-
 <h3 id="record-by-pid">Record by PID</h3>
-
 <pre><code># Must be run as root
 sudo rbspy record --pid $PID
-</code></pre>
-
-<h3 id="record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</h3>
-
+</code></pre><h3 id="record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</h3>
 <pre><code># Must be run as root on Mac (but not Linux)
 rbspy record ruby myprogram.rb
 # Put `--` after record if your program has command line arguments
 rbspy record -- ruby myprogram.rb --log-level 0
-</code></pre>
-
-<p>The reason this has to be run as root on Mac but not on Linux is that Mac and Linux systems APIs are
+</code></pre><p>The reason this has to be run as root on Mac but not on Linux is that Mac and Linux systems APIs are
 different. rbspy can use the <code>process_vm_readv</code> system call to read memory from a child process on
 Linux without being root, but can&rsquo;t do the same with <code>vm_read</code> on Mac.</p>
-
 <p>If run with sudo, <code>rbspy record</code> by default drops root privileges when executing a subprocess. So if
 you&rsquo;re user <code>bork</code> and run <code>sudo rbspy record ruby script.rb</code>. You can disable this with
 <code>--no-drop-root</code>.</p>
-
 <h3 id="optional-arguments">Optional Arguments</h3>
-
 <p>These work regardless of how you started the recording.</p>
-
 <ul>
-<li><code>--rate</code>: Specifies the frequency of that stack traces are recorded. The interval is determined by <code>1000/rate</code>. The default rate is 100hz.</li>
+<li><code>--rate</code>: Specifies the number of stack traces that are sampled per second. The default rate is 100hz.</li>
 <li><code>--duration</code>: Specifies how long to run before stopping rbspy. This conficts with running a subcommand (<code>rbspy record ruby myprogram.rb</code>).</li>
 <li><code>--format</code>: Specifies what format to use to report profiling data. The options are:
-
 <ul>
 <li><code>flamegraph</code>: generates a flamegraph SVG that you can view in a browser</li>
 <li><code>callgrind</code>: generates a callgrind-formatted file that you can view with a tool like
@@ -238,106 +159,72 @@ you&rsquo;re user <code>bork</code> and run <code>sudo rbspy record ruby script.
 <li><code>summary</code>: aggregates % self and % total times by function. Useful to get a basic overview</li>
 <li><code>summary_by_line</code>: aggregates % self and % total times by line number. Especially useful when
 there&rsquo;s 1 line in your program which is taking up all the time.</li>
-</ul></li>
+</ul>
+</li>
 <li><code>--file</code>: Specifies where rbspy will save formatted output.</li>
 <li><code>--raw-file</code>: Specifies where rbspy will save formatted data. Use a gz extension because it will be gzipped.</li>
+<li><code>--flame-min-width</code>: Specifies the minimum flame width in flamegraphs as a percentage. Useful for excluding functions that appear in a small number of samples.</li>
+<li><code>--nonblocking</code>: Don&rsquo;t pause the ruby process when collecting stack samples. Setting this option will reduce the performance impact of sampling but may produce inaccurate results.</li>
 </ul>
-
 <h2 id="report">Report</h2>
-
 <p>If you have a raw rbspy data file that you&rsquo;ve previously recorded, you can use <code>rbspy report</code> to
 generate different kinds of visualizations from it (the flamegraph/callgrind/summary formats, as
 documented above). This is useful because you can record raw data from a program and then decide how
 you want to visualize it afterwards.</p>
-
 <p>For example, here&rsquo;s what recording a simple program and then generating a summary report looks like:</p>
-
 <pre><code>$ sudo rbspy record --raw-file raw.gz ruby ci/ruby-programs/short_program.rb
 $ rbspy report -f summary -i raw.gz -o summary.txt
 $ cat summary.txt
 % self  % total  name
-100.00   100.00  &lt;c function&gt; - unknown
+100.00   100.00  sleep [c function] - (unknown)
   0.00   100.00  ccc - ci/ruby-programs/short_program.rb
   0.00   100.00  bbb - ci/ruby-programs/short_program.rb
   0.00   100.00  aaa - ci/ruby-programs/short_program.rb
   0.00   100.00  &lt;main&gt; - ci/ruby-programs/short_program.rb
-</code></pre>
-
-<h1 id="faq">FAQ</h1>
-
+</code></pre><h1 id="faq">FAQ</h1>
 <h2 id="who-makes-rbspy">Who makes rbspy?</h2>
-
-<p><a href="https://jvns.ca">Julia Evans</a> started the project and is the primary maintainer.
-For a full list of contributors, see <a href="https://github.com/rbspy/rbspy">the github repo</a></p>
-
+<p><a href="https://jvns.ca">Julia Evans</a> started the project and led its development until 2021.
+<a href="https://acj.sh">Adam Jensen</a> is the primary maintainer. For a full list of contributors,
+see the <a href="https://github.com/rbspy/rbspy/blob/master/CONTRIBUTORS.md">CONTRIBUTORS file</a>.</p>
 <h2 id="who-funds-rbspy">Who funds rbspy?</h2>
-
 <p>Initial rbspy development was funded by <a href="https://segment.com/blog/segment-open-fellowship-2017/">the Segment Open Fellowship</a> &ndash; they paid for 3 months of
 development on the project, to take it from a sketchy prototype to an actual working profiler that
 people use to make their Ruby programs faster. Julia took a 3 month sabbatical off work to build it.</p>
-
 <p>This kind of short-term funding is an awesome way to bootstrap new open source projects that might
 not happen otherwise! You can do a lot in 3 months :)</p>
-
 <h2 id="can-i-use-rbspy-in-production">Can I use rbspy in production?</h2>
-
-<p>Yes! rbspy does not add any overhead to your Ruby programs &ndash; it only reads memory from the Ruby
-process you&rsquo;re monitoring, it doesn&rsquo;t make any changes. Unlike some other statistical profilers,
-rbspy does <strong>not</strong> use signals or ptrace, so it won&rsquo;t interrupt system calls your Ruby program is
-making.</p>
-
-<p>The only two things to be aware of are:</p>
-
+<p>Yes! rbspy only reads memory from the Ruby process you&rsquo;re monitoring, it doesn&rsquo;t make any changes.
+Unlike some other statistical profilers, rbspy does <strong>not</strong> use signals or ptrace, so it won&rsquo;t
+interrupt system calls your Ruby program is making.</p>
+<p>The things to be aware of are:</p>
 <ul>
+<li>By default, <code>rbspy</code> 0.6 and newer pauses the ruby process when it&rsquo;s collecting samples. This can
+affect performance, especially if you&rsquo;re using a high sampling rate. You can disable the pausing
+with the <code>--nonblocking</code>, but be aware that this can lead to incorrect samples.
+flag.</li>
 <li><code>rbspy</code> does use some CPU. If you use <code>rbspy record --subprocesses</code>, it can use a substantial
 amount of CPU (because it&rsquo;ll start a separate thread for every process it&rsquo;s recording)</li>
 <li>disk usage: <code>rbspy record</code> will save a data file to disk with compressed stack traces, and if you
 run it for many hours it&rsquo;s possible you&rsquo;ll use a lot of disk space. We recommend giving rbspy a
 time limit, like <code>rbspy record --duration 10</code>.</li>
 </ul>
-
 <p>Any bugs in rbspy will manifest as rbspy crashing, not your Ruby program crashing.</p>
-
 <h2 id="how-does-rbspy-read-data-from-my-ruby-processes">How does rbspy read data from my Ruby processes?</h2>
-
 <p>On Linux, it uses the <code>process_vm_readv</code> system call, which lets you read memory from any other
 running process.</p>
-
-<h2 id="doesn-t-not-pausing-the-ruby-process-cause-errors">Doesn&rsquo;t not pausing the Ruby process cause errors?</h2>
-
-<p>Yep!</p>
-
-<p>rbspy does not stop your Ruby processes to collect information about what it&rsquo;s doing. This is for
-both performance reasons and general production-safety reasons &ndash; only <strong>reading</strong> from your Ruby
-processes and not altering them in any way means that rbspy is safer to run on production Ruby
-applications. rbspy does not use ptrace or signals.</p>
-
-<p>This means that sometimes rbspy will try to read a stack trace out of a Ruby process, there will be
-a race, and the memory of that process will temporarily be in an invalid state which means rbspy
-can&rsquo;t collect its stack. <code>rbspy record</code> handles this by just dropping that stack trace and trying
-again later.</p>
-
 <h2 id="how-does-rbspy-handle-threads">How does rbspy handle threads?</h2>
-
 <p><code>rbspy</code> always collects the stack from what the Ruby VM reports as the currently running thread.
 This is because the GIL only allows one thread to be running Ruby code at any given time. It ignores
 threads that are not currently running.</p>
-
+<p>When rbspy is profiling ruby 3 programs, it currently only samples the main ractor.</p>
 <h2 id="can-rbspy-profile-c-extensions">Can rbspy profile C extensions?</h2>
-
-<p>Not yet. Any calls into C will be reported as &ldquo;unknown C function&rdquo;.</p>
-
+<p>Yes. Any calls into C will be reported in the format &ldquo;sleep [c function] - (unknown)&rdquo;.</p>
 <h2 id="i-love-rbspy-how-can-i-thank-you">I love rbspy! How can I thank you?</h2>
-
 <p>It really helps if you add a comment to our <a href="https://github.com/rbspy/rbspy/issues/62">list of testimonials on GitHub</a> saying how rbspy helped you!</p>
-
 <h2 id="is-there-a-similar-project-for-python">Is there a similar project for Python?</h2>
-
-<p>Yes! <a href="https://github.com/uber/pyflame">pyflame</a> by <a href="https://eklitzke.org/">Evan Klitzke</a> does
+<p>Yes! <a href="https://github.com/benfred/py-spy">py-spy</a> by <a href="https://www.benfrederickson.com/">Ben Frederickson</a> and <a href="https://github.com/uber/pyflame">pyflame</a> by <a href="https://eklitzke.org/">Evan Klitzke</a> do
 basically the same thing as rbspy, but for Python programs.</p>
-
 <h2 id="who-made-the-logo">Who made the logo?</h2>
-
 <p><a href="https://twitter.com/ashleymcnamara">Ashley McNamara</a> was extremely kind and designed it!! She&rsquo;s an
 awesome software engineer who also makes delightful stickers. See her
 <a href="https://github.com/ashleymcnamara/gophers">gophers repository</a> for a bunch of awesome gopher art she&rsquo;s done
