@@ -133,7 +133,9 @@
 <h4 id="macos-homebrew">macOS (homebrew)</h4>
 <p><code>brew install rbspy</code></p>
 <h3 id="install-in-a-ci-pipeline">Install in a CI pipeline</h3>
-<p>If you&rsquo;re using Docker, we publish images on <a href="https://hub.docker.com/r/rbspy/rbspy/tags">Docker Hub</a>. You can also download release binaries from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a>.</p>
+<p>If you&rsquo;re using Docker, we publish images on <a href="https://hub.docker.com/r/rbspy/rbspy/tags">Docker Hub</a>.</p>
+<p>You can also download release binaries from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a>.</p>
+<p>In both cases, the releases marked with <code>gnu</code> contain an rbspy binary that&rsquo;s dynamically linked against GNU libc, which needs to be installed in your container image. Those marked with <code>musl</code> contain an rbspy binary that&rsquo;s statically linked against musl libc and can be used standalone on most Linux systems.</p>
 <h3 id="compile-from-source">Compile from source</h3>
 <p><strong>Step 1</strong>: Install Cargo (if you haven&rsquo;t already). There&rsquo;s a guide in the <a href="https://doc.rust-lang.org/cargo/getting-started/installation.html">cargo docs</a>, or you can run this command if you&rsquo;re on Linux.</p>
 <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
