@@ -43,8 +43,8 @@ What&amp;rsquo;s benchmarking? Why is it important?</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://rbspy.github.io/installing/</guid>
-      <description>Download a binary Installing rbspy is easy: it&amp;rsquo;s a single static binary. There are binaries for Linux, Mac, and Windows, which are the three supported platforms. It&amp;rsquo;s also possible to build rbspy on FreeBSD.
- Download the latest release from the releases page Unzip + move the rbspy binary to /usr/local/bin/rbspy  Compile from source Step 1: Install Cargo (if you haven&amp;rsquo;t already). There&amp;rsquo;s a guide in the cargo docs, or just run this command.</description>
+      <description>Installing rbspy is easy: it&amp;rsquo;s a single binary. There are binaries for Linux, Mac, and Windows, which are the three supported platforms. It&amp;rsquo;s also possible to build rbspy on FreeBSD.
+Download a binary  Download the latest release from the releases page  Note: There are two types of Linux releases. Those tagged with gnu are dynamically linked against GNU libc, which needs to be installed on the system where rbspy runs.</description>
     </item>
     
     <item>
