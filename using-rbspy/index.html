@@ -183,7 +183,21 @@ $ cat summary.txt
   0.00   100.00  bbb - ci/ruby-programs/short_program.rb
   0.00   100.00  aaa - ci/ruby-programs/short_program.rb
   0.00   100.00  &lt;main&gt; - ci/ruby-programs/short_program.rb
-</code></pre><h1 id="faq">FAQ</h1>
+</code></pre><h1 id="containers">Containers</h1>
+<p>If you want to profile a ruby program that&rsquo;s running in a container on Linux, be sure to add the
+<code>SYS_PTRACE</code> capability. For Docker containers, this can be done by adding a flag to the command
+when you launch the container:</p>
+<pre><code>docker run --cap-add=SYS_PTRACE ...
+</code></pre><p>If you&rsquo;re using Kubernetes, you can add the ptrace capability to a deployment like this:</p>
+<pre><code>securityContext:
+  capabilities:
+    add:
+      - SYS_PTRACE
+</code></pre><p>If this doesn&rsquo;t work for you, see <a href="https://github.com/rbspy/rbspy/issues/325">issue 325</a> for
+troubleshooting steps. You may need additional <code>securityContext</code> configuration if the processes
+in your container are running as an unprivileged (non-root) user, which is recommended for security
+reasons.</p>
+<h1 id="faq">FAQ</h1>
 <h2 id="who-makes-rbspy">Who makes rbspy?</h2>
 <p><a href="https://jvns.ca">Julia Evans</a> started the project and led its development until 2021.
 <a href="https://acj.sh">Adam Jensen</a> is the primary maintainer. For a full list of contributors,
@@ -216,7 +230,7 @@ time limit, like <code>rbspy record --duration 10</code>.</li>
 running process.</p>
 <h2 id="how-does-rbspy-handle-threads">How does rbspy handle threads?</h2>
 <p><code>rbspy</code> always collects the stack from what the Ruby VM reports as the currently running thread.
-This is because the GIL only allows one thread to be running Ruby code at any given time. It ignores
+This is because the global VM lock (GVL) only allows one thread to be running Ruby code at any given time. It ignores
 threads that are not currently running.</p>
 <p>When rbspy is profiling ruby 3 programs, it currently only samples the main ractor.</p>
 <h2 id="can-rbspy-profile-c-extensions">Can rbspy profile C extensions?</h2>
