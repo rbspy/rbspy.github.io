@@ -122,7 +122,7 @@
 <p>Snapshot takes a single stack trace from the specified process, prints it, and exits. This is
 useful if you have a stuck Ruby program and just want to know what it&rsquo;s doing right now.  Must be
 run as root.</p>
-<pre><code>sudo rbspy snapshot --pid $PID
+<pre tabindex="0"><code>sudo rbspy snapshot --pid $PID
 </code></pre><h2 id="record">Record</h2>
 <p>Record records stack traces from your process and saves them to disk.</p>
 <p><code>rbspy record</code> will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you
@@ -133,10 +133,10 @@ stored with <code>--file</code> and <code>--raw-file</code>.</p>
 <p>This is useful when you want to know what functions your program is spending most of its time in.</p>
 <p>You can record stack traces in two different ways, by PID or by executing a new ruby process.</p>
 <h3 id="record-by-pid">Record by PID</h3>
-<pre><code># Must be run as root
+<pre tabindex="0"><code># Must be run as root
 sudo rbspy record --pid $PID
 </code></pre><h3 id="record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</h3>
-<pre><code># Must be run as root on Mac (but not Linux)
+<pre tabindex="0"><code># Must be run as root on Mac (but not Linux)
 rbspy record ruby myprogram.rb
 # Put `--` after record if your program has command line arguments
 rbspy record -- ruby myprogram.rb --log-level 0
@@ -174,7 +174,7 @@ generate different kinds of visualizations from it (the flamegraph/callgrind/sum
 documented above). This is useful because you can record raw data from a program and then decide how
 you want to visualize it afterwards.</p>
 <p>For example, here&rsquo;s what recording a simple program and then generating a summary report looks like:</p>
-<pre><code>$ sudo rbspy record --raw-file raw.gz ruby ci/ruby-programs/short_program.rb
+<pre tabindex="0"><code>$ sudo rbspy record --raw-file raw.gz ruby ci/ruby-programs/short_program.rb
 $ rbspy report -f summary -i raw.gz -o summary.txt
 $ cat summary.txt
 % self  % total  name
@@ -187,9 +187,9 @@ $ cat summary.txt
 <p>If you want to profile a ruby program that&rsquo;s running in a container on Linux, be sure to add the
 <code>SYS_PTRACE</code> capability. For Docker containers, this can be done by adding a flag to the command
 when you launch the container:</p>
-<pre><code>docker run --cap-add=SYS_PTRACE ...
+<pre tabindex="0"><code>docker run --cap-add=SYS_PTRACE ...
 </code></pre><p>If you&rsquo;re using Kubernetes, you can add the ptrace capability to a deployment like this:</p>
-<pre><code>securityContext:
+<pre tabindex="0"><code>securityContext:
   capabilities:
     add:
       - SYS_PTRACE

@@ -118,7 +118,7 @@
                         </div>
                         <h2 id="the-case-of-the-slow-unit-test">The case of the slow unit test</h2>
 <p>To get an idea of how rbspy can help you do profiling, let&rsquo;s do a couple of quick examples!</p>
-<pre><code>$ wget http://rbspy.github.io/examples/slow_test.rb
+<pre tabindex="0"><code>$ wget http://rbspy.github.io/examples/slow_test.rb
 $ ruby slow_test.rb
 Loaded suite static/examples/test
 Started
@@ -126,7 +126,7 @@ Started
 
 Finished in 4.001482979 seconds.
 </code></pre><p>Why is this test taking 4 seconds to run? Let&rsquo;s run rbspy!</p>
-<pre><code>$ rbspy record ruby slow_test.rb
+<pre tabindex="0"><code>$ rbspy record ruby slow_test.rb
 Summary of profiling data so far:
 % self  % total  name
  96.98    96.98  slow_function - static/examples/slow_test.rb
@@ -138,7 +138,7 @@ Summary of profiling data so far:
   0.25     0.25  block in &lt;class:SexpBuilder&gt; - /usr/lib/ruby/2.3.0/ripper/sexp.rb
   0.25     0.25  &lt;top (required)&gt; - /usr/lib/ruby/2.3.0/rubygems/specification.rb
 </code></pre><p>It&rsquo;s spending 96% of its time in <code>slow_function</code>! What&rsquo;s that?</p>
-<pre><code>
+<pre tabindex="0"><code>
 def slow_function
     sleep(4)
     return 4
@@ -148,9 +148,9 @@ end
 all the time is being spent in, figure out why) is helpful when you code is taking WAY longer than
 you think it should (for instance something that should take 2 seconds is taking 5 minutes).</p>
 <h2 id="the-case-of-the-selenium-test">The case of the Selenium test</h2>
-<pre><code>$ wget http://rbspy.github.io/examples/selenium.rb
+<pre tabindex="0"><code>$ wget http://rbspy.github.io/examples/selenium.rb
 $ time ruby selenium.rb # requires a bunch of dependencies to be installed
-</code></pre><pre><code>require 'rubygems'
+</code></pre><pre tabindex="0"><code>require 'rubygems'
 require 'headless'
 require 'selenium-webdriver'
 
@@ -159,13 +159,13 @@ Headless.ly do
   driver.navigate.to 'http://google.com'
   puts driver.title 
 end
-</code></pre><pre><code>  0.00    88.13  request - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/net/http.rb
+</code></pre><pre tabindex="0"><code>  0.00    88.13  request - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/net/http.rb
 </code></pre><h2 id="the-case-of-the-slow-download">The case of the slow download</h2>
-<pre><code>$ wget http://rbspy.github.io/examples/mystery_download.rb
+<pre tabindex="0"><code>$ wget http://rbspy.github.io/examples/mystery_download.rb
 $ time ruby mystery_download.rb
 0.09user 0.00system 0:02.13elapsed 4%CPU (0avgtext+0avgdata 11576maxresident)k
 </code></pre><p>2 seconds! Why is this program taking 2 seconds? Again, let&rsquo;s start by running <code>rbspy record</code>!</p>
-<pre><code>$ rbspy record ruby mystery_download.rb
+<pre tabindex="0"><code>$ rbspy record ruby mystery_download.rb
 Time since start: 2s. Press Ctrl+C to stop.
 Summary of profiling data so far:
 % self  % total  name

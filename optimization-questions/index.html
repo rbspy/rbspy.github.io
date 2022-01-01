@@ -137,7 +137,7 @@ function.</p>
 <p>When thinking about this question it&rsquo;s useful to understand the difference between &ldquo;self time&rdquo; and
 &ldquo;total time&rdquo; spent in a function &ndash; a lot of profilers (including rbspy) will give you a report like
 this:</p>
-<pre><code>% self  % total  name
+<pre tabindex="0"><code>% self  % total  name
   3.05    10.09  each_child_node
   2.52    31.14  block (2 levels) in on_send
   2.17    14.31  do_parse
@@ -155,7 +155,7 @@ example, if you have a slow calculation, maybe you can cache it!</p>
 the % of time spent in the function itself + every other function it called.</p>
 <p>Both self time and total time are important to consider &ndash; for example, if I have a function that
 does this:</p>
-<pre><code>def parent_fun
+<pre tabindex="0"><code>def parent_fun
     for x in list1
         for y in list2
             child_fun(x,y)

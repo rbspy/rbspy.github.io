@@ -138,7 +138,7 @@ information about what&rsquo;s going on.</p>
 control over which code gets profiled.  It&rsquo;s best when you want to profile a specific section of
 your code, or only want to profile certain HTTP requests.</p>
 <p>Here&rsquo;s what editing your code to use Stackprof looks like</p>
-<pre><code>StackProf.run(mode: :cpu, out: 'tmp/stackprof-cpu-myapp.dump', raw: true) do
+<pre tabindex="0"><code>StackProf.run(mode: :cpu, out: 'tmp/stackprof-cpu-myapp.dump', raw: true) do
     # code you want to profile here
 end
 </code></pre><p>Here are the steps to using Stackprof:</p>
