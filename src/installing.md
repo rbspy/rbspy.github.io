@@ -1,6 +1,16 @@
-# Installing rbspy on your computer
+# Installing rbspy
 
-Installing rbspy is easy on most platforms, as it's a single binary.
+Installing rbspy is easy on most platforms, as it's a single binary. It can run on your computer, in CI, or on production servers.
+
+## System requirements
+
+rbspy runs on Linux\*, Windows, FreeBSD, and macOS.
+
+* Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.
+
+## Ruby requirements
+
+rbspy can profile programs that use Ruby 1.9.3 and newer. The maintainers try to add support for new Ruby versions shortly after they're released.
 
 ## Option 1: Install from a package
 
@@ -22,6 +32,10 @@ If there's no package for your operating system, downloading a pre-compiled bina
     - Note: There are two types of Linux releases. Those tagged with `gnu` are dynamically linked against GNU libc, which needs to be installed on the system where rbspy runs. Those tagged with `musl` are statically linked against musl libc and can be used without a specific libc being installed.
 2. Unpack the release. On Unix systems (Linux, Mac, FreeBSD), move the rbspy binary to `/usr/local/bin/rbspy`. You will need to make it executable with, for example, `chmod +x rbspy`.
 3. Run the binary to start profiling! See [Using rbspy](./using-rbspy.md) to get started.
+
+### Containers (Docker, podman, etc)
+
+If you're installing rbspy in a containerized environment, please have a look at the images we publish on [Docker Hub](https://hub.docker.com/r/rbspy/rbspy/tags). Each image has support for x86_64 (Intel) and aarch64 (ARM) CPUs, and there are separate tags for glibc and musl as noted above.
 
 ## Option 3: Build rbspy from source
 

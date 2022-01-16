@@ -1,9 +1,7 @@
 # Summary
 
 - [Introduction](./introduction.md)
-- [Installing](./installing/index.md)
-    - [On your computer](./installing/on-your-computer.md)
-    - [In a CI environment](./installing/in-ci.md)
+- [Installing](./installing.md)
 - [Using rbspy](./using-rbspy.md)
 - [rbspy vs stackprof](./rbspy-vs-stackprof.md)
 - [Profiling guide](./profiling-guide/index.md)
