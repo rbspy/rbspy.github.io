@@ -6,7 +6,7 @@
 
 [**snapshot**](./snapshot.md) takes a single stack trace from the specified process, prints it, and exits. This is useful if you have a stuck Ruby program and just want to know what it's doing right now.
 
-[**record**](./record.md) continuously captures stack traces from your process and saves them to disk. This is what you want to use when profiling a program over a period of time, or when you want to produce a flamegraph or other output for offline analysis.
+[**record**](./record.md) continuously captures stack traces from your process and saves them to disk. It's used to profile a program over a period of time and to produce a flamegraph or other output for offline analysis.
 
 [**report**](./report.md) is useful if you have a raw rbspy data file that you've previously recorded. You can use `rbspy report` to generate different kinds of visualizations from it (the flamegraph/callgrind/summary formats, as documented above). This is useful because you can record raw data from a program and then decide how you want to visualize it afterwards.
 
