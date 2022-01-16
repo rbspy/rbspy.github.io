@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="installing.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li class="chapter-item expanded "><a href="using-rbspy/index.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="using-rbspy/snapshot.html"><strong aria-hidden="true">3.1.</strong> snapshot</a></li><li class="chapter-item expanded "><a href="using-rbspy/record.html"><strong aria-hidden="true">3.2.</strong> record</a></li><li class="chapter-item expanded "><a href="using-rbspy/report.html"><strong aria-hidden="true">3.3.</strong> report</a></li></ol></li><li class="chapter-item expanded "><a href="rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -161,22 +161,21 @@ what the top functions being run are, and it also saves the raw data + a flamegr
 depth analysis.</p>
 <img src="../static/images/rbspy-record.gif">
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installing-rbspy"><a class="header" href="#installing-rbspy">Installing rbspy</a></h1>
-<p>Installing rbspy is straightforward on most common operating systems. It can be run on your computer, in CI, or on production servers.</p>
+<p>Installing rbspy is easy on most platforms, as it's a single binary. It can run on your computer, in CI, or on production servers.</p>
 <h2 id="system-requirements"><a class="header" href="#system-requirements">System requirements</a></h2>
+<h3 id="operating-system"><a class="header" href="#operating-system">Operating system</a></h3>
 <p>rbspy runs on Linux*, Windows, FreeBSD, and macOS.</p>
-<ul>
-<li>Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.</li>
-</ul>
-<h2 id="ruby-requirements"><a class="header" href="#ruby-requirements">Ruby requirements</a></h2>
+<p>* Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.</p>
+<h3 id="ruby"><a class="header" href="#ruby">Ruby</a></h3>
 <p>rbspy can profile programs that use Ruby 1.9.3 and newer. The maintainers try to add support for new Ruby versions shortly after they're released.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="installing-rbspy-on-your-computer"><a class="header" href="#installing-rbspy-on-your-computer">Installing rbspy on your computer</a></h1>
-<p>Installing rbspy is easy on most platforms, as it's a single binary.</p>
 <h2 id="option-1-install-from-a-package"><a class="header" href="#option-1-install-from-a-package">Option 1: Install from a package</a></h2>
 <p>Installing from a package is the simplest method. If your preferred operating system or distribution isn't listed here, please consider making a package for it. We are grateful for packaging contributions.</p>
 <h3 id="alpine-linux"><a class="header" href="#alpine-linux">Alpine Linux</a></h3>
-<p><code>apk add rbspy</code></p>
+<pre><code>apk add rbspy
+</code></pre>
 <h3 id="macos-homebrew"><a class="header" href="#macos-homebrew">macOS (Homebrew)</a></h3>
-<p><code>brew install rbspy</code></p>
+<pre><code>brew install rbspy
+</code></pre>
 <h2 id="option-2-download-a-binary"><a class="header" href="#option-2-download-a-binary">Option 2: Download a binary</a></h2>
 <p>If there's no package for your operating system, downloading a pre-compiled binary is the next simplest method. There are binaries for Linux, macOS, FreeBSD, and Windows, which are the supported platforms.</p>
 <ol>
@@ -186,8 +185,10 @@ depth analysis.</p>
 </ul>
 </li>
 <li>Unpack the release. On Unix systems (Linux, Mac, FreeBSD), move the rbspy binary to <code>/usr/local/bin/rbspy</code>. You will need to make it executable with, for example, <code>chmod +x rbspy</code>.</li>
-<li>Run the binary to start profiling! See <a href="installing/./using-rbspy.html">Using rbspy</a> to get started.</li>
+<li>Run the binary to start profiling! See <a href="./using-rbspy.html">Using rbspy</a> to get started.</li>
 </ol>
+<h3 id="containers-docker-podman-etc"><a class="header" href="#containers-docker-podman-etc">Containers (Docker, podman, etc)</a></h3>
+<p>If you're installing rbspy in a containerized environment, please have a look at the images we publish on <a href="https://hub.docker.com/r/rbspy/rbspy/tags">Docker Hub</a>. Each image has support for x86_64 (Intel) and aarch64 (ARM) CPUs, and there are separate tags for glibc and musl as noted above.</p>
 <h2 id="option-3-build-rbspy-from-source"><a class="header" href="#option-3-build-rbspy-from-source">Option 3: Build rbspy from source</a></h2>
 <p>Finally, you can build rbspy from source if you have a Rust toolchain installed. You will need <strong>Rust 1.56 or newer</strong>.</p>
 <ol>
@@ -214,45 +215,47 @@ cargo build --release
 </code></pre>
 </li>
 </ol>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="install-rbspy-in-a-ci-pipeline-or-other-unattended-environment"><a class="header" href="#install-rbspy-in-a-ci-pipeline-or-other-unattended-environment">Install rbspy in a CI pipeline or other unattended environment</a></h1>
-<p>If you're using Docker, we publish images on <a href="https://hub.docker.com/r/rbspy/rbspy/tags">Docker Hub</a>.</p>
-<p>You can also download release binaries from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a>.</p>
-<p>In both cases, the releases marked with <code>gnu</code> contain an rbspy binary that's dynamically linked against GNU libc, which needs to be installed in your container image. Those marked with <code>musl</code> contain an rbspy binary that's statically linked against musl libc and can be used standalone on most Linux systems.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="using-rbspy"><a class="header" href="#using-rbspy">Using rbspy</a></h1>
-<h1 id="subcommands"><a class="header" href="#subcommands">Subcommands</a></h1>
-<p><code>rbspy</code> has 3 subcommands: <code>snapshot</code>, <code>record</code>, and <code>report</code>.</p>
-<h2 id="snapshot"><a class="header" href="#snapshot">Snapshot</a></h2>
+<h2 id="subcommands"><a class="header" href="#subcommands">Subcommands</a></h2>
+<p><code>rbspy</code> has three subcommands: <code>snapshot</code>, <code>record</code>, and <code>report</code>.</p>
+<p><a href="using-rbspy/./snapshot.html"><strong>snapshot</strong></a> takes a single stack trace from the specified process, prints it, and exits. This is useful if you have a stuck Ruby program and just want to know what it's doing right now.</p>
+<p><a href="using-rbspy/./record.html"><strong>record</strong></a> continuously captures stack traces from your process and saves them to disk. This is what you want to use when profiling a program over a period of time, or when you want to produce a flamegraph or other output for offline analysis.</p>
+<p><a href="using-rbspy/./report.html"><strong>report</strong></a> is useful if you have a raw rbspy data file that you've previously recorded. You can use <code>rbspy report</code> to generate different kinds of visualizations from it (the flamegraph/callgrind/summary formats, as documented above). This is useful because you can record raw data from a program and then decide how you want to visualize it afterwards.</p>
+<h2 id="containers"><a class="header" href="#containers">Containers</a></h2>
+<p>If you want to profile a ruby program that's running in a container on Linux, be sure to add the <code>SYS_PTRACE</code> capability. For Docker containers, this can be done by adding a flag to the command when you launch the container:</p>
+<pre><code>docker run --cap-add=SYS_PTRACE ...
+</code></pre>
+<p>If you're using Kubernetes, you can add the ptrace capability to a deployment like this:</p>
+<pre><code>securityContext:
+  capabilities:
+    add:
+      - SYS_PTRACE
+</code></pre>
+<p>If this doesn't work for you, see <a href="https://github.com/rbspy/rbspy/issues/325">issue 325</a> for troubleshooting steps. You may need additional <code>securityContext</code> configuration if the processes in your container are running as an unprivileged (non-root) user, which is recommended for security reasons.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="snapshot"><a class="header" href="#snapshot">Snapshot</a></h1>
 <p>Snapshot takes a single stack trace from the specified process, prints it, and exits. This is
 useful if you have a stuck Ruby program and just want to know what it's doing right now.  Must be
 run as root.</p>
 <pre><code>sudo rbspy snapshot --pid $PID
 </code></pre>
-<h2 id="record"><a class="header" href="#record">Record</a></h2>
-<p>Record records stack traces from your process and saves them to disk.</p>
-<p><code>rbspy record</code> will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you
-can configure the visualization format with <code>--format</code>). The raw data file contains every stack
-trace that <code>rbspy</code> recorded, so that you can generate other visualizations later if you want. By
-default, rbspy saves both files to <code>~/.cache/rbspy/records</code>, but you can customize where those are
-stored with <code>--file</code> and <code>--raw-file</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="record"><a class="header" href="#record">Record</a></h1>
+<p>Record continuously captures stack traces from your process and saves them to disk. This is what you want to use when profiling a program over a period of time, or when you want to produce a flamegraph or other output for offline analysis.</p>
+<p><code>rbspy record</code> will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you can configure the visualization format with <code>--format</code>). The raw data file contains every stack trace that <code>rbspy</code> recorded, so that you can generate other visualizations later if you want. By default, rbspy saves both files to <code>~/.cache/rbspy/records</code>, but you can customize where those are stored with <code>--file</code> and <code>--raw-file</code>.</p>
 <p>This is useful when you want to know what functions your program is spending most of its time in.</p>
 <p>You can record stack traces in two different ways, by PID or by executing a new ruby process.</p>
-<h3 id="record-by-pid"><a class="header" href="#record-by-pid">Record by PID</a></h3>
+<h2 id="record-by-pid"><a class="header" href="#record-by-pid">Record by PID</a></h2>
 <pre><code># Must be run as root
 sudo rbspy record --pid $PID
 </code></pre>
-<h3 id="record-by-executing-the-process-through-rbspy"><a class="header" href="#record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</a></h3>
+<h2 id="record-by-executing-the-process-through-rbspy"><a class="header" href="#record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</a></h2>
 <pre><code># Must be run as root on Mac (but not Linux)
 rbspy record ruby myprogram.rb
 # Put `--` after record if your program has command line arguments
 rbspy record -- ruby myprogram.rb --log-level 0
 </code></pre>
-<p>The reason this has to be run as root on Mac but not on Linux is that Mac and Linux systems APIs are
-different. rbspy can use the <code>process_vm_readv</code> system call to read memory from a child process on
-Linux without being root, but can't do the same with <code>vm_read</code> on Mac.</p>
-<p>If run with sudo, <code>rbspy record</code> by default drops root privileges when executing a subprocess. So if
-you're user <code>bork</code> and run <code>sudo rbspy record ruby script.rb</code>. You can disable this with
-<code>--no-drop-root</code>.</p>
-<h3 id="optional-arguments"><a class="header" href="#optional-arguments">Optional Arguments</a></h3>
+<p>The reason this has to be run as root on Mac but not on Linux is that Mac and Linux systems APIs are different. rbspy can use the <code>process_vm_readv</code> system call to read memory from a child process on Linux without being root, but can't do the same with <code>vm_read</code> on Mac.</p>
+<p>If run with sudo, <code>rbspy record</code> by default drops root privileges when executing a subprocess. So if you're user <code>bork</code> and run <code>sudo rbspy record ruby script.rb</code>. You can disable this with <code>--no-drop-root</code>.</p>
+<h2 id="optional-arguments"><a class="header" href="#optional-arguments">Optional Arguments</a></h2>
 <p>These work regardless of how you started the recording.</p>
 <ul>
 <li><code>--rate</code>: Specifies the number of stack traces that are sampled per second. The default rate is 100hz.</li>
@@ -275,7 +278,7 @@ there's 1 line in your program which is taking up all the time.</li>
 <li><code>--subprocesses</code>: Record all subprocesses of the given PID or command.</li>
 <li><code>--silent</code>: Don't print the summary profiling data every second.</li>
 </ul>
-<h2 id="report"><a class="header" href="#report">Report</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="report"><a class="header" href="#report">Report</a></h2>
 <p>If you have a raw rbspy data file that you've previously recorded, you can use <code>rbspy report</code> to
 generate different kinds of visualizations from it (the flamegraph/callgrind/summary formats, as
 documented above). This is useful because you can record raw data from a program and then decide how
@@ -291,22 +294,6 @@ $ cat summary.txt
   0.00   100.00  aaa - ci/ruby-programs/short_program.rb
   0.00   100.00  &lt;main&gt; - ci/ruby-programs/short_program.rb
 </code></pre>
-<h1 id="containers"><a class="header" href="#containers">Containers</a></h1>
-<p>If you want to profile a ruby program that's running in a container on Linux, be sure to add the
-<code>SYS_PTRACE</code> capability. For Docker containers, this can be done by adding a flag to the command
-when you launch the container:</p>
-<pre><code>docker run --cap-add=SYS_PTRACE ...
-</code></pre>
-<p>If you're using Kubernetes, you can add the ptrace capability to a deployment like this:</p>
-<pre><code>securityContext:
-  capabilities:
-    add:
-      - SYS_PTRACE
-</code></pre>
-<p>If this doesn't work for you, see <a href="https://github.com/rbspy/rbspy/issues/325">issue 325</a> for
-troubleshooting steps. You may need additional <code>securityContext</code> configuration if the processes
-in your container are running as an unprivileged (non-root) user, which is recommended for security
-reasons.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rbspy-vs-stackprof"><a class="header" href="#rbspy-vs-stackprof">rbspy vs StackProf</a></h1>
 <p><a href="https://github.com/rbspy/rbspy">rbspy</a> and <a href="https://github.com/tmm1/stackprof">StackProf</a> are both
 sampling profilers for Ruby. They both let you generate flamegraphs. So when should you use rbspy,
