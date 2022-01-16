@@ -1,0 +1,15 @@
+# Summary
+
+- [Introduction](./introduction.md)
+- [Installing](./installing/index.md)
+    - [On your computer](./installing/on-your-computer.md)
+    - [In a CI environment](./installing/in-ci.md)
+- [Using rbspy](./using-rbspy.md)
+- [rbspy vs stackprof](./rbspy-vs-stackprof.md)
+- [Profiling guide](./profiling-guide/index.md)
+    - [Questions to ask when optimizing code](./profiling-guide/questions-to-ask.md)
+    - [Benchmarking your code](./profiling-guide/benchmarking-your-code.md)
+    - [Using flamegraphs](./profiling-guide/using-flamegraphs.md)
+- [Getting help](./getting-help.md)
+- [Contributing](./contributing.md)
+- [FAQ](./faq.md)

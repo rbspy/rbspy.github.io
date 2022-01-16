@@ -1,0 +1,6 @@
+[book]
+authors = ["Adam Jensen"]
+language = "en"
+multilingual = false
+src = "src"
+title = "rbspy"
