@@ -1,0 +1,716 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>rbspy</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rbspy</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <img src="../static/images/rbspy.jpg" width="200" height="200">
+<h1 id="rbspy"><a class="header" href="#rbspy">rbspy</a></h1>
+<p>Have you ever wanted to know what functions your Ruby program is calling? <code>rbspy</code> can tell you!</p>
+<p><code>rbspy</code> lets you profile Ruby processes that are already running. You give it a PID, and it starts
+profiling! It's a sampling profiler, which means it's <strong>low overhead</strong> and <strong>safe to run in
+production</strong>.</p>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h2>
+<p>If you're on macOS, install rbspy with Homebrew:</p>
+<pre><code>brew install rbspy
+</code></pre>
+<p>If you have a working Rust toolchain (1.56 or newer), you can install with cargo:</p>
+<pre><code>cargo install rbspy
+</code></pre>
+<p>Otherwise, check out the <a href="installing.html">installing</a> section to get rbspy running on your computer.</p>
+<h2 id="profiling-a-ruby-program"><a class="header" href="#profiling-a-ruby-program">Profiling a Ruby program</a></h2>
+<p>If your program is already running, get its PID and profile it like this:</p>
+<pre><code>rbspy record --pid $PID
+</code></pre>
+<p>You can also use rbspy to profile a Ruby script, like this. It works both with and without bundle exec.</p>
+<pre><code>rbspy record -- bundle exec ruby my-script.rb
+</code></pre>
+<p>Here's what running <code>rbspy record</code> on a Rubocop process looks like. You'll see a live summary of
+what the top functions being run are, and it also saves the raw data + a flamegraph for more in
+depth analysis.</p>
+<img src="../static/images/rbspy-record.gif">
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installing-rbspy"><a class="header" href="#installing-rbspy">Installing rbspy</a></h1>
+<p>Installing rbspy is straightforward on most common operating systems. It can be run on your computer, in CI, or on production servers.</p>
+<h2 id="system-requirements"><a class="header" href="#system-requirements">System requirements</a></h2>
+<p>rbspy runs on Linux*, Windows, FreeBSD, and macOS.</p>
+<ul>
+<li>Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.</li>
+</ul>
+<h2 id="ruby-requirements"><a class="header" href="#ruby-requirements">Ruby requirements</a></h2>
+<p>rbspy can profile programs that use Ruby 1.9.3 and newer. The maintainers try to add support for new Ruby versions shortly after they're released.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installing-rbspy-on-your-computer"><a class="header" href="#installing-rbspy-on-your-computer">Installing rbspy on your computer</a></h1>
+<p>Installing rbspy is easy on most platforms, as it's a single binary.</p>
+<h2 id="option-1-install-from-a-package"><a class="header" href="#option-1-install-from-a-package">Option 1: Install from a package</a></h2>
+<p>Installing from a package is the simplest method. If your preferred operating system or distribution isn't listed here, please consider making a package for it. We are grateful for packaging contributions.</p>
+<h3 id="alpine-linux"><a class="header" href="#alpine-linux">Alpine Linux</a></h3>
+<p><code>apk add rbspy</code></p>
+<h3 id="macos-homebrew"><a class="header" href="#macos-homebrew">macOS (Homebrew)</a></h3>
+<p><code>brew install rbspy</code></p>
+<h2 id="option-2-download-a-binary"><a class="header" href="#option-2-download-a-binary">Option 2: Download a binary</a></h2>
+<p>If there's no package for your operating system, downloading a pre-compiled binary is the next simplest method. There are binaries for Linux, macOS, FreeBSD, and Windows, which are the supported platforms.</p>
+<ol>
+<li>Download the latest release for your operating system from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a>
+<ul>
+<li>Note: There are two types of Linux releases. Those tagged with <code>gnu</code> are dynamically linked against GNU libc, which needs to be installed on the system where rbspy runs. Those tagged with <code>musl</code> are statically linked against musl libc and can be used without a specific libc being installed.</li>
+</ul>
+</li>
+<li>Unpack the release. On Unix systems (Linux, Mac, FreeBSD), move the rbspy binary to <code>/usr/local/bin/rbspy</code>. You will need to make it executable with, for example, <code>chmod +x rbspy</code>.</li>
+<li>Run the binary to start profiling! See <a href="installing/./using-rbspy.html">Using rbspy</a> to get started.</li>
+</ol>
+<h2 id="option-3-build-rbspy-from-source"><a class="header" href="#option-3-build-rbspy-from-source">Option 3: Build rbspy from source</a></h2>
+<p>Finally, you can build rbspy from source if you have a Rust toolchain installed. You will need <strong>Rust 1.56 or newer</strong>.</p>
+<ol>
+<li>
+<p>Install Cargo (if you haven't already). There may be a package available for your operating system. There's a guide in the <a href="https://doc.rust-lang.org/cargo/getting-started/installation.html">cargo docs</a>, or you can run this command if you're on Linux, macOS, or FreeBSD:</p>
+<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+<p>For other systems, please check the instructions at https://rustup.rs/.</p>
+</li>
+<li>
+<p>Add <code>~/.cargo/bin</code> to your <code>PATH</code>:</p>
+<pre><code>. &quot;$HOME/.cargo/env&quot;
+</code></pre>
+</li>
+<li>
+<p>Build rbspy!</p>
+<pre><code>git clone https://github.com/rbspy/rbspy
+cd rbspy
+cargo build --release
+./target/release/rbspy --help
+</code></pre>
+<p>Alternatively, you can build and install from crates.io:</p>
+<pre><code>cargo install rbspy
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="install-rbspy-in-a-ci-pipeline-or-other-unattended-environment"><a class="header" href="#install-rbspy-in-a-ci-pipeline-or-other-unattended-environment">Install rbspy in a CI pipeline or other unattended environment</a></h1>
+<p>If you're using Docker, we publish images on <a href="https://hub.docker.com/r/rbspy/rbspy/tags">Docker Hub</a>.</p>
+<p>You can also download release binaries from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a>.</p>
+<p>In both cases, the releases marked with <code>gnu</code> contain an rbspy binary that's dynamically linked against GNU libc, which needs to be installed in your container image. Those marked with <code>musl</code> contain an rbspy binary that's statically linked against musl libc and can be used standalone on most Linux systems.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="using-rbspy"><a class="header" href="#using-rbspy">Using rbspy</a></h1>
+<h1 id="subcommands"><a class="header" href="#subcommands">Subcommands</a></h1>
+<p><code>rbspy</code> has 3 subcommands: <code>snapshot</code>, <code>record</code>, and <code>report</code>.</p>
+<h2 id="snapshot"><a class="header" href="#snapshot">Snapshot</a></h2>
+<p>Snapshot takes a single stack trace from the specified process, prints it, and exits. This is
+useful if you have a stuck Ruby program and just want to know what it's doing right now.  Must be
+run as root.</p>
+<pre><code>sudo rbspy snapshot --pid $PID
+</code></pre>
+<h2 id="record"><a class="header" href="#record">Record</a></h2>
+<p>Record records stack traces from your process and saves them to disk.</p>
+<p><code>rbspy record</code> will save 2 files: a gzipped raw data file, and a visualization (by default a flamegraph, you
+can configure the visualization format with <code>--format</code>). The raw data file contains every stack
+trace that <code>rbspy</code> recorded, so that you can generate other visualizations later if you want. By
+default, rbspy saves both files to <code>~/.cache/rbspy/records</code>, but you can customize where those are
+stored with <code>--file</code> and <code>--raw-file</code>.</p>
+<p>This is useful when you want to know what functions your program is spending most of its time in.</p>
+<p>You can record stack traces in two different ways, by PID or by executing a new ruby process.</p>
+<h3 id="record-by-pid"><a class="header" href="#record-by-pid">Record by PID</a></h3>
+<pre><code># Must be run as root
+sudo rbspy record --pid $PID
+</code></pre>
+<h3 id="record-by-executing-the-process-through-rbspy"><a class="header" href="#record-by-executing-the-process-through-rbspy">Record by executing the process through rbspy</a></h3>
+<pre><code># Must be run as root on Mac (but not Linux)
+rbspy record ruby myprogram.rb
+# Put `--` after record if your program has command line arguments
+rbspy record -- ruby myprogram.rb --log-level 0
+</code></pre>
+<p>The reason this has to be run as root on Mac but not on Linux is that Mac and Linux systems APIs are
+different. rbspy can use the <code>process_vm_readv</code> system call to read memory from a child process on
+Linux without being root, but can't do the same with <code>vm_read</code> on Mac.</p>
+<p>If run with sudo, <code>rbspy record</code> by default drops root privileges when executing a subprocess. So if
+you're user <code>bork</code> and run <code>sudo rbspy record ruby script.rb</code>. You can disable this with
+<code>--no-drop-root</code>.</p>
+<h3 id="optional-arguments"><a class="header" href="#optional-arguments">Optional Arguments</a></h3>
+<p>These work regardless of how you started the recording.</p>
+<ul>
+<li><code>--rate</code>: Specifies the number of stack traces that are sampled per second. The default rate is 100hz.</li>
+<li><code>--duration</code>: Specifies how long to run before stopping rbspy. This conficts with running a subcommand (<code>rbspy record ruby myprogram.rb</code>).</li>
+<li><code>--format</code>: Specifies what format to use to report profiling data. The options are:
+<ul>
+<li><code>flamegraph</code>: generates a flamegraph SVG that you can view in a browser</li>
+<li><code>speedscope</code>: generates a file to drop into https://www.speedscope.app/ to interactively explore flamegraphs</li>
+<li><code>callgrind</code>: generates a callgrind-formatted file that you can view with a tool like
+<code>kcachegrind</code>.</li>
+<li><code>summary</code>: aggregates % self and % total times by function. Useful to get a basic overview</li>
+<li><code>summary_by_line</code>: aggregates % self and % total times by line number. Especially useful when
+there's 1 line in your program which is taking up all the time.</li>
+</ul>
+</li>
+<li><code>--file</code>: Specifies where rbspy will save formatted output.</li>
+<li><code>--raw-file</code>: Specifies where rbspy will save formatted data. Use a gz extension because it will be gzipped.</li>
+<li><code>--flame-min-width</code>: Specifies the minimum flame width in flamegraphs as a percentage. Useful for excluding functions that appear in a small number of samples.</li>
+<li><code>--nonblocking</code>: Don't pause the ruby process when collecting stack samples. Setting this option will reduce the performance impact of sampling but may produce inaccurate results.</li>
+<li><code>--subprocesses</code>: Record all subprocesses of the given PID or command.</li>
+<li><code>--silent</code>: Don't print the summary profiling data every second.</li>
+</ul>
+<h2 id="report"><a class="header" href="#report">Report</a></h2>
+<p>If you have a raw rbspy data file that you've previously recorded, you can use <code>rbspy report</code> to
+generate different kinds of visualizations from it (the flamegraph/callgrind/summary formats, as
+documented above). This is useful because you can record raw data from a program and then decide how
+you want to visualize it afterwards.</p>
+<p>For example, here's what recording a simple program and then generating a summary report looks like:</p>
+<pre><code>$ sudo rbspy record --raw-file raw.gz ruby ci/ruby-programs/short_program.rb
+$ rbspy report -f summary -i raw.gz -o summary.txt
+$ cat summary.txt
+% self  % total  name
+100.00   100.00  sleep [c function] - (unknown)
+  0.00   100.00  ccc - ci/ruby-programs/short_program.rb
+  0.00   100.00  bbb - ci/ruby-programs/short_program.rb
+  0.00   100.00  aaa - ci/ruby-programs/short_program.rb
+  0.00   100.00  &lt;main&gt; - ci/ruby-programs/short_program.rb
+</code></pre>
+<h1 id="containers"><a class="header" href="#containers">Containers</a></h1>
+<p>If you want to profile a ruby program that's running in a container on Linux, be sure to add the
+<code>SYS_PTRACE</code> capability. For Docker containers, this can be done by adding a flag to the command
+when you launch the container:</p>
+<pre><code>docker run --cap-add=SYS_PTRACE ...
+</code></pre>
+<p>If you're using Kubernetes, you can add the ptrace capability to a deployment like this:</p>
+<pre><code>securityContext:
+  capabilities:
+    add:
+      - SYS_PTRACE
+</code></pre>
+<p>If this doesn't work for you, see <a href="https://github.com/rbspy/rbspy/issues/325">issue 325</a> for
+troubleshooting steps. You may need additional <code>securityContext</code> configuration if the processes
+in your container are running as an unprivileged (non-root) user, which is recommended for security
+reasons.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rbspy-vs-stackprof"><a class="header" href="#rbspy-vs-stackprof">rbspy vs StackProf</a></h1>
+<p><a href="https://github.com/rbspy/rbspy">rbspy</a> and <a href="https://github.com/tmm1/stackprof">StackProf</a> are both
+sampling profilers for Ruby. They both let you generate flamegraphs. So when should you use rbspy,
+and when should you use stackprof?</p>
+<p>The two tools are actually used in pretty different ways! rbspy is a command line tool (<code>rbspy record --pid YOUR_PID</code>),
+and StackProf is a library that you can include in your Ruby program and use to profile a given
+section of code.</p>
+<h3 id="when-to-use-rbspy"><a class="header" href="#when-to-use-rbspy">When to use rbspy</a></h3>
+<p>rbspy profiles everything a given Ruby process is doing -- you give it a PID of a Ruby process, and
+it profiles it. It's useful when:</p>
+<ul>
+<li>You don't want to edit your code to start profiling</li>
+<li>You have a Ruby program that you didn't write that you want to quickly get profiling information about (eg Chef / Puppet)</li>
+<li>You want to quickly profile a Ruby script (how to do it: <code>rbspy record ruby my-script.rb</code>)</li>
+</ul>
+<p>One common use case for rbspy is profiling slow unit test runs -- instead of spending a bunch of
+time adding instrumentation, you can run <code>rbspy record ruby my-test.rb</code> and instantly get profiling
+information about what's going on.</p>
+<h3 id="when-to-use-stackprof"><a class="header" href="#when-to-use-stackprof">When to use StackProf</a></h3>
+<p><a href="https://github.com/tmm1/stackprof">StackProf</a> requires more work to set up, and gives you more
+control over which code gets profiled.  It's best when you want to profile a specific section of
+your code, or only want to profile certain HTTP requests. </p>
+<p>Here's what editing your code to use StackProf looks like</p>
+<pre><code>StackProf.run(mode: :cpu, out: 'tmp/stackprof-cpu-myapp.dump', raw: true) do
+    # code you want to profile here
+end
+</code></pre>
+<p>Here are the steps to using StackProf:</p>
+<ol>
+<li>Add the <code>stackprof</code> gem to your Gemfile</li>
+<li>Edit your code to call StackProf and save data to the right file</li>
+<li>Use <code>stackprof</code> to summarize the reported data from the </li>
+</ol>
+<p>A more batteries-included way of doing profiling if you have a Rails/Rack program is to use
+<a href="https://github.com/MiniProfiler/rack-mini-profiler">rack-mini-profiler</a>. It uses StackProf under
+the hood to do CPU profiling as well as supporting memory profiling. <a href="https://www.speedshop.co/2015/08/05/rack-mini-profiler-the-secret-weapon.html">Here's a blog post about
+rack-mini-profiler</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="about-this-profiling-guide"><a class="header" href="#about-this-profiling-guide">About this profiling guide</a></h1>
+<p>rbspy's goal is not just to be a Ruby profiler, but to make profiling a little bit more accessible
+to the Ruby community in general and something that more programmers do.</p>
+<p>We've heard from a lot of people over the years that they find profiling confusing and that they
+don't know where to start. So, this profiling guide aims to explain
+some of the basics of profiling (what's benchmarking? what's a flamegraph?). Nothing in the
+profiling guide is Ruby- or rbspy-specific — it all applies to profiling in general.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="questions-to-ask-when-optimizing-code"><a class="header" href="#questions-to-ask-when-optimizing-code">Questions to ask when optimizing code</a></h1>
+<p>When people start looking at profiling data, they're often unsure of where to start.</p>
+<p>If you have a slow program that you want to start optimizing, here are a few questions to consider
+using your profiling tools to answer.</p>
+<h3 id="is-my-program-mostly-using-the-cpu-or-mostly-waiting"><a class="header" href="#is-my-program-mostly-using-the-cpu-or-mostly-waiting">Is my program mostly using the CPU or mostly waiting?</a></h3>
+<p>If your program is slow, the first most important thing to find out is whether it's slow because
+it's using the CPU or if it's slow because it's waiting for the disk or network or something.</p>
+<p>If your program is spending 98% of its time waiting for the result of a database query, it's very
+possible that you don't need to change your program's code at all, and what you need to do is work
+on your database's indexes!</p>
+<h3 id="is-my-program-swapping-memory-to-disk"><a class="header" href="#is-my-program-swapping-memory-to-disk">Is my program swapping memory to disk?</a></h3>
+<p>This isn't a question that profilers can answer, but if your program is using a lot of memory (more
+than is available on your machine), it's worth checking whether the program is swapping memory to
+disk. Swapping will make your program run a lot slower, especially if your swap partition is
+encrypted.</p>
+<h3 id="is-there-a-single-function-where-all-the-time-is-being-spent"><a class="header" href="#is-there-a-single-function-where-all-the-time-is-being-spent">Is there a single function where all the time is being spent?</a></h3>
+<p>Sometimes when a program is really unexpectedly slow, there's one function which is overwhelmingly
+the culprit. Profilers can tell you what % of your program's execution time was spent in each
+function.</p>
+<p>When thinking about this question it's useful to understand the difference between &quot;self time&quot; and
+&quot;total time&quot; spent in a function -- a lot of profilers (including rbspy) will give you a report like
+this:</p>
+<pre><code>% self  % total  name
+  3.05    10.09  each_child_node
+  2.52    31.14  block (2 levels) in on_send
+  2.17    14.31  do_parse
+  1.76     3.28  cop_config
+  1.70     2.29  block (2 levels) in &lt;class:Node&gt;
+  1.41     1.41  end_pos
+</code></pre>
+<p>The <strong>self time</strong> is the percentage of time that function was at the top of the call stack.
+Basically -- if the function is doing computations itself (vs calling other functions), it's what %
+of time was spent in those functions.</p>
+<p><strong>Looking for functions with high self time can be a good way to find low-hanging fruit for
+optimizations</strong> -- if 20% of the time is being spent in a single function's calculations and you
+can make that function 90% faster, then you've improved your program's overall speed a lot! For
+example, if you have a slow calculation, maybe you can cache it!</p>
+<p>The <strong>total time</strong> is the percentage of time that function appeared in a call stack. Basically it's
+the % of time spent in the function itself + every other function it called.</p>
+<p>Both self time and total time are important to consider -- for example, if I have a function that
+does this:</p>
+<pre><code>def parent_fun
+    for x in list1
+        for y in list2
+            child_fun(x,y)
+        end
+    end
+end
+</code></pre>
+<p>your profiler might report that <code>parent_fun</code> has 0% &quot;self time&quot; (because all it does is call
+<code>child_fun</code> over and over again), but maybe it's still possible to optimize the algorithm it uses.</p>
+<h3 id="how-many-times-is-function-x-being-called"><a class="header" href="#how-many-times-is-function-x-being-called">How many times is function X being called?</a></h3>
+<p>If your profiler says that 98% of the time is being spent inside a single function
+like <code>calculate_thing</code>, you're not done! There are 2 possible cases here:</p>
+<ul>
+<li><code>calculate_thing</code> is taking a long time</li>
+<li><code>calculate_thing</code> is fast, but another function is <strong>calling</strong> that function way too many times.
+No use having a fast function if it's being called 100 million times!</li>
+</ul>
+<p>Because rbspy is a sampling profiler (not a tracing profiler), it actually can't tell you how times
+a function was called -- it just reports &quot;hey, I observed your program 100,000 times, and 98,000 of
+those times it was in the <code>calculate_thing</code> function&quot;.</p>
+<p><a href="https://github.com/ruby-prof/ruby-prof">ruby-prof</a> is a tracing profiler for Ruby, which can tell
+you exactly how many times each function was called at the cost of being higher overhead.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="benchmarking-your-code"><a class="header" href="#benchmarking-your-code">Benchmarking your code</a></h1>
+<p>People who are just getting started making their code faster sometimes confuse <strong>benchmarking</strong> and
+<strong>profiling</strong>. Let's explain the difference and how to use both techniques to make your code faster!</p>
+<p>In short: a benchmark tells you <strong>how slow</strong> your code is (&quot;it took 20 seconds to do X Y Z&quot;) and a
+profiler tells you <strong>why it's slow</strong> (&quot;35% of that time was spent doing compression&quot;).</p>
+<h2 id="whats-benchmarking-why-is-it-important"><a class="header" href="#whats-benchmarking-why-is-it-important">What's benchmarking? Why is it important?</a></h2>
+<p>Optimizing code is often very counterintuitive -- often I'll have a great idea for how to make my
+code faster, and it'll turn out to make almost no difference at all in practice. So when optimizing,
+it's extremely important to have objective standards you can measure your changes against!</p>
+<p>A <strong>benchmark</strong> is a test that you run to measure how fast your code is. For example, if I have a
+compression library, I might test how long it takes to compress a given 100MB file. Or if I was
+working on Jekyll's performance (a static site generator), I might take a specific large site and
+benchmark how long Jekyll takes to render that site.</p>
+<p>If you can run the benchmark on your dev machine, you can make changes, see &quot;oh, that didn't make
+any difference!&quot;, and then quickly try out a different approach.</p>
+<h2 id="run-your-benchmarks-more-than-once"><a class="header" href="#run-your-benchmarks-more-than-once">Run your benchmarks more than once</a></h2>
+<p>Suppose you run your benchmark and it takes 6 seconds. You make some optimizations and run it again,
+and afterwards it takes 5.7 seconds. That's a 5% performance improvement, right? Not huge, but not
+nothing?</p>
+<p>Not necessarily!</p>
+<p>Here's a real benchmark from my computer (generating a Jekyll site), and how long it took (in
+seconds) across 10 different runs:</p>
+<pre><code>5.94
+6.00
+6.04
+5.98
+6.15
+6.37
+6.14
+6.20
+5.98
+6.18
+6.22
+6.04
+6.16
+</code></pre>
+<p>When I ran it 100 times, there was even more variation -- sometimes it would take up to 9 seconds
+(for instance if I was using a lot of CPU).</p>
+<p>So the same benchmark, on the same computer, can take anywhere between 6 to 9 seconds.
+This means that if, for this benchmark, I see a performance improvement of less than 0.5 seconds
+(~10%) or so, it's worth being suspicious.</p>
+<p>We don't have time here to do a rigorous discussion of statistics and benchmarking, but here are a
+few guidelines:</p>
+<ul>
+<li>be suspicious of small performance improvements (like 5% or 10%). The smaller the performance
+improvement you're trying to verify, the more times you need to run your benchmark to be sure that
+it's real.</li>
+<li>running any benchmark 10 times instead of just once is a good way to get an idea of how much
+natural variation that benchmark has.</li>
+</ul>
+<p>If you're interested in taking a more statistically rigorous approach, a good starting point is to
+look up &quot;bootstrap confidence intervals&quot;, which is an easy computational way (very little math!) to
+get confidence intervals.</p>
+<h2 id="using-benchmarking--profiling-to-make-your-code-faster"><a class="header" href="#using-benchmarking--profiling-to-make-your-code-faster">Using benchmarking + profiling to make your code faster</a></h2>
+<p>There are basically 2 typical workflows you can use when optimizing your code. Basically: you can
+either profile a benchmark of your code, or you can profile your code running in production.</p>
+<p>Both of these techniques are basically the same: measure your code's speed somehow, profile it, come
+up with potentially faster code, and then measure again afterwards to see if it actually worked!</p>
+<p>The most important tip here is: <strong>don't use profiler results to figure out if your optimization
+worked, use benchmark results</strong>. Using benchmark results will help you make sure that your
+optimization actually makes a significant improvement to the program's performance as a whole.</p>
+<h3 id="technique-1-benchmark-locally"><a class="header" href="#technique-1-benchmark-locally">Technique 1: Benchmark locally</a></h3>
+<ol>
+<li>Realize something is slow (&quot;oh no, this computation is taking SO LONG, why??&quot;)</li>
+<li>Create a <strong>benchmark</strong> that you can run locally that demonstrates the slow behavior. This doesn't
+need to be complicated!</li>
+<li>Run your benchmark (10 times!) to get a baseline for how long it takes</li>
+<li>Profile the benchmark.</li>
+<li>Implement a fix</li>
+<li>Run your benchmark again to see if your fix worked!</li>
+</ol>
+<h3 id="technique-2-monitor-production-performance"><a class="header" href="#technique-2-monitor-production-performance">Technique 2: Monitor production performance</a></h3>
+<p>This technique has a little less of the scientific rigor that you get when you make a benchmark, but
+often making a benchmark isn't practical! A lot of things happen in production that are hard to
+reproduce, but you need to figure out why they're happening anyway.</p>
+<ol>
+<li>Realize something is slow (your users are complaining about performance!)</li>
+<li>Find a way to monitor the slow thing in production with your favorite monitoring tool (graphite,
+datadog, new relic, whatever)</li>
+<li>Profile the code running in production</li>
+<li>Implement a fix and deploy it to a test environment or to production</li>
+<li>Use your monitoring to see if the performance improved!</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="using-flamegraphs"><a class="header" href="#using-flamegraphs">Using flamegraphs</a></h1>
+<h2 id="whats-a-flamegraph"><a class="header" href="#whats-a-flamegraph">What's a flamegraph?</a></h2>
+<p>Here's a very basic introduction to <a href="http://www.brendangregg.com/flamegraphs.html">flamegraphs</a>.
+Everything in here is true for flamegraphs in general, not just the flamegraphs rbspy generates.</p>
+<p>Flamegraphs are a way to visualize how your program is spending its time. A few important things
+about flamegraphs:</p>
+<ul>
+<li>The x axis on the flamegraph doesn't represent time.</li>
+<li>The SVGs have Javascript in them and they're interactive! You can search with ctrl+f!</li>
+<li>You can't tell from a flamegraph how many times a function was called. You can only tell how much
+time was spent in the function.</li>
+</ul>
+<h2 id="reading-a-flamegraph"><a class="header" href="#reading-a-flamegraph">Reading a flamegraph</a></h2>
+<p>Flamegraphs are generated from a series of stack traces. To get an idea for how this works, let's
+pretend that our profiler has collected 4 stack traces, as follows.</p>
+<pre><code>a;d 1
+b;d 1
+a;b;c 1
+a;b;c;d 1
+</code></pre>
+<p>Here's the flamegraph. It's generated by sorting the above stack traces (so that all the <code>a</code>s are
+together) and arranging them vertically into a chart. In this one, the main method is at the top.</p>
+<a href="profiling-guide/../static/images/simplest-flamegraph.svg">
+<img src="profiling-guide/../static/images/simplest-flamegraph.svg">
+</a>
+<p>What this tells us is:</p>
+<ul>
+<li>75% (3/4) of the stack traces we collected started in the <code>a</code> function</li>
+<li>50% (2/4) of the stack traces started with <code>a</code> calling <code>b</code> and then calling <code>c</code>.</li>
+</ul>
+<h2 id="a-simple-real-example"><a class="header" href="#a-simple-real-example">A simple real example</a></h2>
+<p>To get a tiny bit more complicated -- here's a very simple Ruby program that spends 20% of its time
+running the <code>panda</code> function, and 80% of its time running the <code>cucumber</code> function.</p>
+<pre><code>def panda
+    sleep(0.20)
+end
+
+def potato
+    cucumber
+end
+
+def cucumber
+    sleep(0.80)
+end
+
+loop do
+    panda
+    potato
+end
+</code></pre>
+<p>Here's the flamegraph! There's a <code>panda</code> bar in the flame graph that takes up 20% of the x axis, and
+<code>potato</code> and <code>cucumber</code> bars that take up 80% of the x axis. This means that 80% of the time was
+spent in <code>potato</code>/<code>cucumber</code> and 20% in <code>panda</code>.</p>
+<a href="profiling-guide/../static/images/basic-flamegraph.svg">
+<img src="profiling-guide/../static/images/basic-flamegraph.svg">
+</a>
+<p>If you click on the above flamegraph, you'll get an interactive SVG -- you can hover over any part
+of the flamegraph to get the % of samples that were in that function. In this example, 79.37% of the
+samples were in the <code>potato</code> function.</p>
+<img src="profiling-guide/../static/images/hover.png">
+<h2 id="a-more-complicated-flamegraph-jekyll"><a class="header" href="#a-more-complicated-flamegraph-jekyll">A more complicated flamegraph: Jekyll</a></h2>
+<p>Here's a much more complicated flamegraph generated by <code>rbspy</code>. The way I usually read flamegraphs
+is to look for big wide sections (because they represent a large part of the program's execution)</p>
+<p>There are 2 things that jump out to me about this flamegraph:</p>
+<ul>
+<li>there's an <code>initialize</code> function where 5.9% of the time is spent. Not that much time is being
+spent in initialization!</li>
+<li>86.6% of the time is spent in <code>process_site</code>, and if you look a little further down, you can see
+that <code>render_document</code> splits into 3 separate functions: <code>convert</code>, <code>place_in_layouts</code>, and
+<code>render_liquid</code>. That means that <code>render_document</code> called those 3 methods, and that, while
+<code>render_document</code> did call other methods, it didn't spend a substantial amount of time in any
+other method.</li>
+</ul>
+<p>This is neat! I'm not familiar with the Jekyll codebase at all, but just by looking through this
+flamegraph I can understand a few important things about how the code is structured.</p>
+<p>Here's the slice that jumps out at me (where <code>render_document</code> splits into the 3 methods it calls).
+Basically the thing to look for here is where the big slice (which takes up ~80% of the program)
+breaks into smaller slices, because that tells you what the program's main phases are.</p>
+<img src="profiling-guide/../static/examples/jekyll-flamegraph.png">
+<p>and the whole flamegraph:</p>
+<a href="profiling-guide/../static/examples/jekyll-flamegraph.svg">
+<img src="profiling-guide/../static/examples/jekyll-flamegraph.svg">
+</a>
+<h2 id="when-dont-flamegraphs-work-well-recursion"><a class="header" href="#when-dont-flamegraphs-work-well-recursion">When don't flamegraphs work well? (recursion!)</a></h2>
+<p>Flamegraphs don't work well with highly recursive programs. When you have a program with a lot of
+recursion, what will happen is that the function you're calling recursively will appear over and
+over again multiple times in each stack trace. If you have a very recursive program that you want to
+analyze in depth, using a <code>callgrind</code> visualization instead might work better.</p>
+<p>For example, Rubocop uses a lot of recursion. In this flamegraph from a Rubocop execution, we see
+that the <code>on_block</code>, <code>on_begin</code>, <code>on_while</code>, etc functions get called over and over and over again
+in a lot of different places, and it's very hard to learn anything from the flamegraph except that
+there's a lot of recursion.</p>
+<a href="profiling-guide/../static/images/rubocop-flamegraph.svg">
+<img src="profiling-guide/../static/images/rubocop-flamegraph.svg">
+</a>
+<p>A simple text summary gives us more insight into what's going on (7.6% of the time is spent in
+<code>advance</code>!) than the flamegraph does.</p>
+<pre><code>Summary of profiling data so far:
+% self  % total  name
+  7.65     8.99  advance - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/parser-2.4.0.2/lib/parser/lexer.rb
+  4.83    11.31  each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/node.rb
+  3.66     8.65  block in tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/mixin/surrounding_s
+  3.33     3.33  source_range - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/node.rb
+  2.50    29.28  block (2 levels) in on_send - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/commiss
+  2.50     2.50  block in offensive? - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/style/commented
+  2.50     2.50  block (2 levels) in find_common_characters - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubo
+  2.16     9.65  block in each_child_node - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/node.rb
+  1.83    15.31  do_parse - /home/bork/.rbenv/versions/2.4.0/lib/ruby/2.4.0/racc/parser.rb
+  1.83     1.83  to_s - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/badge.rb
+  1.83     1.83  rspec_pattern - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-rspec-1.22.0/lib/rubocop/cop/rspec/cop.rb
+  1.66     2.66  cop_config - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/cop.rb
+  1.50     1.50  end_pos - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/token.rb
+  1.33     1.50  style_detected - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/mixin/configurable_e
+  1.16     2.00  to_a - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/ast-2.3.0/lib/ast/node.rb
+  1.16     1.16  initialize - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/cop.rb
+  1.16     1.16  block (2 levels) in of - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/unicode-display_width-1.3.0/lib/unicode/dis
+  1.00     9.48  tokens - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/mixin/surrounding_space.rb
+  1.00     2.50  block (2 levels) in &lt;class:Node&gt; - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/ast/no
+  1.00     2.16  block in on_module - /home/bork/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.52.1/lib/rubocop/cop/commissioner.rb
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-help"><a class="header" href="#getting-help">Getting help</a></h1>
+<p>The rbspy community, like the greater Ruby and Rust communities, is a helpful and welcoming place. If you need help using rbspy, here are a few options:</p>
+<ul>
+<li>The mailing list! Email rbspy-users@googlegroups.com</li>
+<li>Gitter chat room: http://gitter.im/rbspy/rbspy</li>
+<li>If you think you've found a bug, <a href="https://github.com/rbspy/rbspy/issues/new">create an issue on GitHub</a>. You may want to search <a href="https://github.com/rbspy/rbspy/issues">open issues</a> first, since someone else may have encountered the same bug.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
+<p>A major goal for this project is to get more maintainers and contributors. Pull requests that
+improve usability, fix bugs, or help rbspy support more operating systems are very welcome. If you
+have questions about contributing, come chat <a href="https://gitter.im/rbspy/rbspy">on gitter</a>.</p>
+<p>The source code for rbspy is on <a href="https://github.com/rbspy/rbspy">GitHub</a>.</p>
+<p>If you're not a very experienced Rust programmer, you're very welcome to contribute. A major reason
+rbspy is written in Rust is that Rust is more approachable than C/C++.
+https://www.rust-lang.org/ has great resources for learning Rust.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently asked questions</a></h1>
+<h2 id="who-makes-rbspy"><a class="header" href="#who-makes-rbspy">Who makes rbspy?</a></h2>
+<p><a href="https://jvns.ca">Julia Evans</a> started the project and led its development until 2021.
+<a href="https://acj.sh">Adam Jensen</a> is the primary maintainer. For a full list of contributors,
+see the <a href="https://github.com/rbspy/rbspy/blob/master/CONTRIBUTORS.md">CONTRIBUTORS file</a>.</p>
+<h2 id="who-funds-rbspy"><a class="header" href="#who-funds-rbspy">Who funds rbspy?</a></h2>
+<p>Initial rbspy development was funded by <a href="https://segment.com/blog/segment-open-fellowship-2017/">the Segment Open Fellowship</a> -- they paid for 3 months of
+development on the project, to take it from a sketchy prototype to an actual working profiler that
+people use to make their Ruby programs faster. Julia took a 3 month sabbatical off work to build it.</p>
+<p>This kind of short-term funding is an awesome way to bootstrap new open source projects that might
+not happen otherwise! You can do a lot in 3 months :)</p>
+<h2 id="can-i-use-rbspy-in-production"><a class="header" href="#can-i-use-rbspy-in-production">Can I use rbspy in production?</a></h2>
+<p>Yes! rbspy only reads memory from the Ruby process you're monitoring, it doesn't make any changes.
+Unlike some other statistical profilers, rbspy does <strong>not</strong> use signals or ptrace, so it won't
+interrupt system calls your Ruby program is making.</p>
+<p>The things to be aware of are:</p>
+<ul>
+<li>By default, <code>rbspy</code> 0.6 and newer pauses the ruby process when it's collecting samples. This can
+affect performance, especially if you're using a high sampling rate. You can disable the pausing
+with the <code>--nonblocking</code>, but be aware that this can lead to incorrect samples.
+flag.</li>
+<li><code>rbspy</code> does use some CPU. If you use <code>rbspy record --subprocesses</code>, it can use a substantial
+amount of CPU (because it'll start a separate thread for every process it's recording)</li>
+<li>disk usage: <code>rbspy record</code> will save a data file to disk with compressed stack traces, and if you
+run it for many hours it's possible you'll use a lot of disk space. We recommend giving rbspy a
+time limit, like <code>rbspy record --duration 10</code>.</li>
+</ul>
+<p>Any bugs in rbspy will manifest as rbspy crashing, not your Ruby program crashing.</p>
+<h2 id="how-does-rbspy-read-data-from-my-ruby-processes"><a class="header" href="#how-does-rbspy-read-data-from-my-ruby-processes">How does rbspy read data from my Ruby processes?</a></h2>
+<p>On Linux, it uses the <code>process_vm_readv</code> system call, which lets you read memory from any other
+running process.</p>
+<h2 id="how-does-rbspy-handle-threads"><a class="header" href="#how-does-rbspy-handle-threads">How does rbspy handle threads?</a></h2>
+<p><code>rbspy</code> always collects the stack from what the Ruby VM reports as the currently running thread.
+This is because the global VM lock (GVL) only allows one thread to be running Ruby code at any given time. It ignores
+threads that are not currently running.</p>
+<p>When rbspy is profiling ruby 3 programs, it currently only samples the main ractor.</p>
+<h2 id="can-rbspy-profile-c-extensions"><a class="header" href="#can-rbspy-profile-c-extensions">Can rbspy profile C extensions?</a></h2>
+<p>Yes. Any calls into C will be reported in the format &quot;sleep [c function] - (unknown)&quot;.</p>
+<h2 id="i-love-rbspy-how-can-i-thank-you"><a class="header" href="#i-love-rbspy-how-can-i-thank-you">I love rbspy! How can I thank you?</a></h2>
+<p>It really helps if you add a comment to our <a href="https://github.com/rbspy/rbspy/issues/62">list of testimonials on GitHub</a> saying how rbspy helped you!</p>
+<h2 id="is-there-a-similar-project-for-python"><a class="header" href="#is-there-a-similar-project-for-python">Is there a similar project for Python?</a></h2>
+<p>Yes! <a href="https://github.com/benfred/py-spy">py-spy</a> by <a href="https://www.benfrederickson.com/">Ben Frederickson</a> and <a href="https://github.com/uber/pyflame">pyflame</a> by <a href="https://eklitzke.org/">Evan Klitzke</a> do
+basically the same thing as rbspy, but for Python programs.</p>
+<h2 id="who-made-the-logo"><a class="header" href="#who-made-the-logo">Who made the logo?</a></h2>
+<p><a href="https://twitter.com/ashleymcnamara">Ashley McNamara</a> was extremely kind and designed it!! She's an
+awesome software engineer who also makes delightful stickers. See her 
+<a href="https://github.com/ashleymcnamara/gophers">gophers repository</a> for a bunch of awesome gopher art she's done
+for the Go community.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+    </body>
+</html>

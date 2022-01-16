@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Installing - rbspy</title>
+        <title>On your computer - rbspy</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html" class="active"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html" class="active"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,24 +134,60 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="installing-rbspy"><a class="header" href="#installing-rbspy">Installing rbspy</a></h1>
-<p>Installing rbspy is straightforward on most common operating systems. It can be run on your computer, in CI, or on production servers.</p>
-<h2 id="system-requirements"><a class="header" href="#system-requirements">System requirements</a></h2>
-<p>rbspy runs on Linux*, Windows, FreeBSD, and macOS.</p>
+                        <h1 id="installing-rbspy-on-your-computer"><a class="header" href="#installing-rbspy-on-your-computer">Installing rbspy on your computer</a></h1>
+<p>Installing rbspy is easy on most platforms, as it's a single binary.</p>
+<h2 id="option-1-install-from-a-package"><a class="header" href="#option-1-install-from-a-package">Option 1: Install from a package</a></h2>
+<p>Installing from a package is the simplest method. If your preferred operating system or distribution isn't listed here, please consider making a package for it. We are grateful for packaging contributions.</p>
+<h3 id="alpine-linux"><a class="header" href="#alpine-linux">Alpine Linux</a></h3>
+<p><code>apk add rbspy</code></p>
+<h3 id="macos-homebrew"><a class="header" href="#macos-homebrew">macOS (Homebrew)</a></h3>
+<p><code>brew install rbspy</code></p>
+<h2 id="option-2-download-a-binary"><a class="header" href="#option-2-download-a-binary">Option 2: Download a binary</a></h2>
+<p>If there's no package for your operating system, downloading a pre-compiled binary is the next simplest method. There are binaries for Linux, macOS, FreeBSD, and Windows, which are the supported platforms.</p>
+<ol>
+<li>Download the latest release for your operating system from <a href="https://github.com/rbspy/rbspy/releases">the releases page</a>
 <ul>
-<li>Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.</li>
+<li>Note: There are two types of Linux releases. Those tagged with <code>gnu</code> are dynamically linked against GNU libc, which needs to be installed on the system where rbspy runs. Those tagged with <code>musl</code> are statically linked against musl libc and can be used without a specific libc being installed.</li>
 </ul>
-<h2 id="ruby-requirements"><a class="header" href="#ruby-requirements">Ruby requirements</a></h2>
-<p>rbspy can profile programs that use Ruby 1.9.3 and newer. The maintainers try to add support for new Ruby versions shortly after they're released.</p>
+</li>
+<li>Unpack the release. On Unix systems (Linux, Mac, FreeBSD), move the rbspy binary to <code>/usr/local/bin/rbspy</code>. You will need to make it executable with, for example, <code>chmod +x rbspy</code>.</li>
+<li>Run the binary to start profiling! See <a href="./using-rbspy.html">Using rbspy</a> to get started.</li>
+</ol>
+<h2 id="option-3-build-rbspy-from-source"><a class="header" href="#option-3-build-rbspy-from-source">Option 3: Build rbspy from source</a></h2>
+<p>Finally, you can build rbspy from source if you have a Rust toolchain installed. You will need <strong>Rust 1.56 or newer</strong>.</p>
+<ol>
+<li>
+<p>Install Cargo (if you haven't already). There may be a package available for your operating system. There's a guide in the <a href="https://doc.rust-lang.org/cargo/getting-started/installation.html">cargo docs</a>, or you can run this command if you're on Linux, macOS, or FreeBSD:</p>
+<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+<p>For other systems, please check the instructions at https://rustup.rs/.</p>
+</li>
+<li>
+<p>Add <code>~/.cargo/bin</code> to your <code>PATH</code>:</p>
+<pre><code>. &quot;$HOME/.cargo/env&quot;
+</code></pre>
+</li>
+<li>
+<p>Build rbspy!</p>
+<pre><code>git clone https://github.com/rbspy/rbspy
+cd rbspy
+cargo build --release
+./target/release/rbspy --help
+</code></pre>
+<p>Alternatively, you can build and install from crates.io:</p>
+<pre><code>cargo install rbspy
+</code></pre>
+</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../installing/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../installing/on-your-computer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../installing/in-ci.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -160,10 +196,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../installing/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../installing/on-your-computer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../installing/in-ci.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Installing - rbspy</title>
+        <title>Profiling guide - rbspy</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html" class="active"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html" class="active"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,24 +134,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="installing-rbspy"><a class="header" href="#installing-rbspy">Installing rbspy</a></h1>
-<p>Installing rbspy is straightforward on most common operating systems. It can be run on your computer, in CI, or on production servers.</p>
-<h2 id="system-requirements"><a class="header" href="#system-requirements">System requirements</a></h2>
-<p>rbspy runs on Linux*, Windows, FreeBSD, and macOS.</p>
-<ul>
-<li>Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.</li>
-</ul>
-<h2 id="ruby-requirements"><a class="header" href="#ruby-requirements">Ruby requirements</a></h2>
-<p>rbspy can profile programs that use Ruby 1.9.3 and newer. The maintainers try to add support for new Ruby versions shortly after they're released.</p>
+                        <h1 id="about-this-profiling-guide"><a class="header" href="#about-this-profiling-guide">About this profiling guide</a></h1>
+<p>rbspy's goal is not just to be a Ruby profiler, but to make profiling a little bit more accessible
+to the Ruby community in general and something that more programmers do.</p>
+<p>We've heard from a lot of people over the years that they find profiling confusing and that they
+don't know where to start. So, this profiling guide aims to explain
+some of the basics of profiling (what's benchmarking? what's a flamegraph?). Nothing in the
+profiling guide is Ruby- or rbspy-specific — it all applies to profiling in general.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../rbspy-vs-stackprof.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../installing/on-your-computer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../profiling-guide/questions-to-ask.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -160,10 +158,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../rbspy-vs-stackprof.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../installing/on-your-computer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../profiling-guide/questions-to-ask.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

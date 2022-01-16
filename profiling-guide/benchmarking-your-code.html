@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Installing - rbspy</title>
+        <title>Benchmarking your code - rbspy</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html" class="active"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html" class="active"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,24 +134,98 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="installing-rbspy"><a class="header" href="#installing-rbspy">Installing rbspy</a></h1>
-<p>Installing rbspy is straightforward on most common operating systems. It can be run on your computer, in CI, or on production servers.</p>
-<h2 id="system-requirements"><a class="header" href="#system-requirements">System requirements</a></h2>
-<p>rbspy runs on Linux*, Windows, FreeBSD, and macOS.</p>
+                        <h1 id="benchmarking-your-code"><a class="header" href="#benchmarking-your-code">Benchmarking your code</a></h1>
+<p>People who are just getting started making their code faster sometimes confuse <strong>benchmarking</strong> and
+<strong>profiling</strong>. Let's explain the difference and how to use both techniques to make your code faster!</p>
+<p>In short: a benchmark tells you <strong>how slow</strong> your code is (&quot;it took 20 seconds to do X Y Z&quot;) and a
+profiler tells you <strong>why it's slow</strong> (&quot;35% of that time was spent doing compression&quot;).</p>
+<h2 id="whats-benchmarking-why-is-it-important"><a class="header" href="#whats-benchmarking-why-is-it-important">What's benchmarking? Why is it important?</a></h2>
+<p>Optimizing code is often very counterintuitive -- often I'll have a great idea for how to make my
+code faster, and it'll turn out to make almost no difference at all in practice. So when optimizing,
+it's extremely important to have objective standards you can measure your changes against!</p>
+<p>A <strong>benchmark</strong> is a test that you run to measure how fast your code is. For example, if I have a
+compression library, I might test how long it takes to compress a given 100MB file. Or if I was
+working on Jekyll's performance (a static site generator), I might take a specific large site and
+benchmark how long Jekyll takes to render that site.</p>
+<p>If you can run the benchmark on your dev machine, you can make changes, see &quot;oh, that didn't make
+any difference!&quot;, and then quickly try out a different approach.</p>
+<h2 id="run-your-benchmarks-more-than-once"><a class="header" href="#run-your-benchmarks-more-than-once">Run your benchmarks more than once</a></h2>
+<p>Suppose you run your benchmark and it takes 6 seconds. You make some optimizations and run it again,
+and afterwards it takes 5.7 seconds. That's a 5% performance improvement, right? Not huge, but not
+nothing?</p>
+<p>Not necessarily!</p>
+<p>Here's a real benchmark from my computer (generating a Jekyll site), and how long it took (in
+seconds) across 10 different runs:</p>
+<pre><code>5.94
+6.00
+6.04
+5.98
+6.15
+6.37
+6.14
+6.20
+5.98
+6.18
+6.22
+6.04
+6.16
+</code></pre>
+<p>When I ran it 100 times, there was even more variation -- sometimes it would take up to 9 seconds
+(for instance if I was using a lot of CPU).</p>
+<p>So the same benchmark, on the same computer, can take anywhere between 6 to 9 seconds.
+This means that if, for this benchmark, I see a performance improvement of less than 0.5 seconds
+(~10%) or so, it's worth being suspicious.</p>
+<p>We don't have time here to do a rigorous discussion of statistics and benchmarking, but here are a
+few guidelines:</p>
 <ul>
-<li>Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.</li>
+<li>be suspicious of small performance improvements (like 5% or 10%). The smaller the performance
+improvement you're trying to verify, the more times you need to run your benchmark to be sure that
+it's real.</li>
+<li>running any benchmark 10 times instead of just once is a good way to get an idea of how much
+natural variation that benchmark has.</li>
 </ul>
-<h2 id="ruby-requirements"><a class="header" href="#ruby-requirements">Ruby requirements</a></h2>
-<p>rbspy can profile programs that use Ruby 1.9.3 and newer. The maintainers try to add support for new Ruby versions shortly after they're released.</p>
+<p>If you're interested in taking a more statistically rigorous approach, a good starting point is to
+look up &quot;bootstrap confidence intervals&quot;, which is an easy computational way (very little math!) to
+get confidence intervals.</p>
+<h2 id="using-benchmarking--profiling-to-make-your-code-faster"><a class="header" href="#using-benchmarking--profiling-to-make-your-code-faster">Using benchmarking + profiling to make your code faster</a></h2>
+<p>There are basically 2 typical workflows you can use when optimizing your code. Basically: you can
+either profile a benchmark of your code, or you can profile your code running in production.</p>
+<p>Both of these techniques are basically the same: measure your code's speed somehow, profile it, come
+up with potentially faster code, and then measure again afterwards to see if it actually worked!</p>
+<p>The most important tip here is: <strong>don't use profiler results to figure out if your optimization
+worked, use benchmark results</strong>. Using benchmark results will help you make sure that your
+optimization actually makes a significant improvement to the program's performance as a whole.</p>
+<h3 id="technique-1-benchmark-locally"><a class="header" href="#technique-1-benchmark-locally">Technique 1: Benchmark locally</a></h3>
+<ol>
+<li>Realize something is slow (&quot;oh no, this computation is taking SO LONG, why??&quot;)</li>
+<li>Create a <strong>benchmark</strong> that you can run locally that demonstrates the slow behavior. This doesn't
+need to be complicated!</li>
+<li>Run your benchmark (10 times!) to get a baseline for how long it takes</li>
+<li>Profile the benchmark.</li>
+<li>Implement a fix</li>
+<li>Run your benchmark again to see if your fix worked!</li>
+</ol>
+<h3 id="technique-2-monitor-production-performance"><a class="header" href="#technique-2-monitor-production-performance">Technique 2: Monitor production performance</a></h3>
+<p>This technique has a little less of the scientific rigor that you get when you make a benchmark, but
+often making a benchmark isn't practical! A lot of things happen in production that are hard to
+reproduce, but you need to figure out why they're happening anyway.</p>
+<ol>
+<li>Realize something is slow (your users are complaining about performance!)</li>
+<li>Find a way to monitor the slow thing in production with your favorite monitoring tool (graphite,
+datadog, new relic, whatever)</li>
+<li>Profile the code running in production</li>
+<li>Implement a fix and deploy it to a test environment or to production</li>
+<li>Use your monitoring to see if the performance improved!</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../profiling-guide/questions-to-ask.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../installing/on-your-computer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../profiling-guide/using-flamegraphs.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -160,10 +234,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../profiling-guide/questions-to-ask.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../installing/on-your-computer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../profiling-guide/using-flamegraphs.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

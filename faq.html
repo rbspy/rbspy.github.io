@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - rbspy</title>
+        <title>FAQ - rbspy</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="faq.html" class="active"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,38 +134,61 @@
 
                 <div id="content" class="content">
                     <main>
-                        <img src="../static/images/rbspy.jpg" width="200" height="200">
-<h1 id="rbspy"><a class="header" href="#rbspy">rbspy</a></h1>
-<p>Have you ever wanted to know what functions your Ruby program is calling? <code>rbspy</code> can tell you!</p>
-<p><code>rbspy</code> lets you profile Ruby processes that are already running. You give it a PID, and it starts
-profiling! It's a sampling profiler, which means it's <strong>low overhead</strong> and <strong>safe to run in
-production</strong>.</p>
-<h2 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h2>
-<p>If you're on macOS, install rbspy with Homebrew:</p>
-<pre><code>brew install rbspy
-</code></pre>
-<p>If you have a working Rust toolchain (1.56 or newer), you can install with cargo:</p>
-<pre><code>cargo install rbspy
-</code></pre>
-<p>Otherwise, check out the <a href="installing.html">installing</a> section to get rbspy running on your computer.</p>
-<h2 id="profiling-a-ruby-program"><a class="header" href="#profiling-a-ruby-program">Profiling a Ruby program</a></h2>
-<p>If your program is already running, get its PID and profile it like this:</p>
-<pre><code>rbspy record --pid $PID
-</code></pre>
-<p>You can also use rbspy to profile a Ruby script, like this. It works both with and without bundle exec.</p>
-<pre><code>rbspy record -- bundle exec ruby my-script.rb
-</code></pre>
-<p>Here's what running <code>rbspy record</code> on a Rubocop process looks like. You'll see a live summary of
-what the top functions being run are, and it also saves the raw data + a flamegraph for more in
-depth analysis.</p>
-<img src="../static/images/rbspy-record.gif">
+                        <h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently asked questions</a></h1>
+<h2 id="who-makes-rbspy"><a class="header" href="#who-makes-rbspy">Who makes rbspy?</a></h2>
+<p><a href="https://jvns.ca">Julia Evans</a> started the project and led its development until 2021.
+<a href="https://acj.sh">Adam Jensen</a> is the primary maintainer. For a full list of contributors,
+see the <a href="https://github.com/rbspy/rbspy/blob/master/CONTRIBUTORS.md">CONTRIBUTORS file</a>.</p>
+<h2 id="who-funds-rbspy"><a class="header" href="#who-funds-rbspy">Who funds rbspy?</a></h2>
+<p>Initial rbspy development was funded by <a href="https://segment.com/blog/segment-open-fellowship-2017/">the Segment Open Fellowship</a> -- they paid for 3 months of
+development on the project, to take it from a sketchy prototype to an actual working profiler that
+people use to make their Ruby programs faster. Julia took a 3 month sabbatical off work to build it.</p>
+<p>This kind of short-term funding is an awesome way to bootstrap new open source projects that might
+not happen otherwise! You can do a lot in 3 months :)</p>
+<h2 id="can-i-use-rbspy-in-production"><a class="header" href="#can-i-use-rbspy-in-production">Can I use rbspy in production?</a></h2>
+<p>Yes! rbspy only reads memory from the Ruby process you're monitoring, it doesn't make any changes.
+Unlike some other statistical profilers, rbspy does <strong>not</strong> use signals or ptrace, so it won't
+interrupt system calls your Ruby program is making.</p>
+<p>The things to be aware of are:</p>
+<ul>
+<li>By default, <code>rbspy</code> 0.6 and newer pauses the ruby process when it's collecting samples. This can
+affect performance, especially if you're using a high sampling rate. You can disable the pausing
+with the <code>--nonblocking</code>, but be aware that this can lead to incorrect samples.
+flag.</li>
+<li><code>rbspy</code> does use some CPU. If you use <code>rbspy record --subprocesses</code>, it can use a substantial
+amount of CPU (because it'll start a separate thread for every process it's recording)</li>
+<li>disk usage: <code>rbspy record</code> will save a data file to disk with compressed stack traces, and if you
+run it for many hours it's possible you'll use a lot of disk space. We recommend giving rbspy a
+time limit, like <code>rbspy record --duration 10</code>.</li>
+</ul>
+<p>Any bugs in rbspy will manifest as rbspy crashing, not your Ruby program crashing.</p>
+<h2 id="how-does-rbspy-read-data-from-my-ruby-processes"><a class="header" href="#how-does-rbspy-read-data-from-my-ruby-processes">How does rbspy read data from my Ruby processes?</a></h2>
+<p>On Linux, it uses the <code>process_vm_readv</code> system call, which lets you read memory from any other
+running process.</p>
+<h2 id="how-does-rbspy-handle-threads"><a class="header" href="#how-does-rbspy-handle-threads">How does rbspy handle threads?</a></h2>
+<p><code>rbspy</code> always collects the stack from what the Ruby VM reports as the currently running thread.
+This is because the global VM lock (GVL) only allows one thread to be running Ruby code at any given time. It ignores
+threads that are not currently running.</p>
+<p>When rbspy is profiling ruby 3 programs, it currently only samples the main ractor.</p>
+<h2 id="can-rbspy-profile-c-extensions"><a class="header" href="#can-rbspy-profile-c-extensions">Can rbspy profile C extensions?</a></h2>
+<p>Yes. Any calls into C will be reported in the format &quot;sleep [c function] - (unknown)&quot;.</p>
+<h2 id="i-love-rbspy-how-can-i-thank-you"><a class="header" href="#i-love-rbspy-how-can-i-thank-you">I love rbspy! How can I thank you?</a></h2>
+<p>It really helps if you add a comment to our <a href="https://github.com/rbspy/rbspy/issues/62">list of testimonials on GitHub</a> saying how rbspy helped you!</p>
+<h2 id="is-there-a-similar-project-for-python"><a class="header" href="#is-there-a-similar-project-for-python">Is there a similar project for Python?</a></h2>
+<p>Yes! <a href="https://github.com/benfred/py-spy">py-spy</a> by <a href="https://www.benfrederickson.com/">Ben Frederickson</a> and <a href="https://github.com/uber/pyflame">pyflame</a> by <a href="https://eklitzke.org/">Evan Klitzke</a> do
+basically the same thing as rbspy, but for Python programs.</p>
+<h2 id="who-made-the-logo"><a class="header" href="#who-made-the-logo">Who made the logo?</a></h2>
+<p><a href="https://twitter.com/ashleymcnamara">Ashley McNamara</a> was extremely kind and designed it!! She's an
+awesome software engineer who also makes delightful stickers. See her 
+<a href="https://github.com/ashleymcnamara/gophers">gophers repository</a> for a bunch of awesome gopher art she's done
+for the Go community.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="installing/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="contributing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -173,8 +196,8 @@ depth analysis.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="installing/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="contributing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
             </nav>
 

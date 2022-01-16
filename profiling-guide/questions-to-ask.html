@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Installing - rbspy</title>
+        <title>Questions to ask when optimizing code - rbspy</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html" class="active"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing/index.html"><strong aria-hidden="true">2.</strong> Installing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installing/on-your-computer.html"><strong aria-hidden="true">2.1.</strong> On your computer</a></li><li class="chapter-item expanded "><a href="../installing/in-ci.html"><strong aria-hidden="true">2.2.</strong> In a CI environment</a></li></ol></li><li class="chapter-item expanded "><a href="../using-rbspy.html"><strong aria-hidden="true">3.</strong> Using rbspy</a></li><li class="chapter-item expanded "><a href="../rbspy-vs-stackprof.html"><strong aria-hidden="true">4.</strong> rbspy vs stackprof</a></li><li class="chapter-item expanded "><a href="../profiling-guide/index.html"><strong aria-hidden="true">5.</strong> Profiling guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../profiling-guide/questions-to-ask.html" class="active"><strong aria-hidden="true">5.1.</strong> Questions to ask when optimizing code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/benchmarking-your-code.html"><strong aria-hidden="true">5.2.</strong> Benchmarking your code</a></li><li class="chapter-item expanded "><a href="../profiling-guide/using-flamegraphs.html"><strong aria-hidden="true">5.3.</strong> Using flamegraphs</a></li></ol></li><li class="chapter-item expanded "><a href="../getting-help.html"><strong aria-hidden="true">6.</strong> Getting help</a></li><li class="chapter-item expanded "><a href="../contributing.html"><strong aria-hidden="true">7.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">8.</strong> FAQ</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,24 +134,79 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="installing-rbspy"><a class="header" href="#installing-rbspy">Installing rbspy</a></h1>
-<p>Installing rbspy is straightforward on most common operating systems. It can be run on your computer, in CI, or on production servers.</p>
-<h2 id="system-requirements"><a class="header" href="#system-requirements">System requirements</a></h2>
-<p>rbspy runs on Linux*, Windows, FreeBSD, and macOS.</p>
+                        <h1 id="questions-to-ask-when-optimizing-code"><a class="header" href="#questions-to-ask-when-optimizing-code">Questions to ask when optimizing code</a></h1>
+<p>When people start looking at profiling data, they're often unsure of where to start.</p>
+<p>If you have a slow program that you want to start optimizing, here are a few questions to consider
+using your profiling tools to answer.</p>
+<h3 id="is-my-program-mostly-using-the-cpu-or-mostly-waiting"><a class="header" href="#is-my-program-mostly-using-the-cpu-or-mostly-waiting">Is my program mostly using the CPU or mostly waiting?</a></h3>
+<p>If your program is slow, the first most important thing to find out is whether it's slow because
+it's using the CPU or if it's slow because it's waiting for the disk or network or something.</p>
+<p>If your program is spending 98% of its time waiting for the result of a database query, it's very
+possible that you don't need to change your program's code at all, and what you need to do is work
+on your database's indexes!</p>
+<h3 id="is-my-program-swapping-memory-to-disk"><a class="header" href="#is-my-program-swapping-memory-to-disk">Is my program swapping memory to disk?</a></h3>
+<p>This isn't a question that profilers can answer, but if your program is using a lot of memory (more
+than is available on your machine), it's worth checking whether the program is swapping memory to
+disk. Swapping will make your program run a lot slower, especially if your swap partition is
+encrypted.</p>
+<h3 id="is-there-a-single-function-where-all-the-time-is-being-spent"><a class="header" href="#is-there-a-single-function-where-all-the-time-is-being-spent">Is there a single function where all the time is being spent?</a></h3>
+<p>Sometimes when a program is really unexpectedly slow, there's one function which is overwhelmingly
+the culprit. Profilers can tell you what % of your program's execution time was spent in each
+function.</p>
+<p>When thinking about this question it's useful to understand the difference between &quot;self time&quot; and
+&quot;total time&quot; spent in a function -- a lot of profilers (including rbspy) will give you a report like
+this:</p>
+<pre><code>% self  % total  name
+  3.05    10.09  each_child_node
+  2.52    31.14  block (2 levels) in on_send
+  2.17    14.31  do_parse
+  1.76     3.28  cop_config
+  1.70     2.29  block (2 levels) in &lt;class:Node&gt;
+  1.41     1.41  end_pos
+</code></pre>
+<p>The <strong>self time</strong> is the percentage of time that function was at the top of the call stack.
+Basically -- if the function is doing computations itself (vs calling other functions), it's what %
+of time was spent in those functions.</p>
+<p><strong>Looking for functions with high self time can be a good way to find low-hanging fruit for
+optimizations</strong> -- if 20% of the time is being spent in a single function's calculations and you
+can make that function 90% faster, then you've improved your program's overall speed a lot! For
+example, if you have a slow calculation, maybe you can cache it!</p>
+<p>The <strong>total time</strong> is the percentage of time that function appeared in a call stack. Basically it's
+the % of time spent in the function itself + every other function it called.</p>
+<p>Both self time and total time are important to consider -- for example, if I have a function that
+does this:</p>
+<pre><code>def parent_fun
+    for x in list1
+        for y in list2
+            child_fun(x,y)
+        end
+    end
+end
+</code></pre>
+<p>your profiler might report that <code>parent_fun</code> has 0% &quot;self time&quot; (because all it does is call
+<code>child_fun</code> over and over again), but maybe it's still possible to optimize the algorithm it uses.</p>
+<h3 id="how-many-times-is-function-x-being-called"><a class="header" href="#how-many-times-is-function-x-being-called">How many times is function X being called?</a></h3>
+<p>If your profiler says that 98% of the time is being spent inside a single function
+like <code>calculate_thing</code>, you're not done! There are 2 possible cases here:</p>
 <ul>
-<li>Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.</li>
+<li><code>calculate_thing</code> is taking a long time</li>
+<li><code>calculate_thing</code> is fast, but another function is <strong>calling</strong> that function way too many times.
+No use having a fast function if it's being called 100 million times!</li>
 </ul>
-<h2 id="ruby-requirements"><a class="header" href="#ruby-requirements">Ruby requirements</a></h2>
-<p>rbspy can profile programs that use Ruby 1.9.3 and newer. The maintainers try to add support for new Ruby versions shortly after they're released.</p>
+<p>Because rbspy is a sampling profiler (not a tracing profiler), it actually can't tell you how times
+a function was called -- it just reports &quot;hey, I observed your program 100,000 times, and 98,000 of
+those times it was in the <code>calculate_thing</code> function&quot;.</p>
+<p><a href="https://github.com/ruby-prof/ruby-prof">ruby-prof</a> is a tracing profiler for Ruby, which can tell
+you exactly how many times each function was called at the cost of being higher overhead.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../profiling-guide/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../installing/on-your-computer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../profiling-guide/benchmarking-your-code.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -160,10 +215,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../profiling-guide/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../installing/on-your-computer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../profiling-guide/benchmarking-your-code.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
