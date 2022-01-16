@@ -8,7 +8,7 @@
 
 [**record**](./record.md) continuously captures stack traces from your process and saves them to disk. It's used to profile a program over a period of time and to produce a flamegraph or other output for offline analysis.
 
-[**report**](./report.md) is useful if you have a raw rbspy data file that you've previously recorded. You can use `rbspy report` to generate different kinds of visualizations from it (the flamegraph/callgrind/summary formats, as documented above). This is useful because you can record raw data from a program and then decide how you want to visualize it afterwards.
+[**report**](./report.md) is useful if you have a raw rbspy data file that you've previously recorded. You can use `rbspy report` to generate different kinds of visualizations from it, as documented in the [record](./record.md#optional-arguments) section. This is useful because you can record raw data from a program and then decide how you want to visualize it afterwards.
 
 ## Containers
 
