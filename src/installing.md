@@ -6,7 +6,7 @@ Installing rbspy is easy on most platforms, as it's a single binary. It can run 
 
 rbspy runs on Linux\*, Windows, FreeBSD, and macOS.
 
-* Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.
+\* Linux kernel version 3.2+ required. For Ubuntu, this means Ubuntu 12.04 or newer.
 
 ## Ruby requirements
 
