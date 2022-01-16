@@ -8,7 +8,7 @@
     - [`report`](./using-rbspy/report.md)
 - [rbspy vs stackprof](./rbspy-vs-stackprof.md)
 - [Profiling guide](./profiling-guide/index.md)
-    - [Questions to ask when optimizing code](./profiling-guide/questions-to-ask.md)
+    - [Questions to ask](./profiling-guide/questions-to-ask.md)
     - [Benchmarking your code](./profiling-guide/benchmarking-your-code.md)
     - [Using flamegraphs](./profiling-guide/using-flamegraphs.md)
 - [Getting help](./getting-help.md)
