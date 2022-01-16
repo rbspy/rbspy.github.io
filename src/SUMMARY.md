@@ -2,7 +2,10 @@
 
 - [Introduction](./introduction.md)
 - [Installing](./installing.md)
-- [Using rbspy](./using-rbspy.md)
+- [Using rbspy](./using-rbspy/index.md)
+    - [`snapshot`](./using-rbspy/snapshot.md)
+    - [`record`](./using-rbspy/record.md)
+    - [`report`](./using-rbspy/report.md)
 - [rbspy vs stackprof](./rbspy-vs-stackprof.md)
 - [Profiling guide](./profiling-guide/index.md)
     - [Questions to ask when optimizing code](./profiling-guide/questions-to-ask.md)
