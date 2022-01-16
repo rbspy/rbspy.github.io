@@ -20,11 +20,15 @@ Installing from a package is the simplest method. If your preferred operating sy
 
 ### Alpine Linux
 
-`apk add rbspy`
+```
+apk add rbspy
+```
 
 ### macOS (Homebrew)
 
-`brew install rbspy`
+```
+brew install rbspy
+```
 
 ## Option 2: Download a binary
 
