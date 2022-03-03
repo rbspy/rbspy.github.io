@@ -144,8 +144,18 @@
 <p><a href="./record.html"><strong>record</strong></a> continuously captures stack traces from your process and saves them to disk. It's used to profile a program over a period of time and to produce a flamegraph or other output for offline analysis.</p>
 <p><a href="./report.html"><strong>report</strong></a> is useful if you have a raw rbspy data file that you've previously recorded. You can use <code>rbspy report</code> to generate different kinds of visualizations from it, as documented in the <a href="./record.html#optional-arguments">record</a> section. This is useful because you can record raw data from a program and then decide how you want to visualize it afterwards.</p>
 <h2 id="containers"><a class="header" href="#containers">Containers</a></h2>
-<p>If you want to profile a ruby program that's running in a container on Linux, be sure to add the <code>SYS_PTRACE</code> capability. For Docker containers, this can be done by adding a flag to the command when you launch the container:</p>
+<p>If you want to profile a ruby program that's running in a container on Linux, be sure to add the <code>SYS_PTRACE</code> capability.</p>
+<p>For Docker containers, this can be done by adding a flag to the command when you launch the container:</p>
 <pre><code>docker run --cap-add=SYS_PTRACE ...
+</code></pre>
+<p>If your Docker containers start up through Docker Compose, you can add the flag to the relevant container(s) in <code>docker-compose.yml</code>:</p>
+<pre><code>services:
+  ruby_container_name:
+    ...
+    other_config_here
+    ...
+    cap_add:
+      - SYS_PTRACE
 </code></pre>
 <p>If you're using Kubernetes, you can add the ptrace capability to a deployment like this:</p>
 <pre><code>securityContext:
