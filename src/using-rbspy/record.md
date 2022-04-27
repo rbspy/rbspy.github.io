@@ -40,7 +40,7 @@ These work regardless of how you started the recording.
    * `callgrind`: generates a callgrind-formatted file that you can view with a tool like
      `kcachegrind`.
    * `summary`: aggregates % self and % total times by function. Useful to get a basic overview
-   * `summary_by_line`: aggregates % self and % total times by line number. Especially useful when
+   * `summary-by-line`: aggregates % self and % total times by line number. Especially useful when
       there's 1 line in your program which is taking up all the time.
  * `--file`: Specifies where rbspy will save formatted output.
  * `--raw-file`: Specifies where rbspy will save formatted data. Use a gz extension because it will be gzipped.
