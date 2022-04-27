@@ -48,3 +48,4 @@ These work regardless of how you started the recording.
  * `--nonblocking`: Don't pause the ruby process when collecting stack samples. Setting this option will reduce the performance impact of sampling but may produce inaccurate results.
  * `--subprocesses`: Record all subprocesses of the given PID or command.
  * `--silent`: Don't print the summary profiling data every second.
+ * `--force-version`: Assume that the process is running a specific version of Ruby instead of automatically detecting it. This is useful when the Ruby version is not yet supported by rbspy, e.g. a release candidate or custom version.
