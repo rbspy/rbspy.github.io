@@ -280,7 +280,7 @@ rbspy record -- ruby myprogram.rb --log-level 0
 <li><code>callgrind</code>: generates a callgrind-formatted file that you can view with a tool like
 <code>kcachegrind</code>.</li>
 <li><code>summary</code>: aggregates % self and % total times by function. Useful to get a basic overview</li>
-<li><code>summary_by_line</code>: aggregates % self and % total times by line number. Especially useful when
+<li><code>summary-by-line</code>: aggregates % self and % total times by line number. Especially useful when
 there's 1 line in your program which is taking up all the time.</li>
 </ul>
 </li>
@@ -290,6 +290,7 @@ there's 1 line in your program which is taking up all the time.</li>
 <li><code>--nonblocking</code>: Don't pause the ruby process when collecting stack samples. Setting this option will reduce the performance impact of sampling but may produce inaccurate results.</li>
 <li><code>--subprocesses</code>: Record all subprocesses of the given PID or command.</li>
 <li><code>--silent</code>: Don't print the summary profiling data every second.</li>
+<li><code>--force-version</code>: Assume that the process is running a specific version of Ruby instead of automatically detecting it. This is useful when the Ruby version is not yet supported by rbspy, e.g. a release candidate or custom version.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="report"><a class="header" href="#report">Report</a></h2>
 <p>If you have a raw rbspy data file that you've previously recorded, you can use <code>rbspy report</code> to
