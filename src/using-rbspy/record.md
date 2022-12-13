@@ -36,7 +36,7 @@ These work regardless of how you started the recording.
  * `--duration`: Specifies how long to run before stopping rbspy. This conficts with running a subcommand (`rbspy record ruby myprogram.rb`).
  * `--format`: Specifies what format to use to report profiling data. The options are:
    * `flamegraph`: generates a flamegraph SVG that you can view in a browser
-   * `speedscope`: generates a file to drop into https://www.speedscope.app/ to interactively explore flamegraphs
+   * `speedscope`: generates a file to drop into [speedscope.app](https://www.speedscope.app/) to interactively explore flamegraphs
    * `callgrind`: generates a callgrind-formatted file that you can view with a tool like
      `kcachegrind`.
    * `summary`: aggregates % self and % total times by function. Useful to get a basic overview
