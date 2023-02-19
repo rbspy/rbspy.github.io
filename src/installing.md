@@ -73,5 +73,6 @@ Finally, you can build rbspy from source if you have a Rust toolchain installed.
     Alternatively, you can build and install from crates.io:
 
     ```
-    cargo install rbspy
+    cargo install rbspy --locked
     ```
+    

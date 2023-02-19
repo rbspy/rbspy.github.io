@@ -19,7 +19,7 @@ brew install rbspy
 If you have a working Rust toolchain (1.56 or newer), you can install with cargo:
 
 ```
-cargo install rbspy
+cargo install rbspy --locked
 ```
 
 Otherwise, check out the [installing](./installing.md) section to get rbspy running on your computer.
