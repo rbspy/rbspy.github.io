@@ -4,7 +4,7 @@
 
 [Julia Evans](https://jvns.ca) started the project and led its development until 2021.
 [Adam Jensen](https://acj.sh) is the primary maintainer. For a full list of contributors,
-see the [CONTRIBUTORS file](https://github.com/rbspy/rbspy/blob/master/CONTRIBUTORS.md).
+see the [CONTRIBUTORS file](https://github.com/rbspy/rbspy/blob/main/CONTRIBUTORS.md).
 
 ## Who funds rbspy?
 
@@ -25,8 +25,7 @@ The things to be aware of are:
 
 * By default, `rbspy` 0.6 and newer pauses the ruby process when it's collecting samples. This can
   affect performance, especially if you're using a high sampling rate. You can disable the pausing
-  with the `--nonblocking`, but be aware that this can lead to incorrect samples.
-  flag.
+  with the `--nonblocking` flag, but be aware that this can lead to incorrect samples.
 * `rbspy` does use some CPU. If you use `rbspy record --subprocesses`, it can use a substantial
   amount of CPU (because it'll start a separate thread for every process it's recording)
 * disk usage: `rbspy record` will save a data file to disk with compressed stack traces, and if you
