@@ -638,7 +638,7 @@ https://www.rust-lang.org/ has great resources for learning Rust.</p>
 <h2 id="who-makes-rbspy"><a class="header" href="#who-makes-rbspy">Who makes rbspy?</a></h2>
 <p><a href="https://jvns.ca">Julia Evans</a> started the project and led its development until 2021.
 <a href="https://acj.sh">Adam Jensen</a> is the primary maintainer. For a full list of contributors,
-see the <a href="https://github.com/rbspy/rbspy/blob/master/CONTRIBUTORS.md">CONTRIBUTORS file</a>.</p>
+see the <a href="https://github.com/rbspy/rbspy/blob/main/CONTRIBUTORS.md">CONTRIBUTORS file</a>.</p>
 <h2 id="who-funds-rbspy"><a class="header" href="#who-funds-rbspy">Who funds rbspy?</a></h2>
 <p>Initial rbspy development was funded by <a href="https://segment.com/blog/segment-open-fellowship-2017/">the Segment Open Fellowship</a> -- they paid for 3 months of
 development on the project, to take it from a sketchy prototype to an actual working profiler that
@@ -653,8 +653,7 @@ interrupt system calls your Ruby program is making.</p>
 <ul>
 <li>By default, <code>rbspy</code> 0.6 and newer pauses the ruby process when it's collecting samples. This can
 affect performance, especially if you're using a high sampling rate. You can disable the pausing
-with the <code>--nonblocking</code>, but be aware that this can lead to incorrect samples.
-flag.</li>
+with the <code>--nonblocking</code> flag, but be aware that this can lead to incorrect samples.</li>
 <li><code>rbspy</code> does use some CPU. If you use <code>rbspy record --subprocesses</code>, it can use a substantial
 amount of CPU (because it'll start a separate thread for every process it's recording)</li>
 <li>disk usage: <code>rbspy record</code> will save a data file to disk with compressed stack traces, and if you
