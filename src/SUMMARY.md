@@ -11,6 +11,6 @@
     - [Questions to ask](./profiling-guide/questions-to-ask.md)
     - [Benchmarking your code](./profiling-guide/benchmarking-your-code.md)
     - [Using flamegraphs](./profiling-guide/using-flamegraphs.md)
-- [Getting help](./getting-help.md)
+- [Reporting issues](./reporting-bugs.md)
 - [Contributing](./contributing.md)
 - [FAQ](./faq.md)
